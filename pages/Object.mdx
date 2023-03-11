@@ -1,0 +1,81 @@
+---
+title: "Object"
+---
+
+## assoc
+
+オブジェクトに key, value を追加する関数です。  
+カリー化されているので後回しにできるのが便利です。  
+あと再代入をしないので、もとのオブジェクトに影響しないのもいいね！
+
+```ts
+import { assoc } from "ramda";
+
+const user = { id: 1 };
+const user2 = { id: 2 };
+const user3 = { id: 3 };
+
+/* カリー化した場合 */
+const addNameUser = assoc("name", "TANAKA")(user);
+console.log(addNameUser); // { id: 1, name: 'TANAKA' }
+
+/* 3つ引数を渡す場合 */
+const addNameUser2 = assoc("name", "YAMADA", user2);
+console.log(addNameUser2); // { id: 2, name: 'YAMADA' }
+
+/* ramdaを使わないならこんな感じ */
+const addNameuser3 = { ...user3, name: "HIRAYAMA" };
+console.log(addNameuser3); // { id: 3, name: 'HIRAYAMA' }
+
+/*
+  注意：型は補完されない
+  本来、USER型はaddressなどというプロパティはないが、assocなら追加できてしまう。
+  プロパティを追加するのはassocで良いが、変更するならスプレッド構文でコピーするか、immerなどを使うと良い。
+*/
+type User = {
+  id: number;
+  name: string;
+};
+const user4 = { id: 4, name: "ISHIDA" };
+const newUser: User = assoc("address", "大阪府茨木市駅前1丁目1-1-1", user4);
+console.log({ newUser }); // { newUser: { id: 4, name: 'ISHIDA', address: '京都府京都市駅前1丁目1-1-1' } }
+```
+
+## clone
+
+オブジェクトをディープコピーしてくれる関数です。  
+下記例、shallowCopy 関数はスプレッド構文を使用してシャローコピーをしています。  
+コピーした obj2 のプロパティにある posts のなかにある post の title を変えました。  
+そうすると、コピー元の obj のほうも posts の index0 にある post の title が変わってしまいます。
+
+deepCopy 関数では ramda.js の clone 関数を使用しました。  
+そうすると、同じように obj2 のプロパティを変更しても obj のほうには影響がありません。
+
+このようにネストしたオブジェクトを安全にコピーできます。  
+ただ、ディープコピーは重い処理です。本当に必要なとき以外はシャローコピーで十分かもしれません。
+
+```ts
+import { clone } from "ramda";
+
+const shallowCopy = () => {
+  const post = { id: 1, title: "ご挨拶" };
+  const obj = { id: 1, name: "TANAKA", posts: [post] };
+  const obj2 = { ...obj };
+  if (obj2.posts[0] === undefined) return;
+  obj2.posts[0].title = "ご挨拶(修正版)";
+  console.log(obj2); // { id: 1, name: 'TANAKA', posts: [ { id: 1, title: 'ご挨拶(修正版)' } ] }
+  console.log(obj); // { id: 1, name: 'TANAKA', posts: [ { id: 1, title: 'ご挨拶(修正版)' } ] } ←変わってしまった！
+};
+shallowCopy();
+
+const deepCopy = () => {
+  const post = { id: 1, title: "ご挨拶" };
+  const obj = { id: 1, name: "TANAKA", posts: [post] };
+  const obj2 = clone(obj);
+  if (obj2.posts[0] === undefined) return;
+  obj2.posts[0].title = "ご挨拶(修正版)";
+  console.log(obj2); // { id: 1, name: 'TANAKA', posts: [ { id: 1, title: 'ご挨拶(修正版)' } ] }
+  console.log(obj); // { id: 1, name: 'TANAKA', posts: [ { id: 1, title: 'ご挨拶' } ] } ←変わってない！
+};
+deepCopy();
+```

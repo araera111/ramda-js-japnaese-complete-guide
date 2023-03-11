@@ -1,0 +1,42 @@
+---
+title: "List"
+---
+
+## all
+
+```ts
+import { all } from "ramda";
+
+const arr1 = [3, 3, 3, 3, 3];
+const arr2 = [3, 3, 3, 3, 1];
+
+const isAll3 = all((x) => x === 3);
+
+const arr1Result = isAll3(arr1);
+console.log({ arr1Result }); // -> { arr1Result: true }
+
+const arr2Result = isAll3(arr2);
+console.log({ arr2Result }); // -> { arr2Result: false }
+
+/* ライブラリなしで書くなら */
+const arr1Result = arr1.every((x) => x === 3);
+```
+
+こんな感じで isAll3 関数とかをつくることができる。
+JS の配列にある every と一緒。
+基本的に配列に使用するなら every で良いけれど、条件が複雑で関数に切り出しておきたいときは all のほうが良いかも。
+
+## append
+
+```ts
+const users = ["TANAKA", "YAMADA"];
+const newUser = "NAKAMURA";
+const resultUsers = append(newUser, users);
+console.log({ resultUsers }); // -> { resultUsers: [ 'TANAKA', 'YAMADA', 'NAKAMURA' ] }
+
+/* ライブラリなしで書くなら */
+const resultUsers = [...users, newUser];
+```
+
+こんな感じで足せます。
+普通に js 風味でええやんってなるけど、pipe とかでつなぎたいときは ramda を使ったほうが便利。curry 化されているし。

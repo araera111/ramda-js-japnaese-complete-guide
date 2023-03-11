@@ -1,15 +1,12 @@
 {
-  "index": "Introduction",
-  "another": "Another Page",
-  "advanced": "Advanced (A Folder)",
-  "about": {
-    "title": "About",
-    "type": "page"
-  },
-  "contact": {
-    "title": "Contact ↗",
-    "type": "page",
-    "href": "https://twitter.com/shuding_",
+  "index": "まえがき",
+  "Installation": "インストール",
+  "List": "配列",
+  "Object": "オブジェクト",
+  "Math": "数",
+  "github_link": {
+    "title": "ramda-js-japnaese-complete-guide",
+    "href": "https://github.com/araera111/ramda-js-japnaese-complete-guide",
     "newWindow": true
   }
 }
