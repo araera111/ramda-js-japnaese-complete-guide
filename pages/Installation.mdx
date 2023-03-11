@@ -1,5 +1,5 @@
 ---
-title: "インストール"
+title: "インストール & インポート"
 ---
 
 ## インストール方法
@@ -24,4 +24,32 @@ or
 pnpm add -D @types/ramda
 or
 npm install -D @types/ramda
+```
+
+## import
+
+2 種類の方法があります。
+
+```ts
+import * as R from "ramda";
+
+const result = R.add(1, 2);
+```
+
+このように R のなかにいろいろな関数が詰め込まれます。
+
+```ts
+import { add } from "ramda";
+
+const result = add(1, 2);
+```
+
+このように、add だけをインポートすることもできます。  
+個別にインポートするほうが書きやすいかなぁ、とは思いますが、「match」など他のライブラリでも使われる関数が被って自動インポートされちゃったりもします。
+
+cjs ならこうです。
+
+```js
+const R = require("ramda");
+const result = R.add(1, 2);
 ```
