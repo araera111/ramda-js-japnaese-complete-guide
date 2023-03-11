@@ -97,3 +97,31 @@ const result2 = pipe(
   map((x) => x * 3)
 )(numbers);
 ```
+
+## addIndex
+
+ramda の map や filter に index(添字)でアクセスできるようにしてくれる関数です。  
+js の array は filter メソッドを持っているが、これは(x,i)と 1 個目のパラメータが配列の中身で、2 個めのパラメータがインデックスである。  
+しかし、ramda の map や filter には index が標準ではついていない。  
+それをなんとかしてくれるのが addIndex 関数なのだ。
+……しかし、TypeScript を使っていると問題点がある。  
+curry 化してあとから配列を入れる関係上、x の値が unknown になるのだ。  
+下記の例を見てほしいのですが、配列の map メソッドだと素直に書けるのを  
+ramda だと無理やり as as で number にアサーションしているので型が非常によろしくないのです。  
+素直に配列の map メソッドを使うか、fp-ts や rambda や ts-belt を使用したほうが良いのではないか、と思います。
+
+```ts
+import { addIndex, map } from "ramda";
+
+const numbers = [1, 2, 3, 4, 5];
+
+/* 最初のものだけを3倍にしたい */
+const result = numbers.map((x, i) => (i === 0 ? x * 3 : x));
+console.log({ result }); // { result: [ 3, 2, 3, 4, 5 ] }
+
+/* ramdaのmapはindexがないので、addIndexでつつんであげる */
+const result2 = addIndex(map)((x, i) =>
+  i === 0 ? (x as unknown as number) * 3 : x
+)(numbers);
+console.log({ result2 }); // { result2: [ 3, 2, 3, 4, 5 ] }
+```
