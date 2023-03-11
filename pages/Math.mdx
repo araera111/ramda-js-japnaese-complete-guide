@@ -4,7 +4,7 @@ title: "Math"
 
 Math では数字に関する関数を扱います。  
 正直プリミティブ過ぎてあんまり使い所がない気がする。  
-現在 2 個。
+現在 8 個。
 
 ## add
 
@@ -22,4 +22,91 @@ number を引数に取り、1 減らした number を返す関数です。
 
 ```ts
 dec(40); // => 39
+```
+
+## inc
+
+increment。1 足した number を返す関数。
+
+```ts
+R.inc(42); //=> 43
+```
+
+## divide
+
+割り算。
+
+```ts
+R.divide(71, 100); //=> 0.71 71÷100 = 71/100 -> 0.71
+
+const half = R.divide(R.__, 2);
+half(42); //=> 21
+
+const reciprocal = R.divide(1);
+reciprocal(4); //=> 0.25
+```
+
+## mathMod
+
+deepl  
+mathMod は、%演算子（ひいては R.modulo）とは異なり、数学的にはモジュロ演算子のような振る舞いをする。つまり、-17 % 5 は-2 ですが、mathMod(-17, 5)は 3 です。mathMod は Integer 引数を必要とし、モジュラスがゼロまたは負の場合は NaN を返します。
+
+全然わからないし一生使うことなさそう。  
+誰か詳しい人教えてください。負数があるときに mod とはなんか違うっぽいらしいが……。
+
+```ts
+R.mathMod(-17, 5); //=> 3
+R.mathMod(17, 5); //=> 2
+R.mathMod(17, -5); //=> NaN
+R.mathMod(17, 0); //=> NaN
+R.mathMod(17.2, 5); //=> NaN
+R.mathMod(17, 5.3); //=> NaN
+
+const clock = R.mathMod(R.__, 12);
+clock(15); //=> 3
+clock(24); //=> 0
+
+const seventeenMod = R.mathMod(17);
+seventeenMod(3); //=> 2
+seventeenMod(4); //=> 1
+seventeenMod(10); //=> 7
+```
+
+## max
+
+2 つの値のうちの大きいほうが求まる。  
+string にも使えて、アスキーコードとかの大きい方が求まるのかな。  
+まあ数字だけにしておいたほうが無難な気はするが……。
+
+```ts
+R.max(789, 123); //=> 789
+R.max("a", "b"); //=> 'b'
+```
+
+## maxby
+
+3 個引数を取る。  
+1 個目は適用する関数。  
+2 個目は数字 A  
+3 個目は数字 B  
+まあ例を見たほうがわかりやすいかな……。
+
+```ts
+const square = (n) => n * n;
+
+/* 
+  square関数は同じ数をかける関数。
+  square関数を-3と2に実行すると9と4になる。
+  どちらが大きいかというと9なので-3が返ってくる。
+*/
+R.maxBy(square, -3, 2); //=> -3
+```
+
+## mean
+
+平均
+
+```ts
+R.mean([2, 7, 9]); //=> 6  2+7+9=18 18/3 = 6
+R.mean([]); //=> NaN
 ```
