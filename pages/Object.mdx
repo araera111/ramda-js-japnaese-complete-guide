@@ -2,6 +2,8 @@
 title: "Object"
 ---
 
+import { Callout } from "nextra-theme-docs";
+
 ## assoc
 
 オブジェクトに key, value を追加する関数です。  
@@ -26,19 +28,36 @@ console.log(addNameUser2); // { id: 2, name: 'YAMADA' }
 /* ramdaを使わないならこんな感じ */
 const addNameuser3 = { ...user3, name: "HIRAYAMA" };
 console.log(addNameuser3); // { id: 3, name: 'HIRAYAMA' }
+```
 
-/*
-  注意：型は補完されない
-  本来、USER型はaddressなどというプロパティはないが、assocなら追加できてしまう。
-  プロパティを追加するのはassocで良いが、変更するならスプレッド構文でコピーするか、immerなどを使うと良い。
-*/
+<Callout type="warning" emoji="⚠️" style={{"white-space": "pre-wrap;"}}>
+<div >
+注意：型は補完されない  
+本来、USER 型は address などというプロパティはないが、assoc なら追加できてしまう。  
+プロパティを追加するのは assoc で良いが、変更するならスプレッド構文でコピーするか、immer などを使うと良い。
+</div>
+</Callout>
+```ts
 type User = {
   id: number;
   name: string;
 };
 const user4 = { id: 4, name: "ISHIDA" };
-const newUser: User = assoc("address", "大阪府茨木市駅前1丁目1-1-1", user4);
+const newUser: User = assoc("address", "京都府京都市駅前1丁目1-1-1", user4);
 console.log({ newUser }); // { newUser: { id: 4, name: 'ISHIDA', address: '京都府京都市駅前1丁目1-1-1' } }
+```
+
+## prop
+
+引数 1 にオブジェクトのキー、引数 2 にオブジェクトを渡す。  
+そうするとそのキーのバリューが取ってこられる関数です。  
+ramda だといろいろな関数で prop を使います。
+
+```ts
+R.prop("x", { x: 100 }); //=> 100
+R.prop("x", {}); //=> undefined
+R.prop(0, [100]); //=> 100
+R.compose(R.inc, R.prop("x"))({ x: 3 }); //=> 4
 ```
 
 ## clone
@@ -78,4 +97,40 @@ const deepCopy = () => {
   console.log(obj); // { id: 1, name: 'TANAKA', posts: [ { id: 1, title: 'ご挨拶' } ] } ←変わってない！
 };
 deepCopy();
+```
+
+## dissoc
+
+これは assoc がわかれば簡単なので、公式の例を拝借。  
+asssoc の逆。  
+第一引数に Object の key を取り、その key:value を Object から削除する。
+
+```ts
+dissoc("b", { a: 1, b: 2, c: 3 }); //=> {a: 1, c: 3}
+```
+
+## values
+
+Object の value だけを取ってくる関数。
+
+```ts
+values({ a: 1, b: 2, c: 3 }); //=> [1, 2, 3]
+```
+
+## keys
+
+Object の key だけを取ってくる関数。
+
+```ts
+keys({ a: 1, b: 2, c: 3 }); //=> ['a', 'b', 'c']
+```
+
+## toPairs
+
+Object の key と value を配列に入れてくれる関数。  
+Object を配列的に処理したいときに使うかな……。
+key と value をタプルにしてくれる、みたいな感じ。
+
+```ts
+toPairs({ a: 1, b: 2, c: 3 }); //=> [['a', 1], ['b', 2], ['c', 3]]
 ```

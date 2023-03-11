@@ -40,3 +40,320 @@ const resultUsers = [...users, newUser];
 
 こんな感じで足せます。
 普通に js 風味でええやんってなるけど、pipe とかでつなぎたいときは ramda を使ったほうが便利。curry 化されているし。
+
+## collectBy
+
+```ts
+import { collectBy, prop } from "ramda";
+
+type Role = "一般社員" | "バイト" | "社長";
+
+type User = {
+  id: number;
+  name: string;
+  role: Role;
+};
+
+const shatyosan: User = {
+  id: 1,
+  name: "山田 太郎",
+  role: "社長",
+};
+
+const bite: User = {
+  id: 2,
+  name: "かむ はなこ",
+  role: "バイト",
+};
+
+const bite2: User = {
+  id: 3,
+  name: "かむかむ かむこ",
+  role: "バイト",
+};
+
+const user: User = {
+  id: 4,
+  name: "しゃいん いちろう",
+  role: "一般社員",
+};
+
+/* 上記のようなユーザーが配列に入っていたとする。 */
+const users = [shatyosan, bite, bite2, user];
+
+/* 社長、バイト、一般社員で配列に分ける関数 */
+const collectByRole = (userList: User[]): User[][] =>
+  collectBy(prop("role"), userList);
+
+const result = collectByRole(users);
+console.log(result);
+
+/*
+[
+  [ { id: 1, name: '山田 太郎', role: '社長' } ],
+  [
+    { id: 2, name: 'かむ はなこ', role: 'バイト' },
+    { id: 3, name: 'かむかむ かむこ', role: 'バイト' }
+  ],
+  [ { id: 4, name: 'しゃいん いちろう', role: '一般社員' } ]
+]
+このように分類してくれるのだ
+*/
+```
+
+## concat
+
+2 つの配列を足すことができます。  
+実は文字にも使えます。  
+concat は JS の配列のメソッドにもあります。(result3)  
+配列を結合したいだけならメソッドでもいいです。  
+ramda の利点はカリー化されているので処理を先送りにしたり、簡単に関数に分けたりできることです。
+
+```ts
+import { concat } from "ramda";
+
+/* 配列の合体 */
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+
+const result = concat(arr1, arr2);
+console.log({ result });
+// { result: [ 1, 2, 3, 4, 5, 6 ] }
+
+/* ramdaなしでやるならこんな感じ */
+const result2 = [...arr1, ...arr2];
+console.log({ result2 });
+// { result: [ 1, 2, 3, 4, 5, 6 ] }
+
+/* そもそも配列のメソッドにもあるよ */
+const result3 = arr1.concat(arr2);
+console.log({ result3 });
+// { result: [ 1, 2, 3, 4, 5, 6 ] }
+
+/* 文字も合体できる */
+const str1 = "AAAAAA";
+const str2 = "BBBBBB";
+const result4 = concat(str1, str2);
+console.log({ result4 });
+// { result5: 'AAAAAABBBBBB' }
+
+/* 普通にやるなら */
+const result5 = str1 + str2;
+console.log({ result5 });
+// { result5: 'AAAAAABBBBBB' }
+```
+
+## count
+
+配列を渡して、ある条件に合致したものの数を返してくれます。
+
+```ts
+import { count } from "ramda";
+
+const countEven = (arr: number[]): number => count((x) => x % 2 === 0, arr);
+
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const result = countEven(numbers);
+console.log({ result }); // { result: 5 } (2,4,6,8,10)のカウント
+
+type User = {
+  id: number;
+  name: string;
+  age: number;
+};
+
+const countAge18OverUser = (arr: User[]): number =>
+  count((x) => x.age >= 18, arr);
+
+const users: User[] = [
+  {
+    id: 1,
+    name: "TANAKA",
+    age: 0,
+  },
+  {
+    id: 2,
+    name: "YAMADA",
+    age: 18,
+  },
+  {
+    id: 3,
+    name: "HANAMURA",
+    age: 19,
+  },
+];
+
+const result2 = countAge18OverUser(users);
+console.log({ result2 }); // { result2: 2 } -> YAMADAとHANAMURAは18歳以上
+```
+
+## countBy
+
+集計を行う関数です。結果は object で返ってきます。  
+下の例を見てもらうのがわかりやすいかも。
+
+```ts
+/*
+  例：好きな色の集計を行いたい
+*/
+
+import { countBy } from "ramda";
+
+/* 回答一覧。とりあえずidと名前はなんでもいいのでコピーで使いまわします。好きな色だけ変えてる。 */
+const questionnaire1 = {
+  id: 1,
+  name: "TANAKA",
+  favoliteColor: "red",
+};
+const questionnaire2 = {
+  id: 2,
+  name: "YAMADA",
+  favoliteColor: "blue",
+};
+const questionnaire3 = {
+  id: 2,
+  name: "YAMADA",
+  favoliteColor: "yellow",
+};
+const questionnaire4 = {
+  id: 2,
+  name: "YAMADA",
+  favoliteColor: "blue",
+};
+const questionnaire5 = {
+  id: 2,
+  name: "YAMADA",
+  favoliteColor: "blue",
+};
+const questionnaire6 = {
+  id: 2,
+  name: "YAMADA",
+  favoliteColor: "yellow",
+};
+const questionnaire7 = {
+  id: 2,
+  name: "YAMADA",
+  favoliteColor: "blue",
+};
+const questionnaire8 = {
+  id: 2,
+  name: "YAMADA",
+  favoliteColor: "redi",
+};
+
+/* もっといろいろ回答があったが、こんな感じでfavoliteColorだけにしたとしよう */
+const list = [
+  questionnaire1,
+  questionnaire2,
+  questionnaire3,
+  questionnaire4,
+  questionnaire5,
+  questionnaire6,
+  questionnaire7,
+  questionnaire8,
+];
+
+const countFavoliteColors = countBy((x) => x.favoliteColor, list);
+console.log({ countFavoliteColors });
+// { countFavoliteColors: { red: 1, blue: 4, yellow: 2, redi: 1 } } ←カウントしたことによってtypoしていたことも判明。
+
+/*
+  countBy の第一引数に関数を渡すことができて、ここでいろいろできます。  
+  たとえば下は公式の例ですが、Math.floorで端数を切り捨てて、数字の頻度をカウントしています。 
+  const numbers = [1.0, 1.1, 1.2, 2.0, 3.0, 2.2];
+  R.countBy(Math.floor)(numbers);    //=> {'1': 3, '2': 2, '3': 1}
+*/
+```
+
+## drop
+
+下記は公式の例。  
+与えられた引数の数だけ、配列の頭から消していく関数。  
+これが意外と便利。  
+ちなみに string にも使えます。slice とかより直感的に使える気がするな。
+
+```ts
+R.drop(1, ["foo", "bar", "baz"]); //=> ['bar', 'baz'] 1個目のfooが消えた
+R.drop(2, ["foo", "bar", "baz"]); //=> ['baz'] 配列の頭から2個が消えた
+R.drop(3, ["foo", "bar", "baz"]); //=> [] 空になった
+R.drop(4, ["foo", "bar", "baz"]); //=> [] 超える数のときは空。エラーは返さない
+R.drop(3, "ramda"); //=> 'da' 文字の頭3個を消した
+```
+
+## dropLast
+
+drop の逆ですな。配列の後ろから消してくれる。  
+文字列操作で結構便利だったりする。  
+PSAEEGGD0001  
+とかで後ろ 4 個取ってきてもらったり。
+
+```ts
+R.dropLast(1, ["foo", "bar", "baz"]); //=> ['foo', 'bar']
+R.dropLast(2, ["foo", "bar", "baz"]); //=> ['foo']
+R.dropLast(3, ["foo", "bar", "baz"]); //=> []
+R.dropLast(4, ["foo", "bar", "baz"]); //=> []
+R.dropLast(3, "ramda"); //=> 'ra'
+```
+
+## take
+
+drop の逆で配列の頭から取得します。string にも使えます。
+
+```ts
+R.take(1, ["foo", "bar", "baz"]); //=> ['foo']
+R.take(2, ["foo", "bar", "baz"]); //=> ['foo', 'bar']
+R.take(3, ["foo", "bar", "baz"]); //=> ['foo', 'bar', 'baz']
+R.take(4, ["foo", "bar", "baz"]); //=> ['foo', 'bar', 'baz']
+R.take(3, "ramda"); //=> 'ram'
+```
+
+## takeLast
+
+そうなると当然 takeLast もあるわな。  
+配列の後ろから取得できます。string にも使えます。
+
+```ts
+R.takeLast(1, ["foo", "bar", "baz"]); //=> ['baz']
+R.takeLast(2, ["foo", "bar", "baz"]); //=> ['bar', 'baz']
+R.takeLast(3, ["foo", "bar", "baz"]); //=> ['foo', 'bar', 'baz']
+R.takeLast(4, ["foo", "bar", "baz"]); //=> ['foo', 'bar', 'baz']
+R.takeLast(3, "ramda"); //=> 'mda'
+```
+
+## filter
+
+filter 関数。  
+js の配列メソッドにはあるが、object にはない。
+
+- object でも filter できる
+- カリー化されているので pipe でつなぎやすい
+  などのメリットがある。
+
+一方、index を返してくれないので index を使ったフィルター処理はできません。
+
+```ts
+/* 公式例 */
+const isEven = (n) => n % 2 === 0;
+R.filter(isEven, [1, 2, 3, 4]); //=> [2, 4]
+R.filter(isEven, { a: 1, b: 2, c: 3, d: 4 }); //=> {b: 2, d: 4}
+
+/*
+  こんな感じでindexを使ったフィルターがjsの配列のmethodではできるが、ramdaだとできない。
+  まあ、同じことやりたいならremove関数でよろしいが
+  たとえば配列で偶数番目のものだけ抜き出すとかの処理はramdaだとできないかな？
+*/
+const filterByIndex = (arr: number[], targetIndex: number): number[] =>
+  arr.filter((_, i) => i !== targetIndex);
+
+/* そういうときはaddIndexを使えばよろしい */
+import { addIndex, filter } from "ramda";
+
+const numbers = [1, 2, 3, 4, 5, 6];
+const filterByEvenIndex = addIndex(filter)((_, i) => i % 2 === 0);
+const result = filterByEvenIndex(numbers);
+console.log({ result }); // { result: [ 1, 3, 5 ] } 配列の偶数番目だけ
+
+const numberObj = [{ a: "a", b: "b", c: "c", d: "d", e: "e" }];
+const result2 = filterByEvenIndex(numberObj);
+console.log({ result2 }); // { result2: [ { a: 'a', b: 'b', c: 'c', d: 'd', e: 'e' } ] } objectに使ってもindexは足されない
+```

@@ -1,12 +1,8 @@
 {
   "index": "まえがき",
   "Installation": "インストール",
-  "List": "配列",
-  "Object": "オブジェクト",
-  "Math": "数",
-  "github_link": {
-    "title": "ramda-js-japnaese-complete-guide",
-    "href": "https://github.com/araera111/ramda-js-japnaese-complete-guide",
-    "newWindow": true
-  }
+  "List": "List",
+  "Object": "Object",
+  "Function": "Function",
+  "Math": "Math"
 }

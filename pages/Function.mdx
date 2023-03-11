@@ -1,0 +1,97 @@
+---
+title: "Function"
+---
+
+## curry
+
+curry 化の説明は難しいです。  
+ひとまず下記例が一番初歩的な curry 化の例です。
+僕がどういうときに curry 化を使うかというと、pipe で関数の処理をつなげたいけれど引数の数があわないときです。  
+pipe については後述します。  
+また pipe を見たあとに curry を見ると、なんとなくわかるかも。
+
+```ts
+import { curry } from "ramda";
+
+/* こういう関数をつくったとする。 */
+const add = (num1: number, num2: number): number => num1 + num2;
+
+/*
+  add5という関数をつくりたい。
+  add5(1)とすると5＋1 = 6になる関数。
+  add5(10)とすると5＋10 = 15
+*/
+const add5Error = add(5); // ERROR 2 個の引数が必要ですが、1 個指定されました。ts(2554)
+
+/* curry化してあげる */
+const curriedAdd = curry(add);
+const add5 = curriedAdd(5);
+const result = add5(10);
+console.log({ result });
+```
+
+```ts
+import { curry, pipe } from "ramda";
+
+type User = { id: number; name: string; age: number };
+
+const basicUser: User = {
+  id: 0,
+  name: "",
+  age: 0,
+};
+
+const addUserId = (id: number, user: User): User => ({ ...user, id });
+const addUserName = (name: string, user: User): User => ({ ...user, name });
+const addUserAge = (age: number, user: User): User => ({ ...user, age });
+const result = pipe(
+  curry(addUserId)(1),
+  curry(addUserName)("TANAKA"),
+  curry(addUserAge)(18)
+)(basicUser);
+console.log({ result }); // { result: { id: 1, name: 'TANAKA', age: 18 } }
+
+/*
+  もちろん、今回の例はもっと簡単に、かつ型安全に書けるが……
+  もっと複雑なオブジェクトをpipeで変換していくときに便利
+*/
+
+const newUser: User = { ...basicUser, id: 18, name: "YAMADA", age: 20 };
+console.log({
+  newUser,
+});
+/*
+  { newUser: { id: 18, name: 'YAMADA', age: 20 } }
+*/
+```
+
+## tap
+
+tap は何をしても同じものを返す関数です。  
+わけがわからないと思いますが、下記例を参考にしてください。
+
+```ts
+import { map, pipe, tap } from "ramda";
+
+const numbers = [1, 2, 3, 4, 5, 6];
+
+const result = pipe(
+  map((x: number) => x * 2),
+  /*
+    ここで何もしないが、もともとの入力が次の関数に送られる
+    tapで処理の途中にログを仕込んだりできる
+  */
+  tap((x) => console.log(x)),
+  map((x) => x * 3)
+)(numbers);
+
+/* もしtapがないときは、こういう風にしないといけない */
+const result2 = pipe(
+  map((x: number) => x * 2),
+  map((x) => {
+    console.log(x);
+    return x;
+  }),
+  map((x) => x * 3)
+)(numbers);
+```
