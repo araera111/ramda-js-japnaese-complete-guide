@@ -1,0 +1,44 @@
+---
+title: "Logic"
+---
+
+## allPass
+
+allPass は、まず propEq を理解するとわかりやすいかもしれません。  
+and 条件というか、全部を満たしたときだけ true になる
+
+```ts
+const isQueen = R.propEq("rank", "Q"); //←rankがQかどうかを判定する関数
+const isSpade = R.propEq("suit", "♠︎"); //スート(マーク)がスペードかどうかを判定する関数
+const isQueenOfSpades = R.allPass([isQueen, isSpade]); //オブジェクトを渡して、isQueenかつisSpadeかどうかを判定できる
+
+isQueenOfSpades({ rank: "Q", suit: "♣︎" }); //=> false
+isQueenOfSpades({ rank: "Q", suit: "♠︎" }); //=> true
+```
+
+## anyPass
+
+allPass の any 版(それじゃわからんて)
+つまり or 条件ですね。  
+ひとつでも合致するものがあれば true
+
+```ts
+const isClub = R.propEq("suit", "♣"); //スートがクローバーかどうかを判定する関数
+const isSpade = R.propEq("suit", "♠"); //スートがスペードかどうかを判定する関数
+const isBlackCard = R.anyPass([isClub, isSpade]); //カードオブジェクトを渡した際、スートがクローバーあるいはスペードかどうかを判定する関数。
+
+isBlackCard({ rank: "10", suit: "♣" }); //=> true クローバーなのでtrue
+isBlackCard({ rank: "Q", suit: "♠" }); //=> true スペードなのでtrue
+isBlackCard({ rank: "Q", suit: "♦" }); //=> false ダイヤなのでfalse
+```
+
+## and
+
+and は&とだいたい一緒です。演算子ではなくて関数にしてくれているということですな。
+
+```ts
+R.and(true, true); //=> true true && true->true
+R.and(true, false); //=> false true && false->false
+R.and(false, true); //=> false false && true -> false
+R.and(false, false); //=> false false && false -> false
+```

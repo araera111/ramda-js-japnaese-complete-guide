@@ -28,6 +28,31 @@ const arr1Result = arr1.every((x) => x === 3);
 JS の配列にある every と一緒。
 基本的に配列に使用するなら every で良いけれど、条件が複雑で関数に切り出しておきたいときは all のほうが良いかも。
 
+## any
+
+これは下記例がわかりづらい気がする。  
+つまり、ひとつの判定する関数に、値を複数配列で渡すことができる。  
+そして、どちらかがその判定に合致していたときは true を返す、ということだろう。
+
+```ts
+import { any } from "ramda";
+
+const numbers1 = [1, 2, 3, 4, 5];
+const isEven = (num: number): boolean => num % 2 === 0;
+
+const result1 = any(isEven, numbers1);
+console.log({ result1 }); // { result1: true } 偶数条件に合致するものが配列にあるのでtrue
+
+const numbers2 = [1, 1, 1, 1, 1];
+const result2 = any(isEven, numbers2);
+console.log({ result2 }); // { result2: false } 偶数のものが配列に存在しないのでfalse
+
+/* 配列のメソッドならこう書けます。 */
+const result3 = numbers1.some((x) => isEven(x));
+const result4 = numbers2.some((x) => isEven(x));
+console.log({ result3, result4 }); // { result3: true, result4: false }
+```
+
 ## append
 
 ```ts
@@ -368,4 +393,32 @@ console.log({ result2 }); // { result2: [ { a: 'a', b: 'b', c: 'c', d: 'd', e: '
 R.uniq([1, 1, 2, 1]); //=> [1, 2]
 R.uniq([1, "1"]); //=> [1, '1']
 R.uniq([[42], [42]]); //=> [[42]]
+```
+
+## adjust
+
+adjust は引数 1 が index, 引数 2 が適用する関数、引数 3 が配列です。
+下記例では a,b,c,d が入っている配列の、index1 に toUpper 関数を適用しています。
+
+```ts
+R.adjust(1, R.toUpper, ["a", "b", "c", "d"]); //=> ['a', 'B', 'c', 'd']
+R.adjust(-1, R.toUpper, ["a", "b", "c", "d"]); //=> ['a', 'b', 'c', 'D']
+```
+
+## aperture
+
+deepl
+連続する要素の n 個のタプルからなる新しいリストを返す。n がリストの長さより大きい場合，空リストが返される。
+
+動きはわかったけど、どういうところで使うのかいまいち想像できないなぁ……。
+
+```ts
+/* 1と2, 2と3, 3と4, 4と5で同じものが2回使われる配列にしてくれる */
+R.aperture(2, [1, 2, 3, 4, 5]); //=> [[1, 2], [2, 3], [3, 4], [4, 5]]
+
+/* 123 234 345と1個ずつずれた3個の組 */
+R.aperture(3, [1, 2, 3, 4, 5]); //=> [[1, 2, 3], [2, 3, 4], [3, 4, 5]]
+
+/* 7つの組をつくれないので空配列が返ってくる */
+R.aperture(7, [1, 2, 3, 4, 5]); //=> []
 ```

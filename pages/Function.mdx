@@ -125,3 +125,206 @@ const result2 = addIndex(map)((x, i) =>
 )(numbers);
 console.log({ result2 }); // { result2: [ 3, 2, 3, 4, 5 ] }
 ```
+
+## always
+
+always(いつも)同じ値を返す関数らしいです。あんまり使いみちはわかりません。誰か教えてください。
+プリミティブではない値を渡した場合、もとの値の参照となるので注意、とのこと。
+
+```ts
+const t = R.always("Tee");
+t(); //=> 'Tee'
+```
+
+## andThen
+
+以下 deepl 翻訳
+解決に成功したプロミス内の値に onSuccess 関数を適用した結果を返します。これは、関数コンポジションの内部でプロミスを扱う場合に便利です。
+どういうことやねんな？
+ということで公式の例をひとつひとつ確認してみよう。
+
+1. makeQuery 関数は email という string を渡すと、{query:{email: string}}というオブジェクトを返してくれる関数。
+2. fetchMember は request(上記 query)を渡すと、firstname, lastName,id を返してくれる promise の関数。
+   つまりメールアドレスで DB に問い合わせてユーザーが返ってくる、みたいな想定なのだろう。
+3. getMemberName 関数は、pipe でどんどん処理を進めていく。
+   bob@gmail.com -> makeQuery で request にする->それを fetchMember で取りに行く->
+   andThen は promise が成功した場合に関数を適用する。
+   ということで fetchMember が成功したときにだけ、pick で firstName, lastName を取るということか……。
+
+```ts
+const makeQuery = (email) => ({ query: { email } });
+const fetchMember = (request) =>
+  Promise.resolve({ firstName: "Bob", lastName: "Loblaw", id: 42 });
+
+//getMemberName :: String -> Promise ({ firstName, lastName })
+const getMemberName = R.pipe(
+  makeQuery,
+  fetchMember,
+  R.andThen(R.pick(["firstName", "lastName"]))
+);
+
+getMemberName("bob@gmail.com").then(console.log);
+```
+
+## otherwhise
+
+deepl
+失敗した約束の中の値に onFailure 関数を適用した結果を返します。これは、関数コンポジション内で拒否されたプロミスを処理するのに便利です。
+
+つまり andThen の反対、promise が reject されたときの処理を行うということかな。
+
+1. failedFetch は失敗する promise
+2. useDefault は Bob と Loblaw を返すだけの関数
+3. recoverFromFailure は fetch->失敗したときはデフォルトユーザーを取る →andthen で成功時の処理という流れ
+   失敗していたら useDefault で初期値を返すような処理を今回はしているのかな。
+
+```ts
+const failedFetch = (id) => Promise.reject("bad ID");
+const useDefault = () => ({ firstName: "Bob", lastName: "Loblaw" });
+
+//recoverFromFailure :: String -> Promise ({ firstName, lastName })
+const recoverFromFailure = R.pipe(
+  failedFetch,
+  R.otherwise(useDefault),
+  R.andThen(R.pick(["firstName", "lastName"]))
+);
+recoverFromFailure(12345).then(console.log);
+```
+
+## ap
+
+deepl
+ap は、値のリストに関数のリストを適用する。
+
+第 2 引数の ap メソッドが存在する場合、そのメソッドにディスパッチする。また、キュレーションされた関数をアプリケータとして扱います。
+
+なんのこっちゃわかりませんので例を追ってみよう。
+
+```ts
+/*
+  [1,2,3]というnumber[]に、2つの関数を適用する。
+  multiply2で2,4,6が生まれる。
+  add3で4,5,6が生まれる。
+  結果は、その2つが合体した[2,4,6,4,5,6]となる。
+  つまり、値のリスト[1,2,3]に関数のリスト[multiply2, add3]を適用するということ。
+*/
+R.ap([R.multiply(2), R.add(3)], [1, 2, 3]); //=> [2, 4, 6, 4, 5, 6]
+
+/*
+  [pizza, salad]->concat tasty -> tasty pizza tasty salad
+  [pizza, salad]->toUpper PIZZA SALAD
+  result -> tasty pizza tastysalad PIZZA SALAD
+*/
+R.ap([R.concat("tasty "), R.toUpper], ["pizza", "salad"]); //=> ["tasty pizza", "tasty salad", "PIZZA", "SALAD"]
+
+// R.ap can also be used as S combinator
+// when only two functions are passed
+
+/*
+  Ramda -> concatで次のものと結合
+  Ramda -> toUpper -> RAMDA
+  RamdaRAMDAという流れか
+*/
+R.ap(R.concat, R.toUpper)("Ramda"); //=> 'RamdaRAMDA'
+```
+
+## apply
+
+apply は可変長引数を取る関数に配列を与えることができる。  
+下記例、Math.max は引数に配列を取ることができない。
+
+```ts
+import { apply } from "ramda";
+
+console.log(Math.max(1, 3, 2)); // ←可変長引数だけを引数に取り、配列は引数に取れない
+// Expected output: 3
+
+/* applyを使うことで、本来可変長引数しか認めないapplyに配列を渡すことができる */
+const nums = [1, 2, 3, -99, 42, 6, 7];
+const result1 = apply(Math.max, nums); //= > 42
+console.log({ result1 }); // { result1: 42 }
+
+/* ちなみにこうやってスプレッド構文を使用することでMath.maxにわたすこともできる */
+const result2 = Math.max(...nums);
+console.log({ result2 }); // { result2: 42 }
+```
+
+## applySpec
+
+deepl
+プロパティと関数を再帰的に対応付けた仕様のオブジェクトが与えられた場合、各プロパティを、与えられた引数で関連する関数を呼び出した結果に対応付けることによって、同じ構造のオブジェクトを生成する関数を作成します。
+
+よーわからんので例を紐解いてみる。
+
+```ts
+/*
+  getMetrics
+  オブジェクトのsumはadd関数である。
+  オブジェクトのnestedは中にmul(multiply)関数を持つオブジェクトを持っている(ややこしいな))
+  で、これをapplySpecが包んでいる。
+
+  getMetrics(2,4)で、2add4 = 6, 2mul4=8となる。
+  つまり、オブジェクトの持っている関数に2,4が渡される。ネストされたものにも実行される。
+  しかも最初に渡したのと同じ構造で返ってくるというわけ。 
+  ややこしい関数やなぁ。何に使うんやろ。
+*/
+const getMetrics = R.applySpec({
+  sum: R.add,
+  nested: { mul: R.multiply },
+});
+getMetrics(2, 4); // => { sum: 6, nested: { mul: 8 } }
+```
+
+## applyTo
+
+これは公式の例を見てもわかりづらいが、TypeScript で map や filter 関数を使いたいときに便利だ。
+
+```ts
+/* 公式の例 */
+const t42 = R.applyTo(42); //42を束縛した
+t42(R.identity); //=> 42 //identityなのでそのまま返す。42
+t42(R.add(1)); //=> 43 42束縛したものにadd1で43
+```
+
+```ts
+/* 先にapplyToを使用してからmapをすると型がつく例 */
+import { applyTo, map, pipe } from "ramda";
+
+const numbers = [1, 2, 3, 4, 5];
+const result = pipe(map((x) => x * 2))(numbers); // 'x''は 'unknown' 型です。ts(18046)
+const result2 = applyTo(numbers)(pipe(map((x) => x * 2))); // applyToで先にnumbersを束縛することで型がつく！
+console.log({ result, result2 }); // { result: [ 2, 4, 6, 8, 10 ], result2: [ 2, 4, 6, 8, 10 ] }
+```
+
+## ascend
+
+ソートのときに使用する。  
+prop と組み合わせて使用することで、オブジェクトのキーをもとに昇順でソートできる。
+
+```ts
+const byAge = R.ascend(R.prop("age")); //ageキーを基準に昇順で並び替える
+const people = [
+  { name: "Emma", age: 70 },
+  { name: "Peter", age: 78 },
+  { name: "Mikhail", age: 62 },
+];
+const peopleByYoungestFirst = R.sort(byAge, people);
+//=> [{ name: 'Mikhail', age: 62 },{ name: 'Emma', age: 70 }, { name: 'Peter', age: 78 }]
+```
+
+## descend
+
+ソートのときに使用する。  
+prop と組み合わせて使用することで、オブジェクトのキーをもとに昇順でソートできる。
+これ知るまでは sortBy でソートしたあとに reverse したりしてた。
+
+```ts
+const byAge = R.descend(R.prop("age"));
+const people = [
+  { name: "Emma", age: 70 },
+  { name: "Peter", age: 78 },
+  { name: "Mikhail", age: 62 },
+];
+const peopleByOldestFirst = R.sort(byAge, people);
+//=> [{ name: 'Peter', age: 78 }, { name: 'Emma', age: 70 }, { name: 'Mikhail', age: 62 }]
+```
