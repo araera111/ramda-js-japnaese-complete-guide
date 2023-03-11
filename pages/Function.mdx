@@ -143,7 +143,7 @@ t(); //=> 'Tee'
 どういうことやねんな？
 ということで公式の例をひとつひとつ確認してみよう。
 
-1. makeQuery 関数は email という string を渡すと、{query:{email: string}}というオブジェクトを返してくれる関数。
+1. makeQuery 関数は email という string を渡すと、`{query:{email: string}}`というオブジェクトを返してくれる関数。
 2. fetchMember は request(上記 query)を渡すと、firstname, lastName,id を返してくれる promise の関数。
    つまりメールアドレスで DB に問い合わせてユーザーが返ってくる、みたいな想定なのだろう。
 3. getMemberName 関数は、pipe でどんどん処理を進めていく。
