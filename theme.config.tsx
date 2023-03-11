@@ -6,7 +6,8 @@ const config: DocsThemeConfig = {
   project: {
     link: "https://github.com/araera111/ramda-js-japnaese-complete-guide",
   },
-  docsRepositoryBase: "https://github.com/shuding/nextra-docs-template",
+  docsRepositoryBase:
+    "https://github.com/araera111/ramda-js-japnaese-complete-guide",
   footer: {
     text: "ramda.js 日本語完全解説",
   },
