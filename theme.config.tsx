@@ -10,6 +10,11 @@ const config: DocsThemeConfig = {
   footer: {
     text: "ramda.js 日本語完全解説",
   },
+  head: (
+    <>
+      <title>ramda.js 日本語完全解説</title>
+    </>
+  ),
 };
 
 export default config;
