@@ -4,5 +4,7 @@
   "List": "List",
   "Object": "Object",
   "Function": "Function",
+  "Relation": "Relation",
+  "String": "String",
   "Math": "Math"
 }

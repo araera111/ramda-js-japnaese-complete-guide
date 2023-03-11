@@ -2,6 +2,8 @@
 title: "List"
 ---
 
+List では配列に関する関数を扱います。array も list も js なら一緒や。
+
 ## all
 
 ```ts
@@ -356,4 +358,14 @@ console.log({ result }); // { result: [ 1, 3, 5 ] } 配列の偶数番目だけ
 const numberObj = [{ a: "a", b: "b", c: "c", d: "d", e: "e" }];
 const result2 = filterByEvenIndex(numberObj);
 console.log({ result2 }); // { result2: [ { a: 'a', b: 'b', c: 'c', d: 'd', e: 'e' } ] } objectに使ってもindexは足されない
+```
+
+## uniq
+
+配列から重複を取り除いてくれます。便利。
+
+```ts
+R.uniq([1, 1, 2, 1]); //=> [1, 2]
+R.uniq([1, "1"]); //=> [1, '1']
+R.uniq([[42], [42]]); //=> [[42]]
 ```
