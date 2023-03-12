@@ -2,7 +2,7 @@
 title: "Logic"
 ---
 
-現在 5 個。
+現在 6 個。
 
 ## allPass
 
@@ -69,4 +69,20 @@ R.isNil(null); //=> true
 isNotNil(null); //=> false 逆になっとる
 R.isNil(7); //=> false
 isNotNil(7); //=> true 逆になっとる
+```
+
+## defaultTo
+
+1. まずは defaultTo で null, undefined,NaN のときに返す値を決める
+2. つくった関数に値を入れてみて、null, undefined, NaN のときにはさっき決めた値が返ってくる
+
+```ts
+const defaultTo42 = R.defaultTo(42); //42を返す関数をつくる
+
+defaultTo42(null); //=> 42  null, undefined ,Nanのときは42が返る
+defaultTo42(undefined); //=> 42
+defaultTo42(false); //=> false falseはfalse
+defaultTo42("Ramda"); //=> 'Ramda' null, undefined, NaNじゃないのでRamda
+// parseInt('string') results in NaN
+defaultTo42(parseInt("string")); //=> 42 Nanなので42
 ```
