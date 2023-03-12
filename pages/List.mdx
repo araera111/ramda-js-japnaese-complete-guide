@@ -506,3 +506,56 @@ R.dropWhile(lteTwo, [1, 2, 3, 4, 3, 2, 1]); //=> [3, 4, 3, 2, 1]
 
 R.dropWhile((x) => x !== "d", "Ramda"); //=> 'da'
 ```
+
+## zipObj
+
+※この回答は bing が回答しました。
+
+ramda.js の zipObj 関数は、キーの配列と値の配列を受け取り、それらを対応させたオブジェクトを返す関数です 1。例えば、次のように使うことができます。
+
+```javascript
+const keys = [‘name’, ‘age’, ‘gender’];
+const values = [‘Alice’, 25, ‘female’];
+const obj = R.zipObj(keys, values); // {name: ‘Alice’, age: 25, gender: ‘female’}
+```
+
+この関数は、キーと値の配列の長さが異なる場合でも動作しますが、長い方の配列の余った要素は無視されます 1。例えば、次のようになります。
+
+```javascript
+const keys = [‘name’, ‘age’, ‘gender’];
+const values = [‘Bob’, 30];
+const obj = R.zipObj(keys, values); // {name: ‘Bob’, age: 30}
+```
+
+この関数は、オブジェクトのプロパティを作るのに便利です。例えば、次のようにして、人物の情報をオブジェクトに変換することができます。
+
+```javascript
+const person = [‘Charlie’, 35, ‘male’, ‘engineer’];
+const keys = [‘name’, ‘age’, ‘gender’, ‘occupation’];
+const obj = R.zipObj(keys, person); // {name: ‘Charlie’, age: 35, gender: ‘male’, occupation: ‘engineer’}
+```
+
+## zipWith
+
+※この回答は bing が回答しました。
+ramda.js の zipWith 関数は、2 つの配列を引数にとり、それぞれの要素に対して指定した関数を適用して新しい配列を返す関数です 1。
+
+例えば、2 つの数値の配列を引数にとり、それぞれの要素を足し合わせた配列を返す関数は、以下のように書けます。
+
+```ts
+const add = (a, b) => a + b;
+const result = R.zipWith(add, [1, 2, 3], [4, 5, 6]); // [5, 7, 9]
+```
+
+また、2 つの文字列の配列を引数にとり、それぞれの要素を連結した配列を返す関数は、以下のように書けます。
+
+```ts
+const concat = (a, b) => a + b;
+const result = R.zipWith(concat, ["a", "b", "c"], ["d", "e", "f"]); // ["ad", "be", "cf"]
+```
+
+zipWith 関数は、引数の配列の長さが異なる場合、短い方の配列の長さに合わせて処理を行います。
+
+```ts
+const result = R.zipWith(add, [1, 2, 3], [4, 5]); // [5, 7]
+```
