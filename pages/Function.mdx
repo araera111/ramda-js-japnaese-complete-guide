@@ -3,7 +3,7 @@ title: "Function"
 ---
 
 Function では関数に関係する関数を紹介します。意味わかりませんね。  
-現在 12 個。
+現在 13 個。
 
 ## curry
 
@@ -328,4 +328,34 @@ const people = [
 ];
 const peopleByOldestFirst = R.sort(byAge, people);
 //=> [{ name: 'Peter', age: 78 }, { name: 'Emma', age: 70 }, { name: 'Mikhail', age: 62 }]
+```
+
+## binary
+
+binary をつけることで 2 個しか引数を取らせなくできる  
+よくわからんけどなんの意味がある関数なんだろう。ごめんなさい。
+
+```ts
+const takesThreeArgs = function (a, b, c) {
+  /* 3つの引数を取る関数 */
+  return [a, b, c];
+};
+takesThreeArgs.length; //=> 3
+takesThreeArgs(1, 2, 3); //=> [1, 2, 3]
+
+const takesTwoArgs =
+  R.binary(
+    takesThreeArgs
+  ); /* binaryをつけることで2個しか引数を取らせなくできる */
+takesTwoArgs.length; //=> 2
+// Only 2 arguments are passed to the wrapped function
+takesTwoArgs(1, 2, 3); //=> [1, 2, undefined]
+```
+
+## bind
+
+```ts
+const log = R.bind(console.log, console);
+R.pipe(R.assoc("a", 2), R.tap(log), R.assoc("a", 3))({ a: 1 }); //=> {a: 3}
+// logs {a: 2}
 ```

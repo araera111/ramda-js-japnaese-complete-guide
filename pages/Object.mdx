@@ -2,7 +2,7 @@
 title: "Object"
 ---
 
-Object では Object に関する関数を紹介。現在 7 個。
+Object では Object に関する関数を紹介。現在 8 個。
 
 import { Callout } from "nextra-theme-docs";
 
@@ -135,4 +135,20 @@ key と value をタプルにしてくれる、みたいな感じ。
 
 ```ts
 toPairs({ a: 1, b: 2, c: 3 }); //=> [['a', 1], ['b', 2], ['c', 3]]
+```
+
+## assocPath
+
+assoc の path(key の nest)を配列でできる。  
+引数 1 がオブジェクトのパスの string[]  
+引数 2 が値
+引数 3 がもとのオブジェクト
+
+```ts
+/* aのなかのbのなかのcに42という値を与えたい */
+R.assocPath(["a", "b", "c"], 42, { a: { b: { c: 0 } } }); //=> {a: {b: {c: 42}}}
+
+// Any missing or non-object keys in path will be overridden
+/* bとかcがないときは追加される */
+R.assocPath(["a", "b", "c"], 42, { a: 5 }); //=> {a: {b: {c: 42}}}
 ```

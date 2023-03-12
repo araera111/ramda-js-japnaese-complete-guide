@@ -2,7 +2,7 @@
 title: "Logic"
 ---
 
-現在 3 個。
+現在 4 個。
 
 ## allPass
 
@@ -43,4 +43,17 @@ R.and(true, true); //=> true true && true->true
 R.and(true, false); //=> false true && false->false
 R.and(false, true); //=> false false && true -> false
 R.and(false, false); //=> false false && false -> false
+```
+
+## both
+
+引数 1,2 ともに 同じ引数を取る、boolean を返す関数を引数に取れる。  
+どちらも true のときだけ true を返す。
+
+```ts
+const gt10 = R.gt(R.__, 10); //10以上ならtrue
+const lt20 = R.lt(R.__, 20); //20以下ならtrue
+const f = R.both(gt10, lt20);
+f(15); //=> true
+f(30); //=> false
 ```
