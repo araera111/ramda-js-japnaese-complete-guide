@@ -162,3 +162,38 @@ R.assocPath(["a", "b", "c"], 42, { a: { b: { c: 0 } } }); //=> {a: {b: {c: 42}}}
 /* bとかcがないときは追加される */
 R.assocPath(["a", "b", "c"], 42, { a: 5 }); //=> {a: {b: {c: 42}}}
 ```
+
+## toPairsIn
+
+```
+typescript
+const obj = {
+a: 1,
+b: 2,
+c: 3
+};
+
+// obj のプロトタイプに d というプロパティを追加する
+Object.prototype.d = 4;
+
+// toPairsIn 関数の型は、
+// (obj: object) => [string, any][]
+// となります。
+// obj はオブジェクト型、返り値は文字列と任意の型のペアの配列型です。
+
+// toPairsIn 関数を obj に適用すると、
+// [[a, 1], [b, 2], [c, 3], [d, 4]]
+// という配列が返ります。
+// 継承された d プロパティも含まれています。
+const result = R.toPairsIn(obj);
+
+// 結果をコンソールに出力する
+console.log("obj のすべてのプロパティを[key, value]のペアに変換した結果は、");
+console.log(result);
+```
+
+このように、toPairsIn 関数はオブジェクトのプロパティをペアに変換する関数です。もっと知りたいことがありますか？
+
+ソース: Bing との会話 2023/3/12(1) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/12.
+(2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/12.
+(3) toPairs and toPairsIn functions | Ramda JS Tutorials - YouTube. https://www.youtube.com/watch?v=USwrZkubf0M アクセス日時 2023/3/12.
