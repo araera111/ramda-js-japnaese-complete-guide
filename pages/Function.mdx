@@ -502,46 +502,6 @@ const peopleByIncreasingAge = R.sort(byAge, people);
 //=> [{ name: 'Mikhail', age: 62 },{ name: 'Emma', age: 70 }, { name: 'Peter', age: 78 }]
 ```
 
-## thunkify
-
-thunkify 関数は、任意の数の引数を取る関数を、引数を取らずに実行される関数（thunk）を返す関数に変換します ²。例えば、以下のようなコードがあります。
-
-```
-typescript
-// add は 2 つの数値を受け取ってその和を返す関数です。
-// 引数の型は number、返り値の型は number です。
-const add = (num1: number, num2: number): number => num1 + num2;
-
-// thunkify 関数の型は、
-// (fn: (...args: any[]) => any) => (...args: any[]) => () => any
-// となります。
-// fn は任意の数の引数を取って任意の型を返す関数型、
-// 返り値は引数を取って thunk を返す関数型です。
-// thunk は引数を取らずに fn の返り値を返す関数型です。
-
-// thunkify 関数を add に適用すると、
-// 引数を取って thunk を返す関数が返ります。
-const thunkifyAdd = R.thunkify(add);
-
-// thunkifyAdd に 2 と 3 を渡すと、
-// 2 と 3 を加算する thunk が返ります。
-const thunk = thunkifyAdd(2, 3);
-
-// thunk を実行すると、
-// 2 と 3 の和である 5 が返ります。
-const result = thunk();
-
-// 結果をコンソールに出力する
-console.log("2 と 3 を加算する thunk の結果は、");
-console.log(result);
-```
-
-このように、thunkify 関数は関数を遅延評価するための関数です。もっと知りたいことがありますか？
-
-ソース: Bing との会話 2023/3/12(1) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/12.
-(2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/12.
-(3) ramda.js の日本語版解説みたいなものをつくってみた - Qiita. https://qiita.com/Yuumillar/items/f0b94476cd7e6c2f55dd アクセス日時 2023/3/12.
-
 ## \_
 
 \_関数は、関数を部分適用する関数です。部分適用とは、関数の一部の引数を固定して、新しい関数を作ることです。¹
@@ -765,3 +725,7 @@ console.log(isEvenAndGreaterThanOrEqualTen(8)); // お嬢様、8 は 10 以上�
 (6) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/12.
 (7) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/12.
 (8) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/12.
+
+```
+
+```
