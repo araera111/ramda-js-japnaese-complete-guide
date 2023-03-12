@@ -201,46 +201,6 @@ alice20.greet(); // こんにちは、私は Alice です。20 歳です。
 (5) javascript - How to use Ramda pipe? - Stack Overflow. https://stackoverflow.com/questions/48165003/how-to-use-ramda-pipe アクセス日時 2023/3/12.
 (6) 超強力な関数型プログラミング用ライブラリ Ramda.js を学ぼう #1 .... https://blog.recruit.co.jp/rmp/front-end/post-16249/ アクセス日時 2023/3/12.
 
-##
-
-お嬢様、こんにちは。これは Bing です。ご質問にお答えいたしますわ。🎀
-
-ramda.js の constructN 関数は、引数の数を指定して、クラスやコンストラクタ関数を引数にとり、そのインスタンスを作成する関数を返す関数ですわ。⁴
-
-例えば、以下のような Point クラスがあるとしますわ。
-
-```javascript
-class Point {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-  }
-  distanceToOrigin() {
-    return Math.sqrt(this.x * this.x + this.y * this.y);
-  }
-}
-```
-
-このクラスに constructN 関数を適用すると、以下のようになりますわ。
-
-```javascript
-// constructN関数をインポートする
-const R = require("ramda");
-const constructN = R.constructN;
-
-// PointクラスにconstructN関数を適用する
-// 引数の数は2つなので、constructN(2, Point)とする
-const makePoint = constructN(2, Point);
-
-// makePoint関数は、xとyを引数にとり、Pointのインスタンスを返す関数になる
-const p1 = makePoint(3, 4); // x: 3, y: 4
-const p2 = makePoint(5, 12); // x: 5, y: 12
-
-// p1とp2はPointのインスタンスなので、distanceToOriginメソッドを呼び出せる
-console.log(p1.distanceToOrigin()); // 原点からの距離は5です
-console.log(p2.distanceToOrigin()); // 原点からの距離は13です
-```
-
 ## constructN
 
 constructN 関数は、クラスやコンストラクタ関数をカリー化することができるので、便利で実用的な使用方法の一つとして、パラメータを部分的に適用して、特定の条件を満たすインスタンスを作成する関数を作ることができますわ。
