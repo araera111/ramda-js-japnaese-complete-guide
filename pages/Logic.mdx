@@ -2,7 +2,7 @@
 title: "Logic"
 ---
 
-現在 4 個。
+現在 5 個。
 
 ## allPass
 
@@ -56,4 +56,17 @@ const lt20 = R.lt(R.__, 20); //20以下ならtrue
 const f = R.both(gt10, lt20);
 f(15); //=> true
 f(30); //=> false
+```
+
+## complement
+
+ある boolena を返す関数があったとする。(ex:isNil)  
+complement を渡すと、その結果が逆になる。
+
+```ts
+const isNotNil = R.complement(R.isNil); //結果が逆になるisNotNil関数を作成できる
+R.isNil(null); //=> true
+isNotNil(null); //=> false 逆になっとる
+R.isNil(7); //=> false
+isNotNil(7); //=> true 逆になっとる
 ```

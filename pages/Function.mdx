@@ -3,7 +3,24 @@ title: "Function"
 ---
 
 Function では関数に関係する関数を紹介します。意味わかりませんね。  
-現在 13 個。
+現在 15 個。
+
+## compose
+
+pipe の逆で右から(改行してたら下から)関数適用される。
+
+```ts
+import { compose, tap, toLower, trim } from "ramda";
+
+const str = "  TESTString  ";
+const result = compose(
+  trim,
+  tap((x) => console.log({ x })), // trim前 { x: '  teststring  ' }
+  toLower
+)(str);
+console.log({ result }); // { result: 'teststring' }
+/* toLower, tap, trimの順に関数が適用される */
+```
 
 ## curry
 
@@ -358,4 +375,21 @@ takesTwoArgs(1, 2, 3); //=> [1, 2, undefined]
 const log = R.bind(console.log, console);
 R.pipe(R.assoc("a", 2), R.tap(log), R.assoc("a", 3))({ a: 1 }); //=> {a: 3}
 // logs {a: 2}
+```
+
+## comparator
+
+その名通り、比較関数を作成する関数。
+個人的には sortBy で良くない、と思ったりする。  
+sort 関数の第一引数を作成するときに使うのかな。
+
+```ts
+const byAge = R.comparator((a, b) => a.age < b.age);
+const people = [
+  { name: "Emma", age: 70 },
+  { name: "Peter", age: 78 },
+  { name: "Mikhail", age: 62 },
+];
+const peopleByIncreasingAge = R.sort(byAge, people);
+//=> [{ name: 'Mikhail', age: 62 },{ name: 'Emma', age: 70 }, { name: 'Peter', age: 78 }]
 ```

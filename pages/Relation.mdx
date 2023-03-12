@@ -2,7 +2,7 @@
 title: "Relation"
 ---
 
-現在 4 個。
+現在 5 個。
 
 ## equals
 
@@ -60,4 +60,16 @@ const square = (n) => n * n;
   どちらが大きいかというと9なので-3が返ってくる。
 */
 R.maxBy(square, -3, 2); //=> -3
+```
+
+## clamp
+
+clamp は引数 1 が min, 引数 2 が max, 引数 3 が値です。  
+min-max の間に収めてくれる関数ですな。  
+date 型とか string 型でも使えるらしい。
+
+```ts
+R.clamp(1, 10, -5); // => 1 min1, max10で-5のときはminの1が採用される
+R.clamp(1, 10, 15); // => 10 min1, max10で入力15のときはmax10が採用される
+R.clamp(1, 10, 4); // => 4 min1, max10 で入力4のときはminとmaxの間なので、そのままの値が返ってくる
 ```

@@ -4,7 +4,7 @@ title: "List"
 
 List では配列に関する関数を扱います。array も list も js なら一緒や。
 
-15 個
+16 個
 
 ## all
 
@@ -423,4 +423,25 @@ R.aperture(3, [1, 2, 3, 4, 5]); //=> [[1, 2, 3], [2, 3, 4], [3, 4, 5]]
 
 /* 7つの組をつくれないので空配列が返ってくる */
 R.aperture(7, [1, 2, 3, 4, 5]); //=> []
+```
+
+## chain
+
+JS で言うところの flatMap ですかね。  
+こういう関数、型がない JS なら便利なんだけど TS だとあんまり有効利用できない気がします。  
+ちゃんとした関数型言語だと、もっとバシバシ型推論がきいて unknown じゃなくなるんだけど……。  
+flatMap は、つまり結果が配列だったときに flat にしてくれる感じですな。  
+map+filter の代わりに 1 回のループで処理できたりします。
+
+```ts
+import { chain, isNil } from "ramda";
+
+const duplicate = (n: number): number[] => [n, n];
+const result = chain(duplicate, [1, 2, 3]);
+console.log({ result }); // { result: [ 1, 1, 2, 2, 3, 3 ] }
+
+const deleteFalsy = (arr: (number | undefined)[]) =>
+  chain((x) => (isNil(x) ? [] : x), arr);
+const result2 = deleteFalsy([1, 2, 3, undefined]);
+console.log({ result2 }); // { result2: [ 1, 2, 3 ] }
 ```
