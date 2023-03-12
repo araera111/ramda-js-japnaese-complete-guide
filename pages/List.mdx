@@ -4,7 +4,7 @@ title: "List"
 
 List では配列に関する関数を扱います。array も list も js なら一緒や。
 
-16 個
+17 個
 
 ## all
 
@@ -444,4 +444,18 @@ const deleteFalsy = (arr: (number | undefined)[]) =>
   chain((x) => (isNil(x) ? [] : x), arr);
 const result2 = deleteFalsy([1, 2, 3, undefined]);
 console.log({ result2 }); // { result2: [ 1, 2, 3 ] }
+```
+
+## dropLastWhile
+
+引数 1 に pred 関数, 引数 2 に配列を取る。  
+pred が false になったものから後ろを drop した結果が返ってくる。
+
+```ts
+const lteThree = (x: number): boolean => x <= 3; //3以下かどうかをbooleanで判定するpred関数
+
+R.dropLastWhile(lteThree, [1, 2, 3, 4, 3, 2, 1]); //=> [1, 2, 3, 4] ←3以下条件に合致しなかった4から後ろを根こそぎ捨てる
+
+R.dropLastWhile((x) => x !== "d", "Ramda"); //=> 'Ramd'
+/* stringにも使える。xがdかどうかを後ろから判定し、falseになったものから後ろを根こそぎ捨てる */
 ```

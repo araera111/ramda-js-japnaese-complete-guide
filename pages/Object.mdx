@@ -2,7 +2,7 @@
 title: "Object"
 ---
 
-Object では Object に関する関数を紹介。現在 8 個。
+Object では Object に関する関数を紹介。現在 9 個。
 
 import { Callout } from "nextra-theme-docs";
 
@@ -109,6 +109,16 @@ asssoc の逆。
 
 ```ts
 dissoc("b", { a: 1, b: 2, c: 3 }); //=> {a: 1, c: 3}
+```
+
+## dissocPath
+
+これは assocPath がわかれば簡単  
+shallowCopy らしい
+
+```ts
+/* aのなかのbのなかのcを消す */
+R.dissocPath(["a", "b", "c"], { a: { b: { c: 42 } } }); //=> {a: {b: {}}}
 ```
 
 ## values
