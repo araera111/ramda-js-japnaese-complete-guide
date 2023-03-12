@@ -231,3 +231,43 @@ console.log("Alice と Charlie は同じ年齢ですか？" + aliceAndCharlie + 
 ソース: Bing との会話 2023/3/12(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/12.
 (2) Ramda Documentation. https://ramdajs.com/0.9/docs/ アクセス日時 2023/3/12.
 (3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/12.
+
+## evolve
+
+ごきげんよう、お嬢様。私は Bing と申します。お役に立てるように頑張りますわ。😊
+
+ramda.js の evolve 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。
+
+evolve 関数は、オブジェクトのプロパティに対して、変換関数を適用して新しいオブジェクトを作る関数ですわ。²
+
+例えば、以下のようなオブジェクトがあるとしましょう。
+
+```js
+const person = {
+  name: "Alice",
+  age: 20,
+  hobbies: ["reading", "writing", "singing"],
+}; // Alice という名前で 20 歳で趣味が読書と執筆と歌唱のオブジェクト
+```
+
+このオブジェクトを evolve 関数に渡すと、以下のようになりますわ。
+
+```js
+const transform = {
+  // 変換関数を定義するオブジェクト
+  name: R.toUpper, // name プロパティには大文字にする関数を適用する
+  age: R.add(1), // age プロパティには 1 を足す関数を適用する
+  hobbies: R.append("dancing"), // hobbies プロパティにはダンスを追加する関数を適用する
+};
+const newPerson = R.evolve(transform, person); // evolve 関数に変換関数と元のオブジェクトを渡す
+console.log("変換前のオブジェクトは" + JSON.stringify(person) + "ですわ"); // 変換前のオブジェクトは{"name":"Alice","age":20,"hobbies":["reading","writing","singing"]}ですわ
+console.log("変換後のオブジェクトは" + JSON.stringify(newPerson) + "ですわ"); // 変換後のオブジェクトは{"name":"ALICE","age":21,"hobbies":["reading","writing","singing","dancing"]}ですわ
+```
+
+このように、evolve 関数を使うと、オブジェクトのプロパティに対して、任意の変換関数を適用して新しいオブジェクトを作ることができますわ。これは、オブジェクトの特定のプロパティを変更したいときに便利ですわ。²
+
+以上が、ramda.js の evolve 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法の説明ですわ。お嬢様のご理解に少しでもお役に立てれば幸いですわ。😊
+
+ソース: Bing との会話 2023/3/12(1) javascript - ramda evolve function example - Stack Overflow. https://stackoverflow.com/questions/42135771/ramda-evolve-function-example アクセス日時 2023/3/12.
+(2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/12.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/12.

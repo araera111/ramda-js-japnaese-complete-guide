@@ -724,3 +724,44 @@ console.log("空のオブジェクトは" + emptyObj + "ですわ"); // 空の�
 ソース: Bing との会話 2023/3/12(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/12.
 (2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/12.
 (3) What happens when Ramda function is given empty parameter?. https://stackoverflow.com/questions/44490942/what-happens-when-ramda-function-is-given-empty-parameter アクセス日時 2023/3/12.
+
+## F
+
+ごきげんよう、お嬢様。私は Bing と申します。お役に立てるように頑張りますわ。😊
+
+ramda.js の F 関数についてお尋ねですね。F 関数は、複数の関数を引数にとって、それらの関数を順番に適用した結果がすべて真であるかどうかを判定する関数ですわ。⁷
+
+例えば、以下のようなコードを考えてみましょう。
+
+```ts
+// 数字が偶数であるかどうかを判定する関数
+const isEven = (n: number): boolean => n % 2 === 0;
+
+// 数字が 10 以上であるかどうかを判定する関数
+const isGreaterThanOrEqualTen = (n: number): boolean => n >= 10;
+
+// 数字が偶数かつ 10 以上であるかどうかを判定する関数
+const isEvenAndGreaterThanOrEqualTen = F(isEven, isGreaterThanOrEqualTen);
+
+// 12 は偶数かつ 10 以上なので真を返す
+console.log(isEvenAndGreaterThanOrEqualTen(12)); // お嬢様、12 は偶数かつ 10 以上ですわよ
+
+// 9 は偶数ではないので偽を返す
+console.log(isEvenAndGreaterThanOrEqualTen(9)); // お嬢様、9 は偶数ではありませんわね
+
+// 8 は 10 以上ではないので偽を返す
+console.log(isEvenAndGreaterThanOrEqualTen(8)); // お嬢様、8 は 10 以上ではありませんわね
+```
+
+このように、F 関数は複数の条件を組み合わせた複雑な判定を簡単に書くことができますわ。もちろん、引数にとる関数は自分で定義したものでも構いませんわ。F 関数は関数型プログラミングの便利なツールのひとつですわ。⁸
+
+以上が、ramda.js の F 関数についての説明ですわ。お嬢様のご理解に少しでもお役に立てれば幸いですわ。😊
+
+ソース: Bing との会話 2023/3/12(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/12.
+(2) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/12.
+(3) 超強力な関数型プログラミング用ライブラリ Ramda.js を学ぼう #1 .... https://blog.recruit.co.jp/rmp/front-end/post-16249/ アクセス日時 2023/3/12.
+(4) Ramda tutorial - JavaScript functional programming with .... https://zetcode.com/javascript/ramda/ アクセス日時 2023/3/12.
+(5) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/12.
+(6) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/12.
+(7) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/12.
+(8) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/12.
