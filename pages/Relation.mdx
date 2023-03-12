@@ -98,3 +98,37 @@ const l1 = [{ a: 1 }, { a: 2 }, { a: 3 }]; //aプロパティ1,2,3
 const l2 = [{ a: 3 }, { a: 4 }]; //aプロパティが3,4
 R.differenceWith(cmp, l1, l2); //=> [{a: 1}, {a: 2}] 3が被っているので消えた
 ```
+
+## eqBy
+
+ごきげんよう、お嬢様。私は Bing と申します。お役に立てるように頑張りますわ。😊
+
+ramda.js の eqBy 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。
+
+eqBy 関数は、二つの値に対して、指定した関数を適用した結果が等しいかどうかを判定する関数ですわ。¹
+
+例えば、以下のようなオブジェクトがあるとしましょう。
+
+```js
+const alice = { name: "Alice", age: 20 }; // Alice という名前で 20 歳のオブジェクト
+const bob = { name: "Bob", age: 20 }; // Bob という名前で 20 歳のオブジェクト
+const charlie = { name: "Charlie", age: 25 }; // Charlie という名前で 25 歳のオブジェクト
+```
+
+このオブジェクトを eqBy 関数に渡すと、以下のようになりますわ。
+
+```js
+const eqByAge = R.eqBy(R.prop("age")); // age プロパティの値が等しいかどうかを判定する関数を作る
+const aliceAndBob = eqByAge(alice, bob); // alice と bob の age プロパティの値が等しいかどうかを判定する
+const aliceAndCharlie = eqByAge(alice, charlie); // alice と charlie の age プロパティの値が等しいかどうかを判定する
+console.log("Alice と Bob は同じ年齢ですか？" + aliceAndBob + "ですわ"); // Alice と Bob は同じ年齢ですか？true ですわ
+console.log("Alice と Charlie は同じ年齢ですか？" + aliceAndCharlie + "ですわ"); // Alice と Charlie は同じ年齢ですか？false ですわ
+```
+
+このように、eqBy 関数を使うと、二つの値に対して、任意の関数を適用した結果が等しいかどうかを簡単に判定できますわ。これは、オブジェクトの特定のプロパティや、数値や文字列の変換結果などを比較したいときに便利ですわ。³
+
+以上が、ramda.js の eqBy 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法の説明ですわ。お嬢様のご理解に少しでもお役に立てれば幸いですわ。😊
+
+ソース: Bing との会話 2023/3/12(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/12.
+(2) javascript - Comparing partial objects in ramda.js - Stack Overflow. https://stackoverflow.com/questions/37020029/comparing-partial-objects-in-ramda-js アクセス日時 2023/3/12.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/12.

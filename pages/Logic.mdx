@@ -71,6 +71,223 @@ R.isNil(7); //=> false
 isNotNil(7); //=> true 逆になっとる
 ```
 
+## cond
+
+bing
+cond 関数は、if/else if/else のような条件分岐を行う関数です ¹。例えば、以下のようなコードがあります。
+
+```ts
+// 数字を受け取って、その数字が偶数か奇数かを判定する関数
+const evenOrOdd = (num: number): string => {
+  if (num % 2 === 0) {
+    return "偶数";
+  } else if (num % 2 === 1) {
+    return "奇数";
+  } else {
+    return "数字ではない";
+  }
+};
+
+// evenOrOdd 関数を使って、5 を判定する
+const result1 = evenOrOdd(5);
+
+// 結果を表示
+console.log(result1); // 奇数
+```
+
+このコードでは、evenOrOdd 関数は、数字を受け取って、その数字が偶数か奇数かを判定する関数です。この関数は、if/else if/else 文を使って条件分岐を行っています。このような関数は、cond 関数を使って書き換えることができます。cond 関数は、[条件, 処理]のペアの配列を受け取って、条件に合致する処理を返す関数を返します。以下のように書き換えることができます。
+
+```ts
+// 数字を受け取って、その数字が偶数か奇数かを判定する関数
+const evenOrOdd = R.cond([
+  [R.equals(0), R.always("偶数")], // 0 のときは偶数と返す
+  [R.modulo(R.__, 2), R.always("奇数")], // 2 で割った余りがあるときは奇数と返す
+  [R.T, R.always("数字ではない")], // それ以外のときは数字ではないと返す
+]);
+
+// evenOrOdd 関数を使って、5 を判定する
+const result1 = evenOrOdd(5);
+
+// 結果を表示
+console.log(result1); // 奇数
+```
+
+このコードでは、evenOrOdd 関数は、cond 関数に[条件, 処理]のペアの配列を渡して作られています。cond 関数は、引数を条件に適用して、真となるものが見つかったら、その条件に対応する処理を実行して返します。このように、cond 関数は、条件分岐をシンプルに書くことができます。
+
+ソース: Bing との会話 2023/3/12(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/12.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/12.
+(3) javascript - Ramda `cond` else statement - Stack Overflow. https://stackoverflow.com/questions/38150870/ramda-cond-else-statement アクセス日時 2023/3/12.
+
+## construct
+
+お嬢様、こんにちは。これは Bing です。ご質問にお答えいたしますわ。🎀
+
+ramda.js の construct 関数は、クラスやコンストラクタ関数を引数にとり、そのインスタンスを作成する関数を返す関数ですわ。⁴
+
+例えば、以下のような Person クラスがあるとしますわ。
+
+```javascript
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  greet() {
+    console.log(`こんにちは、私は${this.name}です。${this.age}歳です。`);
+  }
+}
+```
+
+このクラスに construct 関数を適用すると、以下のようになりますわ。
+
+```javascript
+// construct 関数をインポートする
+const R = require("ramda");
+const construct = R.construct;
+
+// Person クラスに construct 関数を適用する
+const makePerson = construct(Person);
+
+// makePerson 関数は、name と age を引数にとり、Person のインスタンスを返す関数になる
+const alice = makePerson("Alice", 18); // name: Alice, age: 18
+const bob = makePerson("Bob", 20); // name: Bob, age: 20
+
+// alice と bob は Person のインスタンスなので、greet メソッドを呼び出せる
+alice.greet(); // こんにちは、私は Alice です。18 歳です。
+bob.greet(); // こんにちは、私は Bob です。20 歳です。
+```
+
+construct 関数は、クラスやコンストラクタ関数をカリー化することができるので、便利で実用的な使用方法の一つとして、パラメータを部分的に適用して、特定の条件を満たすインスタンスを作成する関数を作ることができますわ。
+
+例えば、以下のようにしますわ。
+
+```javascript
+// construct 関数をインポートする
+const R = require("ramda");
+const construct = R.construct;
+
+// Person クラスは前と同じ
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  greet() {
+    console.log(`こんにちは、私は${this.name}です。${this.age}歳です。`);
+  }
+}
+
+// Person クラスに construct 関数を適用する
+const makePerson = construct(Person);
+
+// makePerson 関数に name を部分的に適用して、新しい関数を作る
+const makeAlice = makePerson("Alice");
+
+// makeAlice 関数は、age を引数にとり、name が Alice の Person のインスタンスを返す関数になる
+const alice18 = makeAlice(18); // name: Alice, age: 18
+const alice20 = makeAlice(20); // name: Alice, age: 20
+
+// alice18 と alice20 は Person のインスタンスなので、greet メソッドを呼び出せる
+alice18.greet(); // こんにちは、私は Alice です。18 歳です。
+alice20.greet(); // こんにちは、私は Alice です。20 歳です。
+```
+
+以上が、ramda.js の construct 関数についての説明ですわ。ご理解いただけましたでしょうか？🌸
+
+ソース: Bing との会話 2023/3/12(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/12.
+(2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/12.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/12.
+(4) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/12.
+(5) javascript - How to use Ramda pipe? - Stack Overflow. https://stackoverflow.com/questions/48165003/how-to-use-ramda-pipe アクセス日時 2023/3/12.
+(6) 超強力な関数型プログラミング用ライブラリ Ramda.js を学ぼう #1 .... https://blog.recruit.co.jp/rmp/front-end/post-16249/ アクセス日時 2023/3/12.
+
+##
+
+お嬢様、こんにちは。これは Bing です。ご質問にお答えいたしますわ。🎀
+
+ramda.js の constructN 関数は、引数の数を指定して、クラスやコンストラクタ関数を引数にとり、そのインスタンスを作成する関数を返す関数ですわ。⁴
+
+例えば、以下のような Point クラスがあるとしますわ。
+
+```javascript
+class Point {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+  distanceToOrigin() {
+    return Math.sqrt(this.x * this.x + this.y * this.y);
+  }
+}
+```
+
+このクラスに constructN 関数を適用すると、以下のようになりますわ。
+
+```javascript
+// constructN関数をインポートする
+const R = require("ramda");
+const constructN = R.constructN;
+
+// PointクラスにconstructN関数を適用する
+// 引数の数は2つなので、constructN(2, Point)とする
+const makePoint = constructN(2, Point);
+
+// makePoint関数は、xとyを引数にとり、Pointのインスタンスを返す関数になる
+const p1 = makePoint(3, 4); // x: 3, y: 4
+const p2 = makePoint(5, 12); // x: 5, y: 12
+
+// p1とp2はPointのインスタンスなので、distanceToOriginメソッドを呼び出せる
+console.log(p1.distanceToOrigin()); // 原点からの距離は5です
+console.log(p2.distanceToOrigin()); // 原点からの距離は13です
+```
+
+## constructN
+
+constructN 関数は、クラスやコンストラクタ関数をカリー化することができるので、便利で実用的な使用方法の一つとして、パラメータを部分的に適用して、特定の条件を満たすインスタンスを作成する関数を作ることができますわ。
+
+例えば、以下のようにしますわ。
+
+```javascript
+// constructN関数をインポートする
+const R = require("ramda");
+const constructN = R.constructN;
+
+// Pointクラスは前と同じ
+class Point {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+  distanceToOrigin() {
+    return Math.sqrt(this.x * this.x + this.y * this.y);
+  }
+}
+
+// PointクラスにconstructN関数を適用する
+// 引数の数は2つなので、constructN(2, Point)とする
+const makePoint = constructN(2, Point);
+
+// makePoint関数にxを部分的に適用して、新しい関数を作る
+const makePointWithX = makePoint(10);
+
+// makePointWithX関数は、yを引数にとり、xが10のPointのインスタンスを返す関数になる
+const p3 = makePointWithX(6); // x: 10, y: 6
+const p4 = makePointWithX(8); // x: 10, y: 8
+
+// p3とp4はPointのインスタンスなので、distanceToOriginメソッドを呼び出せる
+console.log(p3.distanceToOrigin()); // 原点からの距離は11.66です
+console.log(p4.distanceToOrigin()); // 原点からの距離は12.81です
+```
+
+以上が、ramda.js の constructN 関数についての説明ですわ。ご理解いただけましたでしょうか？🌸
+
+ソース: Bing との会話 2023/3/12(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/12.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/12.
+(3) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/12.
+(4) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/12.
+(5) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/12.
+(6) javascript - Create object with Ramda - Stack Overflow. https://stackoverflow.com/questions/51089297/create-object-with-ramda アクセス日時 2023/3/12.
+
 ## defaultTo
 
 1. まずは defaultTo で null, undefined,NaN のときに返す値を決める
@@ -86,3 +303,41 @@ defaultTo42("Ramda"); //=> 'Ramda' null, undefined, NaNじゃないのでRamda
 // parseInt('string') results in NaN
 defaultTo42(parseInt("string")); //=> 42 Nanなので42
 ```
+
+## either
+
+ごきげんよう、お嬢様。私は Bing と申します。お役に立てるように頑張りますわ。😊
+
+ramda.js の either 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。
+
+either 関数は、二つの述語関数を引数に取って、そのどちらかが真になるかどうかを判定する関数を返す関数ですわ。述語関数とは、真偽値を返す関数のことですわ。¹
+
+例えば、以下のような関数があるとしましょう。
+
+```js
+const isEven = (num: number): boolean => num % 2 === 0; // 偶数かどうかを判定する関数
+const isPositive = (num: number): boolean => num > 0; // 正数かどうかを判定する関数
+```
+
+この関数は、数値を引数に取って、その数値が偶数かどうか、正数かどうかを判定する関数ですわ。この関数を either 関数で組み合わせると、以下のようになりますわ。
+
+```js
+const isEvenOrPositive = R.either(isEven, isPositive); // 偶数または正数かどうかを判定する関数を返す
+```
+
+この関数は、数値を引数に取って、その数値が偶数または正数かどうかを判定する関数ですわ。この関数を使うと、以下のように書けますわ。
+
+```js
+const result1 = isEvenOrPositive(2); // 2 は偶数または正数なので、真を返す
+const result2 = isEvenOrPositive(-3); // -3 は偶数または正数ではないので、偽を返す
+console.log("結果 1 は" + result1 + "ですわ"); // 結果 1 は true ですわ
+console.log("結果 2 は" + result2 + "ですわ"); // 結果 2 は false ですわ
+```
+
+このように、either 関数を使うと、二つの述語関数の論理和を取る関数を作ることができますわ。これは、複雑な条件分岐を簡潔に書いたり、関数を引数として渡したりするのに便利ですわ。¹
+
+以上が、ramda.js の either 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法の説明ですわ。お嬢様のご理解に少しでもお役に立てれば幸いですわ。😊
+
+ソース: Bing との会話 2023/3/12(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/12.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/12.
+(3) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/12.
