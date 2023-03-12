@@ -514,25 +514,25 @@ R.dropWhile((x) => x !== "d", "Ramda"); //=> 'da'
 ramda.js の zipObj 関数は、キーの配列と値の配列を受け取り、それらを対応させたオブジェクトを返す関数です 1。例えば、次のように使うことができます。
 
 ```javascript
-const keys = [‘name’, ‘age’, ‘gender’];
-const values = [‘Alice’, 25, ‘female’];
-const obj = R.zipObj(keys, values); // {name: ‘Alice’, age: 25, gender: ‘female’}
+const keys = [‘name', ‘age', ‘gender'];
+const values = [‘Alice', 25, ‘female'];
+const obj = R.zipObj(keys, values); // {name: ‘Alice', age: 25, gender: ‘female'}
 ```
 
 この関数は、キーと値の配列の長さが異なる場合でも動作しますが、長い方の配列の余った要素は無視されます 1。例えば、次のようになります。
 
 ```javascript
-const keys = [‘name’, ‘age’, ‘gender’];
-const values = [‘Bob’, 30];
-const obj = R.zipObj(keys, values); // {name: ‘Bob’, age: 30}
+const keys = [‘name', ‘age', ‘gender'];
+const values = [‘Bob', 30];
+const obj = R.zipObj(keys, values); // {name: ‘Bob', age: 30}
 ```
 
 この関数は、オブジェクトのプロパティを作るのに便利です。例えば、次のようにして、人物の情報をオブジェクトに変換することができます。
 
 ```javascript
-const person = [‘Charlie’, 35, ‘male’, ‘engineer’];
-const keys = [‘name’, ‘age’, ‘gender’, ‘occupation’];
-const obj = R.zipObj(keys, person); // {name: ‘Charlie’, age: 35, gender: ‘male’, occupation: ‘engineer’}
+const person = [‘Charlie', 35, ‘male', ‘engineer'];
+const keys = [‘name', ‘age', ‘gender', ‘occupation'];
+const obj = R.zipObj(keys, person); // {name: ‘Charlie', age: 35, gender: ‘male', occupation: ‘engineer'}
 ```
 
 ## zipWith
