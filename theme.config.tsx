@@ -2,7 +2,7 @@ import React from "react";
 import { DocsThemeConfig } from "nextra-theme-docs";
 
 const config: DocsThemeConfig = {
-  logo: <span>ramda.js 日本語完全解説 </span>,
+  logo: <span>お嬢様 AI による ramda.js 日本語不完全解説 </span>,
   project: {
     link: "https://github.com/araera111/ramda-js-japnaese-complete-guide",
   },
@@ -13,7 +13,7 @@ const config: DocsThemeConfig = {
   },
   head: (
     <>
-      <title>ramda.js 日本語完全解説</title>
+      <title>お嬢様 AI による ramda.js 日本語不完全解説</title>
     </>
   ),
 };
