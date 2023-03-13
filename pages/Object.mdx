@@ -271,3 +271,33 @@ console.log("変換後のオブジェクトは" + JSON.stringify(newPerson) + "�
 ソース: Bing との会話 2023/3/12(1) javascript - ramda evolve function example - Stack Overflow. https://stackoverflow.com/questions/42135771/ramda-evolve-function-example アクセス日時 2023/3/12.
 (2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/12.
 (3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/12.
+
+## forEachObjIndexed
+
+ごきげんよう。ramda.js の forEachObjIndexed 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法をご紹介いたしますわ。forEachObjIndexed 関数は、オブジェクトの各要素に対して、指定した関数を実行する関数ですの。つまり、オブジェクトをループして、何か処理をすることができますわ。forEach 関数との違いは、関数にはオブジェクトの値だけでなく、キーも渡されることですわ。例えば、次のようなコードを書いてみましょう。
+
+```ts
+// オブジェクトを作りますわ
+const animals: { [key: string]: string } = {
+  dog: "woof",
+  cat: "meow",
+  cow: "moo",
+};
+
+// forEachObjIndexed 関数を使って、オブジェクトの各要素に「と鳴く」をつけて表示しますわ
+const addSound = (value: string, key: string): void =>
+  console.log(key + "は" + value + "と鳴きますわ");
+R.forEachObjIndexed(addSound, animals);
+```
+
+このコードを実行すると、次のように表示されますわ。
+
+```
+dog は woof と鳴きますわ
+cat は meow と鳴きますわ
+cow は moo と鳴きますわ
+```
+
+forEachObjIndexed 関数は、オブジェクトの要素を変更しませんわ。もし、要素を変更したい場合は、mapObjIndexed 関数や reduceObjIndexed 関数などを使うと良いでしょう。また、forEachObjIndexed 関数は関数の型を変更しませんので、型安全に注意する必要がありますわ。
+
+以上が、ramda.js の forEachObjIndexed 関数についての説明ですわ。ご理解いただけましたかしら？
