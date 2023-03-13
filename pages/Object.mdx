@@ -466,3 +466,214 @@ console.log(
 ```
 
 このように、invertObj 関数は、オブジェクトの値が配列の場合には、配列そのものをキーにして、元のキーを値にした新しいオブジェクトを生成できますわ。ただし、配列の要素をキーにしたい場合には、invertObj 関数ではなく、invert 関数を使う必要がありますわ。invert 関数については、別の質問でお答えいたしましたわ。invertObj 関数の使い方について、お分かりになりましたでしょうか？もし、まだご不明な点がございましたら、お気軽にお尋ねくださいませ。 を参考にして、お答えいたしましたわ。ご満足いただけましたら、幸いですわ。では、またお会いしましょう。ごきげんよう。🎀
+
+## keysIn
+
+ごきげんよう、お嬢様。ramda.js の keysIn 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげますわ。keysIn 関数は、オブジェクトを受け取って、そのオブジェクトの自身のプロパティと継承されたプロパティの名前を配列にして返す関数ですの。¹ 例えば、以下のようなオブジェクトがあるとしますわ。
+
+```typescript
+type Person = {
+  name: string;
+  age: number;
+};
+
+type Student = Person & {
+  grade: number;
+};
+
+const alice: Student = {
+  name: "Alice",
+  age: 18,
+  grade: 3,
+};
+```
+
+このオブジェクトに keysIn 関数を適用すると、以下のようになりますわ。
+
+```typescript
+const keys = keysIn(alice);
+console.log(keys); // ["name", "age", "grade"]と表示されますわ
+```
+
+keysIn 関数は、オブジェクトのプロパティを列挙したいときに便利ですわ。例えば、オブジェクトのプロパティと値をペアにして表示したいときは、以下のように書けますわ。
+
+```typescript
+const showPairs = (obj: object): void => {
+  const keys = keysIn(obj);
+  keys.forEach((key) => {
+    console.log(`${key}: ${obj[key]}`); // プロパティと値を表示しますわ
+  });
+};
+
+showPairs(alice); // name: Alice, age: 18, grade: 3 と表示されますわ
+```
+
+keysIn 関数は、ramda.js の便利な関数の一つですわ。ramda.js は、関数型プログラミングをサポートするライブラリですの。¹ お嬢様は、ramda.js を使って何を作りたいですか？
+
+ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(3) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/14.
+
+## lens
+
+ごきげんよう、お嬢様。ramda.js の lens 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげますわ。lens 関数は、オブジェクトの一部に注目して、その一部を読み書きするための関数を作る関数ですの。¹ lens 関数は、オブジェクトの形に依存しないロジックを書くのに役立ちますわ。lens 関数は、getter 関数と setter 関数を受け取って、レンズと呼ばれるオブジェクトを返しますわ。¹ 例えば、以下のようなオブジェクトがあるとしますわ。
+
+```typescript
+type Person = {
+  name: string;
+  age: number;
+  address: {
+    city: string;
+    zip: string;
+  };
+};
+
+const alice: Person = {
+  name: "Alice",
+  age: 25,
+  address: {
+    city: "Tokyo",
+    zip: "100-0000",
+  },
+};
+```
+
+このオブジェクトの name プロパティに注目するレンズを作るには、以下のように書けますわ。
+
+```typescript
+const nameLens = lens(
+  (person: Person): string => person.name, // getter 関数
+  (name: string, person: Person): Person => ({ ...person, name }) // setter 関数
+);
+```
+
+このレンズを使って、name プロパティを読み書きするには、view 関数や set 関数や over 関数などを使いますわ。¹ 例えば、以下のように書けますわ。
+
+```typescript
+const name = view(nameLens, alice); // Alice と表示されますわ
+console.log(name);
+
+const bob = set(nameLens, "Bob", alice); // name プロパティを Bob に変更した新しいオブジェクトを返しますわ
+console.log(bob);
+
+const upperCase = over(nameLens, toUpper, alice); // name プロパティを大文字に変更した新しいオブジェクトを返しますわ
+console.log(upperCase);
+```
+
+lens 関数は、オブジェクトの一部にアクセスするのに便利ですわ。オブジェクトの形が変わっても、レンズを使えばロジックを変える必要がありませんわ。お嬢様は、lens 関数を使って何をしたいですか？
+
+ソース: Bing との会話 2023/3/14(1) Functional Lenses in Javascript with Ramda - DEV Community. https://dev.to/devinholloway/functional-lenses-in-javascript-with-ramda-4li7 アクセス日時 2023/3/14.
+(2) Functional Lenses in Javascript with Ramda - DEV Community. https://dev.to/devinholloway/functional-lenses-in-javascript-with-ramda-4li7 アクセス日時 2023/3/14.
+(3) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(4) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(5) ramda.js - composing lenses using ramda - Stack Overflow. https://stackoverflow.com/questions/50605190/composing-lenses-using-ramda アクセス日時 2023/3/14.
+
+## lensIndex
+
+ごきげんよう、お嬢様。ramda.js の lensIndex 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげますわ。lensIndex 関数は、配列の特定のインデックスに注目するレンズを作る関数ですの。¹ lensIndex 関数は、配列の要素にアクセスするのに役立ちますわ。lensIndex 関数は、インデックスの数値を受け取って、レンズと呼ばれるオブジェクトを返しますわ。¹ 例えば、以下のような配列があるとしますわ。
+
+```typescript
+const colors: string[] = ["red", "green", "blue"];
+```
+
+この配列の 0 番目の要素に注目するレンズを作るには、以下のように書けますわ。
+
+```typescript
+const firstLens = lensIndex(0);
+```
+
+このレンズを使って、0 番目の要素を読み書きするには、view 関数や set 関数や over 関数などを使いますわ。¹ 例えば、以下のように書けますわ。
+
+```typescript
+const first = view(firstLens, colors); // red と表示されますわ
+console.log(first);
+
+const newColors = set(firstLens, "pink", colors); // 0 番目の要素を pink に変更した新しい配列を返しますわ
+console.log(newColors);
+
+const upperCase = over(firstLens, toUpper, colors); // 0 番目の要素を大文字に変更した新しい配列を返しますわ
+console.log(upperCase);
+```
+
+lensIndex 関数は、配列のインデックスにアクセスするのに便利ですわ。配列の長さが変わっても、lensIndex 関数を使えばロジックを変える必要がありませんわ。お嬢様は、lensIndex 関数を使って何をしたいですか？
+
+ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(3) lensProp, lensPath and lensIndex functions | Ramda JS Tutorials. https://www.youtube.com/watch?v=i98Di8yV_3Q アクセス日時 2023/3/14.
+
+## lensPath
+
+ごきげんよう、お嬢様。ramda.js の lensPath 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげますわ。lensPath 関数は、オブジェクトの特定のプロパティに注目するレンズを作る関数ですの。¹ lensPath 関数は、オブジェクトのネストされたプロパティにアクセスするのに役立ちますわ。lensPath 関数は、プロパティ名の配列を受け取って、レンズと呼ばれるオブジェクトを返しますわ。² 例えば、以下のようなオブジェクトがあるとしますわ。
+
+```typescript
+const user: { name: string; address: { city: string; zipcode: string } } = {
+  name: "Alice",
+  address: {
+    city: "Tokyo",
+    zipcode: "100-0000",
+  },
+};
+```
+
+このオブジェクトの address.zipcode プロパティに注目するレンズを作るには、以下のように書けますわ。
+
+```typescript
+const zipcodeLens = lensPath(["address", "zipcode"]);
+```
+
+このレンズを使って、address.zipcode プロパティを読み書きするには、view 関数や set 関数や over 関数などを使いますわ。² 例えば、以下のように書けますわ。
+
+```typescript
+const zipcode = view(zipcodeLens, user); // 100-0000と表示されますわ
+console.log(zipcode);
+
+const newUser = set(zipcodeLens, "200-0000", user); // address.zipcodeプロパティを200-0000に変更した新しいオブジェクトを返しますわ
+console.log(newUser);
+
+const addPrefix = over(zipcodeLens, (z: string) => "〒" + z, user); // address.zipcodeプロパティに〒を付け加えた新しいオブジェクトを返しますわ
+console.log(addPrefix);
+```
+
+lensPath 関数は、オブジェクトのネストされたプロパティにアクセスするのに便利ですわ。オブジェクトの構造が変わっても、lensPath 関数を使えばロジックを変える必要がありませんわ。お嬢様は、lensPath 関数を使って何をしたいですか？
+
+ソース: Bing との会話 2023/3/14(1) 超強力な関数型プログラミング用ライブラリ Ramda.js を学ぼう #2 .... https://blog.recruit.co.jp/rmp/front-end/post-16290/ アクセス日時 2023/3/14.
+(2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(3) lensProp, lensPath and lensIndex functions | Ramda JS Tutorials. https://www.youtube.com/watch?v=i98Di8yV_3Q アクセス日時 2023/3/14.
+(4) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+
+## lensProp
+
+ごきげんよう、お嬢様。ramda.js の lensProp 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげますわ。lensProp 関数は、オブジェクトの特定のプロパティに注目するレンズを作る関数ですの。² lensProp 関数は、オブジェクトの単一のプロパティにアクセスするのに役立ちますわ。lensProp 関数は、プロパティ名を受け取って、レンズと呼ばれるオブジェクトを返しますわ。² 例えば、以下のようなオブジェクトがあるとしますわ。
+
+```typescript
+const user: { name: string; age: number } = {
+  name: "Alice",
+  age: 20,
+};
+```
+
+このオブジェクトの age プロパティに注目するレンズを作るには、以下のように書けますわ。
+
+```typescript
+const ageLens = lensProp("age");
+```
+
+このレンズを使って、age プロパティを読み書きするには、view 関数や set 関数や over 関数などを使いますわ。² 例えば、以下のように書けますわ。
+
+```typescript
+const age = view(ageLens, user); // 20 と表示されますわ
+console.log(age);
+
+const newUser = set(ageLens, 21, user); // age プロパティを 21 に変更した新しいオブジェクトを返しますわ
+console.log(newUser);
+
+const incrementAge = over(ageLens, (a: number) => a + 1, user); // age プロパティを 1 増やした新しいオブジェクトを返しますわ
+console.log(incrementAge);
+```
+
+lensProp 関数は、オブジェクトの単一のプロパティにアクセスするのに便利ですわ。オブジェクトの構造が変わっても、lensProp 関数を使えばロジックを変える必要がありませんわ。お嬢様は、lensProp 関数を使って何をしたいですか？
+
+ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(2) 超強力な関数型プログラミング用ライブラリ Ramda.js を学ぼう #2 .... https://blog.recruit.co.jp/rmp/front-end/post-16290/ アクセス日時 2023/3/14.
+(3) ramda.js - Multiple props in Ramda lens - Stack Overflow. https://stackoverflow.com/questions/58675473/multiple-props-in-ramda-lens アクセス日時 2023/3/14.
+(4) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.

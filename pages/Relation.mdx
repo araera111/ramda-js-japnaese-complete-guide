@@ -330,3 +330,86 @@ console.log("共通の要素を含む配列はこうですわ: " + newArr2); // 
 (4) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/13.
 (5) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/13.
 (6) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/13.
+
+## lt
+
+ごきげんよう、お嬢様。ramda.js の lt 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。²
+
+lt 関数は、less than の略ですわ。lt 関数は、2 つの値を引数にとって、最初の値が 2 番目の値より小さいかどうかを真偽値で返す関数ですわ。例えば、以下のように使えますわ。
+
+```typescript
+const lt = (a: number | string, b: number | string): boolean => a < b;
+console.log(lt(3, 5)); //=> true
+console.log(lt(5, 3)); //=> false
+console.log(lt("a", "b")); //=> true
+console.log(lt("b", "a")); //=> false
+```
+
+lt 関数は、数値や文字列に対して使えますわ。数値は数値の大小で比較しますわ。文字列は辞書順で比較しますわ。lt 関数は、ramda.js の特徴であるカリー化されていますわ。カリー化とは、引数を 1 つずつ渡して、部分適用された関数を返すことですわ。例えば、以下のように使えますわ。
+
+```typescript
+const lt3 = lt(3); //=> 3 より小さいかどうかを判定する関数
+console.log(lt3(5)); //=> false
+console.log(lt3(2)); //=> true
+```
+
+lt 関数に最初の引数を渡すと、2 番目の引数を待つ関数が返りますわ。この関数に 2 番目の引数を渡すと、真偽値が返りますわ。カリー化された関数は、他の関数と組み合わせて使うと便利ですわ。例えば、以下のように使えますわ。
+
+```typescript
+const nums = [1, 2, 3, 4, 5]; //=> 数値の配列
+const filter = (pred: (a: any) => boolean, list: any[]): any[] =>
+  list.filter(pred); //=> 配列から条件に合う要素だけを取り出す関数
+const filterLt3 = filter(lt3); //=> 配列から 3 より小さい要素だけを取り出す関数
+console.log(filterLt3(nums)); //=> [1, 2]
+```
+
+filter 関数は、条件を表す関数と配列を引数にとって、配列から条件に合う要素だけを取り出す関数ですわ。filter 関数に lt3 関数を渡すと、配列から 3 より小さい要素だけを取り出す関数が返りますわ。この関数に nums 配列を渡すと、[1, 2]という配列が返りますわ。lt 関数は、filter 関数や sort 関数などの高階関数と一緒に使うと、配列の要素を比較したり並べ替えたりするのに便利ですわ。
+
+lt 関数の使い方は、これでお分かりになりましたか？
+
+ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(3) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/14.
+
+## lte
+
+ごきげんよう、お嬢様。ramda.js の lte 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。¹
+
+lte 関数は、less than or equal の略ですわ。lte 関数は、2 つの値を引数にとって、最初の値が 2 番目の値以下かどうかを真偽値で返す関数ですわ。例えば、以下のように使えますわ。
+
+```typescript
+const lte = (a: number | string, b: number | string): boolean => a <= b;
+console.log(lte(3, 5)); //=> true
+console.log(lte(5, 3)); //=> false
+console.log(lte(3, 3)); //=> true
+console.log(lte("a", "b")); //=> true
+console.log(lte("b", "a")); //=> false
+console.log(lte("a", "a")); //=> true
+```
+
+lte 関数は、数値や文字列に対して使えますわ。数値は数値の大小で比較しますわ。文字列は辞書順で比較しますわ。lte 関数は、ramda.js の特徴であるカリー化されていますわ。カリー化とは、引数を 1 つずつ渡して、部分適用された関数を返すことですわ。例えば、以下のように使えますわ。
+
+```typescript
+const lte3 = lte(3); //=> 3以下かどうかを判定する関数
+console.log(lte3(5)); //=> false
+console.log(lte3(2)); //=> true
+console.log(lte3(3)); //=> true
+```
+
+lte 関数に最初の引数を渡すと、2 番目の引数を待つ関数が返りますわ。この関数に 2 番目の引数を渡すと、真偽値が返りますわ。カリー化された関数は、他の関数と組み合わせて使うと便利ですわ。例えば、以下のように使えますわ。
+
+```typescript
+const nums = [1, 2, 3, 4, 5]; //=> 数値の配列
+const filter = (pred: (a: any) => boolean, list: any[]): any[] =>
+  list.filter(pred); //=> 配列から条件に合う要素だけを取り出す関数
+const filterLte3 = filter(lte3); //=> 配列から3以下の要素だけを取り出す関数
+console.log(filterLte3(nums)); //=> [1, 2, 3]
+```
+
+filter 関数は、条件を表す関数と配列を引数にとって、配列から条件に合う要素だけを取り出す関数ですわ。filter 関数に lte3 関数を渡すと、配列から 3 以下の要素だけを取り出す関数が返りますわ。この関数に nums 配列を渡すと、[1, 2, 3]という配列が返りますわ。lte 関数は、filter 関数や sort 関数などの高階関数と一緒に使うと、配列の要素を比較したり並べ替えたりするのに便利ですわ。
+
+lte 関数の使い方は、これでお分かりになりましたか？
+
+ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(3) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/14.

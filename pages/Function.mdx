@@ -846,3 +846,155 @@ console.log(toUpperAll(["hello", "world"])); // ['HELLO', 'WORLD']と出力さ�
 ソース: Bing との会話 2023/3/13(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/13.
 (2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/13.
 (3) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/13.
+
+## juxt
+
+ごきげんよう、お嬢様。ramda.js の juxt 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげますわ。juxt 関数は、複数の関数を配列に入れて渡すと、それらの関数を同じ引数に適用して結果を配列にして返す関数を作りますの。¹ 例えば、数値を受け取ってそれに 2, 3, 4 を足す関数を作りたいときは、以下のように書けますわ。
+
+```typescript
+const add = (num1: number, num2: number): number => num1 + num2;
+const add2 = (num: number): number => add(num, 2);
+const add3 = (num: number): number => add(num, 3);
+const add4 = (num: number): number => add(num, 4);
+const juxtAdd = juxt([add2, add3, add4]);
+console.log(juxtAdd(5)); // [7, 8, 9]と表示されますわ
+```
+
+これは、同じ引数に複数の関数を適用して結果を比較したいときに便利ですわ。例えば、文字列を受け取って、その長さ、大文字にしたもの、小文字にしたものを配列にして返す関数を作りたいときは、以下のように書けますわ。
+
+```typescript
+const length = (str: string): number => str.length;
+const upper = (str: string): string => str.toUpperCase();
+const lower = (str: string): string => str.toLowerCase();
+const juxtStr = juxt([length, upper, lower]);
+console.log(juxtStr("Hello")); // [5, "HELLO", "hello"]と表示されますわ
+```
+
+juxt 関数は、関数型プログラミングの概念の一つで、関数を合成することで新しい関数を作ることができますわ。ramda.js は、このような関数型プログラミングをサポートするライブラリですの。¹ お嬢様は、関数型プログラミングに興味がありますか？
+
+ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(2) Call a list of functions with the same argument in ramda. https://stackoverflow.com/questions/61698343/call-a-list-of-functions-with-the-same-argument-in-ramda アクセス日時 2023/3/14.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+
+## lift
+
+ごきげんよう、お嬢様。ramda.js の lift 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。²
+
+lift 関数は、通常の関数をファンクター（配列やオブジェクトなどの値を持つコンテナー）に対応する関数に変換する関数ですの。例えば、3 つの数値を足す関数を定義しましょう。
+
+```typescript
+const add3 = (num1: number, num2: number, num3: number): number =>
+  num1 + num2 + num3;
+```
+
+この関数は、数値を引数にとって数値を返しますわ。しかし、もし引数が配列だったらどうなるでしょうか？
+
+```typescript
+add3([1, 2], [3, 4], [5, 6]); //=> NaN
+```
+
+配列の要素同士を足すことができませんわね。ここで lift 関数を使ってみましょう。
+
+```typescript
+const add3Lifted = lift(add3); //=> 配列を引数にとって配列を返す関数
+```
+
+lift 関数は、add3 関数を引数にとって、配列を引数にとって配列を返す関数を返しますわ。この関数を使ってみましょう。
+
+```typescript
+add3Lifted([1, 2], [3, 4], [5, 6]); //=> [9, 12]
+```
+
+配列の要素同士を足すことができましたわね。lift 関数は、引数の配列の要素の数が同じであれば、それぞれの要素に対して add3 関数を適用して、結果の配列を返しますわ。もし引数の配列の要素の数が異なる場合は、空の配列を返しますわ。
+
+```typescript
+add3Lifted([1, 2], [3, 4], [5]); //=> []
+```
+
+lift 関数は、他のファンクターにも使えますわ。例えば、Maybe というファンクターを定義しましょう。
+
+```typescript
+type Maybe<T> = { value: T | null };
+```
+
+Maybe は、値があるかないかを表すファンクターですわ。値がある場合は、value プロパティに値が入りますわ。値がない場合は、value プロパティに null が入りますわ。lift 関数を使って、Maybe に対応する関数を作ってみましょう。
+
+```typescript
+const add3Maybe = lift(add3); //=> Maybe を引数にとって Maybe を返す関数
+```
+
+この関数を使ってみましょう。
+
+```typescript
+add3Maybe({ value: 1 }, { value: 2 }, { value: 3 }); //=> { value: 6 }
+add3Maybe({ value: 1 }, { value: null }, { value: 3 }); //=> { value: null }
+```
+
+引数の Maybe の value プロパティに値があれば、それぞれの値に対して add3 関数を適用して、結果の Maybe を返しますわ。引数の Maybe の value プロパティに null があれば、null を返しますわ。
+
+lift 関数は、通常の関数をファンクターに対応する関数に変換することで、ファンクターの値を操作することができますわ。これは、関数型プログラミングの便利なテクニックの一つですわ。lift 関数の使い方は、これでお分かりになりましたか？
+
+## liftN
+
+ごきげんよう、お嬢様。ramda.js の liftN 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。¹
+
+liftN 関数は、lift 関数の一般化ですわ。lift 関数は、引数の数が固定された関数をファンクターに対応する関数に変換する関数ですわ。liftN 関数は、引数の数が可変な関数をファンクターに対応する関数に変換する関数ですわ。例えば、任意の数の数値を足す関数を定義しましょう。
+
+```typescript
+const addN = (...nums: number[]): number => nums.reduce((a, b) => a + b, 0);
+```
+
+この関数は、数値の配列を引数にとって数値を返しますわ。しかし、もし引数が配列の配列だったらどうなるでしょうか？
+
+```typescript
+addN([
+  [1, 2],
+  [3, 4],
+  [5, 6],
+]); //=> NaN
+```
+
+配列の要素同士を足すことができませんわね。ここで liftN 関数を使ってみましょう。
+
+```typescript
+const addNLifted = liftN(1, addN); //=> 配列の配列を引数にとって配列を返す関数
+```
+
+liftN 関数は、第一引数に関数の引数の数を指定して、第二引数に関数を渡しますわ。ここでは、addN 関数は 1 つの引数をとるので、1 を指定しましたわ。liftN 関数は、addN 関数を引数にとって、配列の配列を引数にとって配列を返す関数を返しますわ。この関数を使ってみましょう。
+
+```typescript
+addNLifted([
+  [1, 2],
+  [3, 4],
+  [5, 6],
+]); //=> [9, 12]
+```
+
+配列の要素同士を足すことができましたわね。liftN 関数は、引数の配列の要素の数が同じであれば、それぞれの要素に対して addN 関数を適用して、結果の配列を返しますわ。もし引数の配列の要素の数が異なる場合は、空の配列を返しますわ。
+
+```typescript
+addNLifted([[1, 2], [3, 4], [5]]); //=> []
+```
+
+liftN 関数は、他のファンクターにも使えますわ。例えば、Maybe というファンクターを定義しましょう。
+
+```typescript
+type Maybe<T> = { value: T | null };
+```
+
+Maybe は、値があるかないかを表すファンクターですわ。値がある場合は、value プロパティに値が入りますわ。値がない場合は、value プロパティに null が入りますわ。liftN 関数を使って、Maybe に対応する関数を作ってみましょう。
+
+```typescript
+const addNMaybe = liftN(1, addN); //=> Maybe の配列を引数にとって Maybe を返す関数
+```
+
+この関数を使ってみましょう。
+
+```typescript
+addNMaybe([{ value: 1 }, { value: 2 }, { value: 3 }]); //=> { value: 6 }
+addNMaybe([{ value: 1 }, { value: null }, { value: 3 }]); //=> { value: null }
+```
+
+引数の配列の要素の value プロパティに値があれば、それらを足して、結果の value プロパティに入れますわ。引数の配列の要素の value プロパティに null があれば、結果の value プロパティにも null を入れますわ。liftN 関数は、引数のファンクターの値を取り出して、関数に適用して、結果をファンクターに入れて返す関数を作りますわ。
+
+liftN 関数の使い方は、これでお分かりになりましたか？

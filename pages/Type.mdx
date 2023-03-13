@@ -69,3 +69,51 @@ console.log(filterStrings([1, "a", true, "b", 2, "c"])); // ['a', 'b', 'c']と�
 ```
 
 以上が、ramda.js の is 関数についての説明でしたわ。ご理解いただけましたでしょうか？もし、もっと詳しく知りたいことがありましたら、お気軽にお尋ねくださいませ。には、ramda.js の他の関数についても詳しく説明されていますわ。ご参考になさってくださいませ。では、またお会いしましょう。ごきげんよう。🎀
+
+## isNil
+
+ごきげんよう、お嬢様。ramda.js の isNil 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法をお教えいたしますわ。¹ によると、isNil 関数は、値を受け取って、その値が null または undefined であるかどうかを判定する関数ですわ。例えば、null や undefined を isNil 関数に渡すと、true を返しますわ。以下の例をご覧くださいませ。
+
+```typescript
+// isNil 関数をインポートするのですわ
+import { isNil } from "ramda";
+
+// 値が null または undefined であるかどうかを判定する関数を使ってみるのですわ
+console.log(isNil(null)); // true と出力されるのですわ
+console.log(isNil(undefined)); // true と出力されるのですわ
+console.log(isNil(0)); // false と出力されるのですわ
+console.log(isNil("")); // false と出力されるのですわ
+console.log(isNil(false)); // false と出力されるのですわ
+```
+
+このように、isNil 関数を使うと、値が null または undefined であるかどうかを簡単にチェックできますわ。isNil 関数の引数は、any 型と推論されるので、typescript 形式で関数の引数と返り値に型を明記する必要はありませんわ。ただし、isNil 関数は、null と undefined 以外の値をすべて false と判定するので、空の配列やオブジェクトや文字列や NaN や Infinity などを判定する場合は、注意が必要ですわ。例えば、以下のように書けますわ。
+
+```typescript
+// isNil 関数をインポートするのですわ
+import { isNil } from "ramda";
+
+// 値が null または undefined であるかどうかを判定する関数を使ってみるのですわ
+console.log(isNil([])); // false と出力されるのですわ
+console.log(isNil({})); // false と出力されるのですわ
+console.log(isNil("")); // false と出力されるのですわ
+console.log(isNil(NaN)); // false と出力されるのですわ
+console.log(isNil(Infinity)); // false と出力されるのですわ
+```
+
+このように、isNil 関数は、null と undefined 以外の値をすべて false と判定しますわ。もし、空の配列やオブジェクトや文字列や NaN や Infinity なども空と判定したい場合は、isNil 関数の代わりに、isEmpty 関数を使う必要がありますわ。例えば、以下のように書けますわ。
+
+```typescript
+// isEmpty 関数をインポートするのですわ
+import { isEmpty } from "ramda";
+
+// 値が空であるかどうかを判定する関数を使ってみるのですわ
+console.log(isEmpty([])); // true と出力されるのですわ
+console.log(isEmpty({})); // true と出力されるのですわ
+console.log(isEmpty("")); // true と出力されるのですわ
+console.log(isEmpty(null)); // true と出力されるのですわ
+console.log(isEmpty(undefined)); // true と出力されるのですわ
+console.log(isEmpty(NaN)); // true と出力されるのですわ
+console.log(isEmpty(Infinity)); // true と出力されるのですわ
+```
+
+以上が、ramda.js の isNil 関数についての説明でしたわ。ご理解いただけましたでしょうか？もし、もっと詳しく知りたいことがありましたら、お気軽にお尋ねくださいませ。には、ramda.js の他の関数についても詳しく説明されていますわ。ご参考になさってくださいませ。では、またお会いしましょう。ごきげんよう。🎀
