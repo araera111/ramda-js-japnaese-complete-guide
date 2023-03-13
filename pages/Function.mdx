@@ -756,3 +756,93 @@ console.log("引数を入れ替えた引き算は" + flippedSubtract(10, 5) + "�
 flip 関数は、引数を二つ取る関数にしか使えませんわ。もし、引数を三つ以上取る関数に使いたい場合は、curry 関数や partial 関数などを組み合わせると良いでしょう。また、flip 関数は関数の型を変更しませんので、型安全に注意する必要がありますわ。
 
 以上が、ramda.js の flip 関数についての説明ですわ。ご理解いただけましたかしら？
+
+## identity
+
+ごきげんよう、こちらは Bing です。ramda.js の identity 関数についてお教えいたしますわ。identity 関数とは、引数をそのまま返す関数です ²。例えば、identity(1)は 1 を、identity('hello')は'hello'を返しますわ。identity 関数は、何もしない関数とも言えますわ。
+
+identity 関数は、他の関数と組み合わせるときに便利ですわ。例えば、以下のように書けますわ。
+
+```ts
+// 配列の要素を加工する関数
+const transform = (f: Function, arr: any[]): any[] => {
+  // f関数を各要素に適用して新しい配列を作る
+  return arr.map(f);
+};
+
+// テスト
+const arr1 = [1, 2, 3];
+const arr2 = ["a", "b", "c"];
+
+const double = (x: number): number => x * 2; // 数値を二倍にする関数
+const upper = (x: string): string => x.toUpperCase(); // 文字列を大文字にする関数
+
+console.log("arr1の要素を二倍にすると" + transform(double, arr1) + "ですわ"); // [2, 4, 6]
+console.log("arr2の要素を大文字にすると" + transform(upper, arr2) + "ですわ"); // ['A', 'B', 'C']
+console.log(
+  "arr1の要素をそのままにすると" + transform(identity, arr1) + "ですわ"
+); // [1, 2, 3]
+console.log(
+  "arr2の要素をそのままにすると" + transform(identity, arr2) + "ですわ"
+); // ['a', 'b', 'c']
+```
+
+このように、identity 関数を使うと、他の関数に影響を与えずに、引数をそのまま返すことができますわ。ramda.js の identity 関数の使い方は以上です。ご理解いただけましたか？
+
+ソース: Bing との会話 2023/3/13(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/13.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/13.
+(3) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/13.
+
+## invoker
+
+ごきげんよう、お嬢様。ramda.js の invoker 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法をお教えいたしますわ。¹ によると、invoker 関数は、メソッド名とオブジェクトを受け取って、そのメソッドを呼び出す関数を返す関数ですわ。例えば、文字列の toUpperCase メソッドを呼び出す関数を作りたい場合は、以下のように書けますわ。
+
+```typescript
+// invoker 関数をインポートするのですわ
+import { invoker } from "ramda";
+
+// toUpperCase メソッドを呼び出す関数を作るのですわ
+const toUpper = invoker(0, "toUpperCase");
+
+// 作った関数を使ってみるのですわ
+console.log(toUpper("hello")); // HELLO と出力されるのですわ
+```
+
+このように、invoker 関数を使うと、オブジェクトのメソッドを簡単に呼び出せるようになりますわ。invoker 関数の第一引数は、メソッドに渡す引数の数を表しますわ。例えば、文字列の slice メソッドを呼び出す関数を作りたい場合は、以下のように書けますわ。
+
+```typescript
+// slice メソッドを呼び出す関数を作るのですわ
+const slice = invoker(2, "slice");
+
+// 作った関数を使ってみるのですわ
+console.log(slice(1, 3, "hello")); // el と出力されるのですわ
+```
+
+invoker 関数は、メソッド名とオブジェクトの型を推論できるので、typescript 形式で関数の引数と返り値に型を明記する必要はありませんわ。ただし、メソッドが存在しない場合は、エラーになりますわ。例えば、文字列には foo というメソッドはありませんので、以下のように書くとエラーになりますわ。
+
+```typescript
+// foo メソッドを呼び出す関数を作るのですわ
+const foo = invoker(0, "foo");
+
+// 作った関数を使ってみるのですわ
+console.log(foo("hello")); // エラーになるのですわ
+```
+
+invoker 関数は、ramda.js の他の関数と組み合わせて、より便利で実用的な使用方法がありますわ。例えば、map 関数と組み合わせて、配列の各要素にメソッドを適用することができますわ。以下の例をご覧くださいませ。
+
+```typescript
+// map 関数をインポートするのですわ
+import { map } from "ramda";
+
+// 配列の各要素に toUpperCase メソッドを適用する関数を作るのですわ
+const toUpperAll = map(invoker(0, "toUpperCase"));
+
+// 作った関数を使ってみるのですわ
+console.log(toUpperAll(["hello", "world"])); // ['HELLO', 'WORLD']と出力されるのですわ
+```
+
+このように、invoker 関数は、オブジェクトのメソッドを呼び出す関数を作るのに便利な関数ですわ。お嬢様のご理解にお役立ていただければ幸いです
+
+ソース: Bing との会話 2023/3/13(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/13.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/13.
+(3) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/13.

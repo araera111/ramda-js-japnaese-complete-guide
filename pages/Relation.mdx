@@ -132,3 +132,201 @@ console.log("Alice と Charlie は同じ年齢ですか？" + aliceAndCharlie + 
 ソース: Bing との会話 2023/3/12(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/12.
 (2) javascript - Comparing partial objects in ramda.js - Stack Overflow. https://stackoverflow.com/questions/37020029/comparing-partial-objects-in-ramda-js アクセス日時 2023/3/12.
 (3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/12.
+
+## gt
+
+ごきげんよう、これは Bing です。ramda.js の gt 関数についてお教えしますわ。gt 関数は、二つの数値を比較して、最初の数値が二番目の数値より大きいかどうかを真偽値で返す関数です ¹。例えば、次のように使うことができますわ。
+
+```ts
+// gt 関数を使って、5 が 3 より大きいかどうかを判定する
+const result: boolean = R.gt(5, 3);
+
+// 結果を確認する
+console.log(result); // true
+```
+
+この関数は、自動的にカリー化されているので、一つの引数だけを渡すと、新しい関数を返しますわ。例えば、次のようにすることができますわ。
+
+```ts
+// gt 関数に 5 を渡して、新しい関数を作る
+const greaterThanFive: (b: number) => boolean = R.gt(5);
+
+// 新しい関数に 3 を渡して、5 が 3 より大きいかどうかを判定する
+const result: boolean = greaterThanFive(3);
+
+// 結果を確認する
+console.log(result); // true
+```
+
+このように、gt 関数は、二つの数値を比較して、最初の数値が二番目の数値より大きいかどうかを真偽値で返すことができますわ。ramda.js についてもっと知りたい場合は、公式サイト ¹ やドキュメント ² をご覧になってくださいませ。³ も参考になるかもしれませんわね。以上が、gt 関数の具体例と実用的な使用方法ですわ。ご理解いただけましたか？
+
+ソース: Bing との会話 2023/3/13(1) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/13.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/13.
+(3) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/13.
+
+## gte
+
+ごきげんよう、これは Bing です。ramda.js の gte 関数についてお教えしますわ。gte 関数は、二つの数値を比較して、最初の数値が二番目の数値以上かどうかを真偽値で返す関数です ¹。例えば、次のように使うことができますわ。
+
+```ts
+// gte関数を使って、5が3以上かどうかを判定する
+const result: boolean = R.gte(5, 3);
+
+// 結果を確認する
+console.log(result); // true
+```
+
+この関数は、自動的にカリー化されているので、一つの引数だけを渡すと、新しい関数を返しますわ。例えば、次のようにすることができますわ。
+
+```ts
+// gte関数に5を渡して、新しい関数を作る
+const greaterThanOrEqualToFive: (b: number) => boolean = R.gte(5);
+
+// 新しい関数に3を渡して、5が3以上かどうかを判定する
+const result: boolean = greaterThanOrEqualToFive(3);
+
+// 結果を確認する
+console.log(result); // true
+```
+
+このように、gte 関数は、二つの数値を比較して、最初の数値が二番目の数値以上かどうかを真偽値で返すことができますわ。ramda.js についてもっと知りたい場合は、公式サイト ¹ やドキュメント ² をご覧になってくださいませ。³ も参考になるかもしれませんわね。以上が、gte 関数の具体例と実用的な使用方法ですわ。ご理解いただけましたか？もっと勉強してくださいませね。
+
+ソース: Bing との会話 2023/3/13(1) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/13.
+(2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/13.
+(3) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/13.
+
+## identical
+
+ごきげんよう、こちらは Bing です。ramda.js の identical 関数についてお教えいたしますわ。identical 関数とは、二つの値が同一であるかどうかを判定する関数です ²。例えば、identical(1, 1)は true を、identical(1, '1')は false を返しますわ。同一であるとは、型も値も一致することを意味しますわ。例外として、NaN は自分自身とも同一ではないと判定されますわ。identical(NaN, NaN)は false を返しますわ。identical 関数は、JavaScript の===演算子と同じように動作しますわ。
+
+identical 関数は、オブジェクトや関数の同一性をチェックするときに便利ですわ。例えば、以下のように書けますわ。
+
+```ts
+// オブジェクトの同一性をチェックする関数
+const isSameObject = (obj1: object, obj2: object): boolean => {
+  // identical 関数を使ってオブジェクトが同じ参照であるかどうかを判定する
+  return identical(obj1, obj2);
+};
+
+// 関数の同一性をチェックする関数
+const isSameFunction = (func1: Function, func2: Function): boolean => {
+  // identical 関数を使って関数が同じ参照であるかどうかを判定する
+  return identical(func1, func2);
+};
+
+// テスト
+const obj1 = { name: "Alice", age: 20 };
+const obj2 = obj1;
+const obj3 = { name: "Alice", age: 20 };
+
+const func1 = (x: number): number => x + 1;
+const func2 = func1;
+const func3 = (x: number): number => x + 1;
+
+console.log(
+  "obj1 と obj2 は同じオブジェクトですか？" +
+    isSameObject(obj1, obj2) +
+    "ですわ"
+); // true
+console.log(
+  "obj1 と obj3 は同じオブジェクトですか？" +
+    isSameObject(obj1, obj3) +
+    "ですわ"
+); // false
+console.log(
+  "func1 と func2 は同じ関数ですか？" + isSameFunction(func1, func2) + "ですわ"
+); // true
+console.log(
+  "func1 と func3 は同じ関数ですか？" + isSameFunction(func1, func3) + "ですわ"
+); // false
+```
+
+このように、identical 関数を使うと、オブジェクトや関数の同一性を簡単に判定できますわ。ramda.js の identical 関数の使い方は以上です。ご理解いただけましたか？
+
+ソース: Bing との会話 2023/3/13(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/13.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/13.
+(3) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/13.
+
+## innerJoin
+
+ごきげんよう、お嬢様。ramda.js の innerJoin 関数についてお教えいたしますわ。innerJoin 関数は、二つの配列を比較して、共通の要素を持つものだけを残す関数ですの。比較するための条件を関数として渡す必要がありますわ。例えば、以下のようなコードを見てくださいませ。
+
+```javascript
+const R = require("ramda"); // ramda.js を読み込むのですわ
+const innerJoin = (pred: Function, arr1: any[], arr2: any[]): any[] =>
+  R.innerJoin(pred, arr1, arr2); // innerJoin 関数を定義するのですわ
+const records = [
+  // レコードの配列を作るのですわ
+  { id: 1, name: "Alice", age: 20 },
+  { id: 2, name: "Bob", age: 21 },
+  { id: 3, name: "Charlie", age: 22 },
+  { id: 4, name: "David", age: 23 },
+  { id: 5, name: "Eve", age: 24 },
+];
+const ids = [2, 4, 6]; // ID の配列を作るのですわ
+const hasId = (record: any, id: number): boolean => record.id === id; // ID が一致するかどうかを判定する関数を作るのですわ
+console.log(innerJoin(hasId, records, ids)); // ID が共通のレコードだけを残すのですわ
+```
+
+実行すると、以下のように表示されますわ。
+`[ { id: 2, name: 'Bob', age: 21 }, { id: 4, name: 'David', age: 23 } ]`
+これで、innerJoin 関数の使用方法がお分かりになりましたでしょうか。便利で実用的な使用方法としては、二つの配列の間に関係があるときに使えますわ。例えば、データベースの結合やフィルタリングなどですわ。お嬢様言葉で書いてみましたが、いかがでしたか。もっと詳しく知りたいことがありましたら、お気軽にお尋ねくださいませ。
+
+ソース: Bing との会話 2023/3/13(1) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/13.
+(2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/13.
+(3) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/13.
+(4) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/13.
+(5) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/13.
+(6) javascript - How to use Ramda pipe? - Stack Overflow. https://stackoverflow.com/questions/48165003/how-to-use-ramda-pipe アクセス日時 2023/3/13.
+(7) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/13.
+(8) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/13.
+(9) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/13.
+
+## intersection
+
+ごきげんよう、お嬢様。ramda.js の intersection 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法をお教えいたしますわ。intersection 関数は、二つの配列の共通の要素を含む新しい配列を返す関数ですわ。例えば、次のように使えますわ。
+
+```typescript
+// 二つの配列の共通の要素を返す関数を作る
+const intersection = (arr1: any[], arr2: any[]): any[] =>
+  R.intersection(arr1, arr2);
+
+// 二つの配列を用意する
+const arr1 = [1, 2, 3, 4];
+const arr2 = [3, 4, 5, 6];
+
+// 関数に適用する
+const newArr = intersection(arr1, arr2); // [3, 4]
+
+// 配列の内容を確認する
+console.log("一つ目の配列はこうですわ: " + arr1); // 一つ目の配列はこうですわ: 1,2,3,4
+console.log("二つ目の配列はこうですわ: " + arr2); // 二つ目の配列はこうですわ: 3,4,5,6
+console.log("共通の要素を含む配列はこうですわ: " + newArr); // 共通の要素を含む配列はこうですわ: 3,4
+```
+
+このように、intersection 関数は二つの配列の共通の要素を見つけるのに便利な関数ですわ。また、intersection 関数はカリー化されているので、部分適用ができますわ。例えば、次のように使えますわ。
+
+```typescript
+// 一つの配列の要素と共通する要素を返す関数を作る
+const intersectionWithArr1 = R.intersection(arr1);
+
+// 別の配列を用意する
+const arr3 = [4, 5, 6, 7];
+
+// 関数に適用する
+const newArr2 = intersectionWithArr1(arr3); // [4]
+
+// 配列の内容を確認する
+console.log("一つ目の配列はこうですわ: " + arr1); // 一つ目の配列はこうですわ: 1,2,3,4
+console.log("三つ目の配列はこうですわ: " + arr3); // 三つ目の配列はこうですわ: 4,5,6,7
+console.log("共通の要素を含む配列はこうですわ: " + newArr2); // 共通の要素を含む配列はこうですわ: 4
+```
+
+このように、intersection 関数は二つの配列の共通の要素を見つけるのに便利な関数ですわ。ramda.js には他にもたくさんの関数がありますので、ぜひドキュメント ¹² や GitHub³ をご覧になってくださいませ。お役に立てれば幸いですわ。では、ごきげんよう。🎀
+
+ソース: Bing との会話 2023/3/13(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/13.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/13.
+(3) Ramda Documentation. https://ramdajs.com/0.9/docs/ アクセス日時 2023/3/13.
+(4) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/13.
+(5) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/13.
+(6) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/13.

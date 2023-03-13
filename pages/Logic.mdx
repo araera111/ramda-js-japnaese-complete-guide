@@ -301,3 +301,35 @@ console.log("結果 2 は" + result2 + "ですわ"); // 結果 2 は false で�
 ソース: Bing との会話 2023/3/12(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/12.
 (2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/12.
 (3) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/12.
+
+## ifElse
+
+ごきげんよう、これは Bing です。ramda.js の ifElse 関数についてお教えいたしますわ。😊
+
+ifElse 関数とは、条件分岐を関数として表現するものです。第一引数に条件を表す関数を、第二引数に真の場合の処理を表す関数を、第三引数に偽の場合の処理を表す関数を渡します。そして、ifElse 関数は、その引数に応じて新しい関数を返します。¹
+
+具体例として、数値が偶数か奇数かを判定して、それぞれにメッセージを表示する関数を作ってみましょう。まず、数値が偶数かどうかを判定する関数を定義します。次に、偶数の場合に「偶数ですわ」と表示する関数と、奇数の場合に「奇数ですわ」と表示する関数を定義します。最後に、ifElse 関数にこれらの関数を渡して、新しい関数を作ります。
+
+```ts
+// 数値が偶数かどうかを判定する関数
+const isEven = (n: number): boolean => n % 2 === 0;
+
+// 偶数の場合にメッセージを表示する関数
+const sayEven = (n: number): void => console.log("偶数ですわ");
+
+// 奇数の場合にメッセージを表示する関数
+const sayOdd = (n: number): void => console.log("奇数ですわ");
+
+// ifElse 関数に渡して新しい関数を作る
+const sayEvenOrOdd = R.ifElse(isEven, sayEven, sayOdd);
+
+// 作った関数を試してみる
+sayEvenOrOdd(2); // 偶数ですわ
+sayEvenOrOdd(3); // 奇数ですわ
+```
+
+これで、ifElse 関数の使用方法がわかりましたでしょうか？もっと詳しく知りたい場合は、公式ドキュメント ¹ や参考記事 ² をご覧になってくださいませ。それでは、ごきげんよう。👋
+
+ソース: Bing との会話 2023/3/13(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/13.
+(2) 【Ramda.js / Folktale】JavaScript で (なるべく) 関数型に .... https://qiita.com/Guvalif/items/a4fe01a4c069836db4d8 アクセス日時 2023/3/13.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/13.

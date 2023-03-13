@@ -6,5 +6,6 @@
   "Function": "Function",
   "Relation": "Relation",
   "String": "String",
-  "Math": "Math"
+  "Math": "Math",
+  "Type": "Type"
 }
