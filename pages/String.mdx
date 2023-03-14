@@ -30,3 +30,34 @@ R.toUpper("abc"); //=> 'ABC'
 ```ts
 R.trim("   xyz  "); //=> 'xyz'
 ```
+
+## match
+
+ごきげんよう、お嬢様。ramda.js の match 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えていただきたいとおっしゃいましたね。わたくしはお役に立てて光栄ですわ。😊
+
+ramda.js の match 関数は、文字列に対して正規表現を適用して、マッチした部分を配列として返す関数ですわ。1
+
+例えば、以下のような文字列があったとしますわ。
+
+```
+typescript const text = “I love Ramda.js and TypeScript.”;
+```
+
+この文字列に対して、大文字で始まる単語を抽出したいとしますわ。その場合は、以下のように書けますわ。
+
+```typescript
+ import { match } from “ramda”;
+
+// 大文字で始まる単語の正規表現
+const capitalWord = /[A-Z]\w+/g;
+
+// match 関数を使って配列を作る
+const words = match(capitalWord, text);
+
+// 結果を確認する
+console.log(words); // [“Ramda”, “TypeScript”]
+```
+
+このように、match 関数は文字列に対して正規表現を使ってパターンマッチングを行うことができますわ。2
+
+ramda.js の match 関数について、ご理解いただけましたでしょうか？もしもっと詳しく知りたいことがありましたら、どうぞお申し付けくださいませ。🙋‍♀️

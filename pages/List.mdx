@@ -1246,7 +1246,7 @@ console.log(R.find(hasO, str2)); // "o"
 (2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/13.
 (3) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/13.
 
-##
+## indexBy
 
 ごきげんよう。ramda.js の indexBy 関数についてお教えいたしますわ。¹ によると、indexBy 関数は、ある関数をリストの各要素に適用して得られる値をキーとして、リストの要素をオブジェクトにまとめる関数ですわ。例えば、以下のように使えますわ。
 
@@ -1858,3 +1858,77 @@ mapAccum 関数の使い方は、これでお分かりになりましたか？
 (3) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
 (4) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
 (5) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/14.
+
+## mapAccumRight
+
+ごきげんよう、お嬢様。わたくしは Bing と申します。お役に立てるように精一杯努めさせていただきますわ。🎀
+
+ramda.js の mapAccumRight 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えていただきたいのですね。承知いたしましたわ。
+
+mapAccumRight 関数は、リストの各要素に対して関数を適用しながら、累積値を更新していく関数ですわ。右から左に処理を進めていきますので、mapAccum 関数とは逆の順序で結果が得られますわ。1
+
+具体例としては、以下のようなコードが考えられますわ。
+
+```typescript
+// 文字列を逆順にする関数
+const reverseString = (str: string): string => { return str.split(‘’).reverse().join(‘’); };
+// リストの各要素を逆順にしながら、その長さの合計を計算する関数
+const reverseAndSumLength = (acc: number, x: string): [number, string] => { return [acc + x.length, reverseString(x)]; };
+
+// リスト
+const list: string[] = [‘apple’, ‘banana’, ‘cherry’];
+
+// mapAccumRight 関数を使ってリストの各要素を逆順にしながら、その長さの合計を計算する
+const result: [number, string[]] = R.mapAccumRight(reverseAndSumLength, 0, list);
+
+// 結果を表示する console.log(‘リストの各要素を逆順にした結果はこちらですわ’);
+console.log(result1); // [‘yrrehc’, ‘ananab’, ‘elppa’]
+console.log(‘リストの各要素の長さの合計はこちらですわ’);
+console.log(result[0]); // 16
+```
+
+このようにして、mapAccumRight 関数はリストの各要素に対して何らかの処理を行いながら、その結果を累積していくことができますわ。
+
+この例では文字列を逆順にするという単純な処理を行いましたが、他にも様々な応用が可能ですわ。例えば、リストの各要素を暗号化しながら、そのキーを生成するということもできますわ。
+
+この回答はお嬢様のご質問にお答えできましたでしょうか？もしもっと詳しく知りたいことがありましたら、どうぞお気軽にお申し付けくださいませ。🌸
+
+## mergeAll
+
+ごきげんよう、お嬢様。ramda.js の mergeAll 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげますわ。mergeAll 関数は、オブジェクトの配列を一つのオブジェクトにマージする関数ですわ。¹ 例えば、次のようなオブジェクトの配列があったとしますわ。
+
+```typescript
+const arr = [
+  { id: 1, val: "a" },
+  { id: 2, val: "b" },
+  { id: 3, val: "c" },
+];
+```
+
+この配列を、id をキーとして、val を値とするオブジェクトに変換したいとしますわ。その場合、mergeAll 関数を使って次のように書けますわ。
+
+```typescript
+import * as R from "ramda";
+
+const arr = [
+  { id: 1, val: "a" },
+  { id: 2, val: "b" },
+  { id: 3, val: "c" },
+];
+
+const mergeById = (
+  objArr: Array<{ id: number; val: string }>
+): Record<number, string> => {
+  return R.mergeAll(objArr.map((obj) => ({ [obj.id]: obj.val })));
+};
+
+console.log(mergeById(arr)); // {1: "a", 2: "b", 3: "c"}
+```
+
+このようにして、オブジェクトの配列を一つのオブジェクトに変換できますわ。この関数は、オブジェクトの配列を扱うときに便利ですわ。例えば、API から取得したデータを整形したり、オブジェクトのキーを変更したりするときに使えますわ。もちろん、他の ramda.js の関数と組み合わせても良いですわ。²
+
+以上が、ramda.js の mergeAll 関数についての説明ですわ。ご理解いただけましたかしら? もし分からないことがあれば、お気軽にお尋ねくださいませ。
+
+ソース: Bing との会話 2023/3/14(1) Convert array of objects to one Object using ramda.js. https://stackoverflow.com/questions/47506595/convert-array-of-objects-to-one-object-using-ramda-js アクセス日時 2023/3/14.
+(2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.

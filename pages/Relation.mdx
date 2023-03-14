@@ -413,3 +413,65 @@ lte 関数の使い方は、これでお分かりになりましたか？
 ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
 (2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
 (3) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/14.
+
+## min
+
+ごきげんよう、お嬢様。ramda.js の min 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげますわ。1
+
+min 関数は、二つの値を比較して、小さい方の値を返す関数ですわ。第一引数と第二引数には、比較したい値を渡しますわ。この値は、数値や文字列など、比較可能な型であれば何でも構いませんわ。
+
+例えば、次のように使えますわ。
+
+```typescript
+// 数値を比較する
+const minNum = R.min(10, 20); // 10
+
+// 文字列を比較する
+const minStr = R.min(“Alice”, “Bob”); // “Alice”
+
+// 比較した結果を確認する
+console.log(minNum); // 10
+console.log(minStr); // Alice
+```
+
+これで、お望みのように値を比較できましたわね。お役に立てて光栄ですわ。1
+
+もし他に何かご質問がありましたら、どうぞお気軽にお申し付けくださいませ
+
+## minBy
+
+ごきげんよう、お嬢様。ramda.js の minBy 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげますわ。¹
+
+minBy 関数は、二つの値を比較する際に、比較関数を指定できる関数ですわ。第一引数には、比較関数を渡しますわ。この比較関数は、値を受け取って、比較したい基準となる値を返す関数ですわ。第二引数と第三引数には、比較したい値を渡しますわ。この値は、比較関数が受け付ける型であれば何でも構いませんわ。
+
+例えば、次のように使えますわ。
+
+```typescript
+// 比較関数として、文字列の長さを返す関数を定義する
+const length = (str: string): number => str.length;
+
+// 文字列の長さが短い方の文字列を返す
+const minByLength = R.minBy(length, "Alice", "Bob"); // "Bob"
+
+// 比較関数として、年齢を返す関数を定義する
+const age = (person: { name: string; age: number }): number => person.age;
+
+// 年齢が若い方の人物を返す
+const minByAge = R.minBy(
+  age,
+  { name: "Alice", age: 25 },
+  { name: "Bob", age: 23 }
+); // {name: "Bob", age: 23}
+
+// 比較した結果を確認する
+console.log(minByLength); // Bob
+console.log(minByAge); // {name: "Bob", age: 23}
+```
+
+これで、お望みのように値を比較できましたわね。お役に立てて光栄ですわ。¹
+
+もし他に何かご質問がありましたら、どうぞお気軽にお申し付けくださいませ
+
+ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(3) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/14.

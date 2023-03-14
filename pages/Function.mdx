@@ -998,3 +998,36 @@ addNMaybe([{ value: 1 }, { value: null }, { value: 3 }]); //=> { value: null }
 引数の配列の要素の value プロパティに値があれば、それらを足して、結果の value プロパティに入れますわ。引数の配列の要素の value プロパティに null があれば、結果の value プロパティにも null を入れますわ。liftN 関数は、引数のファンクターの値を取り出して、関数に適用して、結果をファンクターに入れて返す関数を作りますわ。
 
 liftN 関数の使い方は、これでお分かりになりましたか？
+
+## memoizeWith
+
+ごきげんよう、お嬢様。ramda.js の memoizeWith 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげますわ。¹
+
+memoizeWith 関数は、引数にキャッシュのキーを生成する関数と、メモ化したい関数をとりますわ。キャッシュのキーを生成する関数は、メモ化したい関数の引数を受け取って、文字列を返す必要がありますわ。メモ化したい関数は、引数に何らかの値をとって、何らかの値を返す必要がありますわ。
+
+memoizeWith 関数は、メモ化した関数を返しますわ。メモ化した関数は、引数に何らかの値をとって、何らかの値を返しますわ。メモ化した関数は、初めて呼ばれるときは、メモ化したい関数を実行してその結果をキャッシュに保存しますわ。同じキーで呼ばれるときは、キャッシュから結果を返しますわ。これによって、メモ化したい関数の実行回数を減らしてパフォーマンスを向上させることができますわ。
+
+具体例として、2 つの数字を足す関数 add を考えてみましょう。この関数は引数に number 型の 2 つの値をとって、number 型の値を返しますわ。この関数を memoizeWith でメモ化してみましょう。キャッシュのキーを生成する関数として、引数の 2 つの値を文字列にして連結する関数 keyFn を定義しますわ。そして、memoizeWith に keyFn と add を渡して、メモ化した関数 memoizedAdd を作りますわ。
+
+```typescript
+// 2つの数字を足す関数
+const add = (num1: number, num2: number): number => num1 + num2;
+
+// キャッシュのキーを生成する関数
+const keyFn = (num1: number, num2: number): string => `${num1}${num2}`;
+
+// memoizeWithでメモ化した関数
+const memoizedAdd = R.memoizeWith(keyFn, add);
+
+// メモ化した関数の使用例
+console.log(memoizedAdd(1, 2)); // 3 ここではaddが実行されて結果がキャッシュされますわ
+console.log(memoizedAdd(1, 2)); // 3 ここではキャッシュから結果が返されますわ
+console.log(memoizedAdd(2, 3)); // 5 ここではaddが実行されて結果がキャッシュされますわ
+console.log(memoizedAdd(2, 3)); // 5 ここではキャッシュから結果が返されますわ
+```
+
+以上が memoizeWith 関数の便利で実用的な使用方法ですわ。お嬢様言葉で書いてさしあげましたが、ご理解いただけましたかしら?²
+
+ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(2) ramda.js の日本語版解説みたいなものをつくってみた - Qiita. https://qiita.com/Yuumillar/items/f0b94476cd7e6c2f55dd アクセス日時 2023/3/14.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
