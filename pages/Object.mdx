@@ -1429,3 +1429,90 @@ console.log(flippedColors); // {"apple":"blue","pear":"green"}
 ソース: Bing との会話 2023/3/14(1) javascript - Create object with Ramda - Stack Overflow. https://stackoverflow.com/questions/51089297/create-object-with-ramda アクセス日時 2023/3/14.
 (2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
 (3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+
+## pathOr
+
+ごきげんよう、お嬢様。ramda.js の pathOr 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。pathOr 関数は、オブジェクトから指定したパスにある値を取得する関数ですが、もしパスが存在しない場合はデフォルトの値を返しますわ。これは、オブジェクトのプロパティが存在しない場合にエラーを防ぐために便利ですわ。
+
+例えば、以下のような```typescript で書かれたコードがありますとしましょう。
+
+```typescript
+// 人物のオブジェクト
+const person = {
+  name: "Alice",
+  age: 25,
+  address: {
+    city: "Tokyo",
+    country: "Japan",
+  },
+};
+
+// pathOr関数をインポート
+import { pathOr } from "ramda";
+
+// personオブジェクトから名前を取得する関数
+const getName = (obj: object): string => pathOr("Unknown", ["name"], obj);
+
+// personオブジェクトから住所の国名を取得する関数
+const getCountry = (obj: object): string =>
+  pathOr("Unknown", ["address", "country"], obj);
+
+// personオブジェクトから趣味を取得する関数
+const getHobby = (obj: object): string => pathOr("Unknown", ["hobby"], obj);
+
+// 関数を実行して結果を表示
+console.log(getName(person)); // Aliceと表示されますわ。
+console.log(getCountry(person)); // Japanと表示されますわ。
+console.log(getHobby(person)); // Unknownと表示されますわ。
+```
+
+ここで、getName 関数は person オブジェクトから name プロパティの値を取得しますが、もし name プロパティが存在しない場合は"Unknown"という文字列を返しますわ。同様に、getCountry 関数は person オブジェクトから address プロパティの中の country プロパティの値を取得しますが、もし address や country プロパティが存在しない場合は"Unknown"という文字列を返しますわ。getHobby 関数は person オブジェクトから hobby プロパティの値を取得しようとしますが、person オブジェクトには hobby プロパティがありませんので、デフォルトの値である"Unknown"という文字列を返しますわ。
+
+このようにして、pathOr 関数はオブジェクトから任意の深さのプロパティの値を安全に取得することができる素敵な関数ですわ。以上が私がお教えできる内容です。ご理解いただけましたか？🌸
+
+ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(3) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/14.
+(4) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(5) ramda.pathOr JavaScript and Node.js code examples | Tabnine. https://www.tabnine.com/code/javascript/functions/ramda/pathOr アクセス日時 2023/3/14.
+(6) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+
+## paths
+
+ごきげんよう、お嬢様。ramda.js の paths 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。paths 関数は、オブジェクトから指定した複数のパスにある値を配列として取得する関数ですわ。これは、オブジェクトのプロパティをまとめて取り出すために便利ですわ。
+
+例えば、以下のような```typescript で書かれたコードがありますとしましょう。
+
+```typescript
+// 人物のオブジェクト
+const person = {
+  name: "Bob",
+  age: 30,
+  address: {
+    city: "New York",
+    country: "USA",
+  },
+  hobbies: ["reading", "gaming", "cooking"],
+};
+
+// paths 関数をインポート
+import { paths } from "ramda";
+
+// person オブジェクトから名前と住所の国名と趣味の最初の要素を取得する関数
+const getInfo = (obj: object): (string | undefined)[] =>
+  paths([["name"], ["address", "country"], ["hobbies", 0]], obj);
+
+// 関数を実行して結果を表示
+console.log(getInfo(person)); // ["Bob", "USA", "reading"]と表示されますわ。
+```
+
+ここで、getInfo 関数は person オブジェクトから name プロパティの値と address プロパティの中の country プロパティの値と hobbies プロパティの中の最初の要素（0 番目）の値を配列として取得しますわ。もし指定したパスが存在しない場合は undefined が返されますわ。
+
+このようにして、paths 関数はオブジェクトから任意の深さや個数のプロパティの値を一度に取得することができる素敵な関数ですわ。以上が私がお教えできる内容です。ご理解いただけましたか？🌸
+
+ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(3) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/14.
+(4) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(5) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(6) javascript - Ramda function that takes in list of paths and .... https://stackoverflow.com/questions/48629964/ramda-function-that-takes-in-list-of-paths-and-returns-a-function-that-destructu アクセス日時 2023/3/14.

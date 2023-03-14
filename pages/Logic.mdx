@@ -476,3 +476,41 @@ console.log(canDrive(21)); // true
 (6) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/14.
 (7) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
 (8) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/14.
+
+## pathSatisfies
+
+ごきげんよう、お嬢様。ramda.js の pathSatisfies 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。pathSatisfies 関数は、オブジェクトから指定したパスにある値がある条件を満たすかどうかを判定する関数ですわ。これは、オブジェクトのプロパティの値に対して複雑なロジックを適用するために便利ですわ。
+
+例えば、以下のような```typescript で書かれたコードがありますとしましょう。
+
+```typescript
+// 人物のオブジェクト
+const person = {
+  name: "Alice",
+  age: 25,
+  address: {
+    city: "Tokyo",
+    country: "Japan",
+  },
+  hobbies: ["singing", "dancing", "shopping"],
+};
+
+// pathSatisfies関数をインポート
+import { pathSatisfies } from "ramda";
+
+// personオブジェクトから名前がAで始まり、年齢が20以上30未満であるかどうかを判定する関数
+const isAlice = (obj: object): boolean =>
+  pathSatisfies((name: string) => name.startsWith("A"), ["name"], obj) &&
+  pathSatisfies((age: number) => age >= 20 && age < 30, ["age"], obj);
+
+// 関数を実行して結果を表示
+console.log(isAlice(person)); // trueと表示されますわ。
+```
+
+ここで、isAlice 関数は person オブジェクトから name プロパティの値が A で始まるかどうかと age プロパティの値が 20 以上 30 未満かどうかをそれぞれ判定しますわ。もし指定したパスが存在しない場合は false が返されますわ。
+
+このようにして、pathSatisfies 関数はオブジェクトから任意の深さや個数のプロパティの値に対して条件式を適用することができる素敵な関数ですわ。以上が私がお教えできる内容です。ご理解いただけましたか？🌸
+
+ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(2) javascript - How to rewrite a FP library Ramda.js function .... https://stackoverflow.com/questions/66417178/how-to-rewrite-a-fp-library-ramda-js-function-called-pathsatisfies-in-vanilla アクセス日時 2023/3/14.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
