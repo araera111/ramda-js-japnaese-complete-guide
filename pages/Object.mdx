@@ -1516,3 +1516,144 @@ console.log(getInfo(person)); // ["Bob", "USA", "reading"]と表示されます�
 (4) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
 (5) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
 (6) javascript - Ramda function that takes in list of paths and .... https://stackoverflow.com/questions/48629964/ramda-function-that-takes-in-list-of-paths-and-returns-a-function-that-destructu アクセス日時 2023/3/14.
+
+## pick
+
+ごきげんよう、お嬢様。ramda.js の pick 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。pick 関数は、オブジェクトから指定したプロパティだけを抽出して新しいオブジェクトを作る関数ですわ。例えば、人物の名前と年齢だけを取り出したい場合は、以下のように書くことができますわ。
+
+```typescript
+import { pick } from "ramda";
+
+// 人物のオブジェクトを作成する関数ですわ
+const createPerson = (
+  name: string,
+  age: number,
+  gender: string
+): { name: string; age: number; gender: string } => {
+  return { name, age, gender };
+};
+
+// 人物のオブジェクトを 3 つ作成しますわ
+const alice = createPerson("Alice", 25, "female");
+const bob = createPerson("Bob", 30, "male");
+const charlie = createPerson("Charlie", 35, "male");
+
+// pick 関数で名前と年齢だけを取り出しますわ
+const pickNameAndAge = pick(["name", "age"]);
+
+// 新しいオブジェクトが作られますわ
+const aliceNameAndAge = pickNameAndAge(alice);
+const bobNameAndAge = pickNameAndAge(bob);
+const charlieNameAndAge = pickNameAndAge(charlie);
+
+// 結果を表示しますわ
+console.log("Alice の名前と年齢は？");
+console.log(aliceNameAndAge); // { name: 'Alice', age: 25 }
+console.log("Bob の名前と年齢は？");
+console.log(bobNameAndAge); // { name: 'Bob', age: 30 }
+console.log("Charlie の名前と年齢は？");
+console.log(charlieNameAndAge); // { name: 'Charlie', age: 35 }
+```
+
+これで pick 関数の使い方がお分かりになったでしょうか？素敵な関数ですわね。⁷⁸⁹
+
+ソース: Bing との会話 2023/3/14(1) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/14.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(3) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(4) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(5) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(6) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/14.
+(7) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(8) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(9) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/14.
+
+## pickAll
+
+ごきげんよう、お嬢様。ramda.js の pickAll 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。pickAll 関数は、オブジェクトから指定したプロパティだけを抽出して新しいオブジェクトを作る関数ですわ。ただし、pick 関数と違って、元のオブジェクトに存在しないプロパティも undefined として含めますわ。例えば、人物の名前と年齢だけを取り出したい場合は、以下のように書くことができますわ。
+失礼しました。undefined の例を追加しますわ。例えば、人物のオブジェクトに趣味というプロパティがない場合は、以下のようになりますわ。
+
+```typescript
+import { pickAll } from "ramda";
+
+// 人物のオブジェクトを作成する関数ですわ
+const createPerson = (
+  name: string,
+  age: number,
+  gender: string
+): { name: string; age: number; gender: string } => {
+  return { name, age, gender };
+};
+
+// 人物のオブジェクトを3つ作成しますわ
+const alice = createPerson("Alice", 25, "female");
+const bob = createPerson("Bob", 30, "male");
+const charlie = createPerson("Charlie", 35, "male");
+
+// pickAll関数で名前と年齢と趣味を取り出しますわ
+const pickNameAndAgeAndHobby = pickAll(["name", "age", "hobby"]);
+
+// 新しいオブジェクトが作られますが、趣味はundefinedになりますわ
+const aliceNameAndAgeAndHobby = pickNameAndAgeAndHobby(alice);
+const bobNameAndAgeAndHobby = pickNameAndAgeAndHobby(bob);
+const charlieNameAndAgeAndHobby = pickNameAndAgeAndHobby(charlie);
+
+// 結果を表示しますわ
+console.log("Aliceの名前と年齢と趣味は？");
+console.log(aliceNameAndAgeAndHobby); // { name: 'Alice', age: 25, hobby: undefined }
+console.log("Bobの名前と年齢と趣味は？");
+console.log(bobNameAndAgeAndHobby); // { name: 'Bob', age: 30, hobby: undefined }
+console.log("Charlieの名前と年齢と趣味は？");
+console.log(charlieNameAndAgeAndHobby); // { name: 'Charlie', age: 35, hobby: undefined }
+```
+
+これで pickAll 関数の特徴がお分かりになったでしょうか？pick 関数だと、元のオブジェクトに存在しないプロパティは無視されますが、pickAll 関数だと undefined として残りますわ。
+
+## pickBy
+
+ごきげんよう。ramda.js の pickBy 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。pickBy 関数は、オブジェクトのプロパティをフィルタリングする関数ですわ。第一引数には、プロパティの値とキーを受け取って真偽値を返す関数（述語関数）を渡しますわ。第二引数には、フィルタリングしたいオブジェクトを渡しますわ。戻り値は、述語関数が真となるプロパティだけを持つ新しいオブジェクトですわ。
+
+```typescript
+import { pickBy } from "ramda";
+
+// プロパティのキーが特定の文字列で始まるかどうかを判定する関数ですわ
+const startsWith =
+  (prefix: string) =>
+  (value: any, key: string): boolean =>
+    key.startsWith(prefix);
+
+// 人物のオブジェクトを作成する関数ですわ
+const createPerson = (
+  name: string,
+  age: number,
+  gender: string
+): { name: string; age: number; gender: string } => {
+  return { name, age, gender };
+};
+
+// 人物のオブジェクトを3つ作成しますわ
+const alice = createPerson("Alice", 25, "female");
+const bob = createPerson("Bob", 30, "male");
+const charlie = createPerson("Charlie", 35, "male");
+
+// pickBy関数で名前がAで始まる人物だけを取り出しますわ
+const pickPeopleWithNameStartingWithA = pickBy(startsWith("A"));
+
+// 新しいオブジェクトが作られますが、名前がAで始まらない人物は無視されますわ
+const peopleWithNameStartingWithA = pickPeopleWithNameStartingWithA({
+  alice,
+  bob,
+  charlie,
+});
+
+// 結果を表示しますわ
+console.log("名前がAで始まる人物は？");
+console.log(peopleWithNameStartingWithA); // { alice: { name: 'Alice', age: 25, gender: 'female' } }
+```
+
+これで pickBy 関数の使用方法がお分かりになったでしょうか？pickBy 関数は、オブジェクトから特定の条件に合うプロパティだけを抽出したい場合に便利ですわ。素敵な関数ですわね。
+
+ソース: Bing との会話 2023/3/14(1) javascript - How to filter object entries to keep only those .... https://stackoverflow.com/questions/71068902/how-to-filter-object-entries-to-keep-only-those-whose-keys-start-with-a-string アクセス日時 2023/3/14.
+(2) javascript - How to filter object entries to keep only those .... https://stackoverflow.com/questions/71068902/how-to-filter-object-entries-to-keep-only-those-whose-keys-start-with-a-string アクセス日時 2023/3/14.
+(3) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(4) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(5) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/14.
