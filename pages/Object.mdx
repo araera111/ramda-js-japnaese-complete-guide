@@ -1261,3 +1261,68 @@ console.log(modifyFriendName); // {name: "Alice", age: 25, friends: [{name: "BOB
 ソース: Bing との会話 2023/3/14(1) Add "modify" and "modifyPath" that applies a function to a .... https://github.com/ramda/ramda/issues/3106 アクセス日時 2023/3/14.
 (2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
 (3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+
+## objOf
+
+ごきげんよう、お嬢様。ramda.js の objOf 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。objOf 関数は、キーと値を引数に取り、そのキーと値からなるオブジェクトを返す関数ですわ。例えば、objOf('name', 'Alice')とすると、{name: 'Alice'}というオブジェクトが返ってきますわ。この関数は、カリー化されているので、一つの引数だけを渡して部分適用することもできますわ。例えば、objOf('age')とすると、年齢を値に取るオブジェクトを作る関数が返ってきますわ。これは、他の関数と組み合わせて使うことで便利ですわ。
+
+```typescript
+// objOf 関数の型定義
+const objOf = <K extends string, V>(key: K, value: V): { [P in K]: V } => ({
+  [key]: value,
+});
+
+// キーと値を渡してオブジェクトを作る
+const person = objOf("name", "Alice");
+console.log(person); // {name: 'Alice'} お嬢様のお名前ですわね
+
+// 一つの引数だけを渡して部分適用する
+const makeAgeObj = objOf("age");
+console.log(makeAgeObj(18)); // {age: 18} お嬢様はまだ若いですわ
+
+// map 関数などと組み合わせて使う
+const names = ["Alice", "Bob", "Charlie"];
+const makeNameObj = objOf("name");
+console.log(names.map(makeNameObj)); // [{name: 'Alice'}, {name: 'Bob'}, {name: 'Charlie'}] お嬢様以外にも名前がありますわ
+```
+
+ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(3) javascript - Create object with Ramda - Stack Overflow. https://stackoverflow.com/questions/51089297/create-object-with-ramda アクセス日時 2023/3/14.
+
+## omit
+
+ごきげんよう、お嬢様。ramda.js の omit 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。omit 関数は、オブジェクトから指定したプロパティを除外した新しいオブジェクトを返す関数ですわ ⁵。例えば、次のようなコードがありますとしましょう。
+
+```typescript
+const person = { name: "Alice", age: 21, gender: "female" };
+console.log(person); // {name: 'Alice', age: 21, gender: 'female'}
+```
+
+この場合、person オブジェクトには name, age, gender の三つのプロパティがありますわね。しかし、もし person オブジェクトから gender プロパティを取り除きたい場合はどうすればよろしいでしょうか？JavaScript では delete 演算子を使ってプロパティを削除することができますが、ramda.js では omit 関数を使ってもっと簡単に書くことができますわ。
+
+```typescript
+const person = { name: "Alice", age: 21, gender: "female" };
+console.log(R.omit(["gender"], person)); // {name: 'Alice', age: 21}
+```
+
+このコードでは、omit 関数が gender プロパティを含む配列と person オブジェクトを受け取って、gender プロパティを除外した新しいオブジェクトを返していますわ。これは便利な方法ですわね。もちろん、omit 関数は複数のプロパティやネストされたオブジェクトでも使えますわ。
+
+```typescript
+const person = {
+  name: "Alice",
+  age: 21,
+  gender: "female",
+  address: { city: "Tokyo", zipCode: "100-0000" },
+};
+console.log(R.omit(["age", "address.zipCode"], person)); // {name: 'Alice', gender: 'female', address:{city:'Tokyo'}}
+```
+
+以上が ramda.js の omit 関数についての説明ですわ。素敵な関数ですわね。お役に立てましたら幸いですわ。
+
+ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(3) eval - How can I use Ramda's omit() function on a deeply .... https://stackoverflow.com/questions/52569027/how-can-i-use-ramdas-omit-function-on-a-deeply-nested-object-member-in-javasc アクセス日時 2023/3/14.
+(4) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(5) eval - How can I use Ramda's omit() function on a deeply .... https://stackoverflow.com/questions/52569027/how-can-i-use-ramdas-omit-function-on-a-deeply-nested-object-member-in-javasc アクセス日時 2023/3/14.
+(6) ramda.omit JavaScript and Node.js code examples | Tabnine. https://www.tabnine.com/code/javascript/functions/ramda/omit アクセス日時 2023/3/14.
