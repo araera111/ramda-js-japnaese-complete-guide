@@ -475,3 +475,43 @@ console.log(minByAge); // {name: "Bob", age: 23}
 ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
 (2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
 (3) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/14.
+
+## pathEq
+
+ごきげんよう、お嬢様。ramda.js の pathEq 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。pathEq 関数は、オブジェクトや配列のネストされたプロパティが指定した値と等しいかどうかを判定するための関数ですわ ¹。例えば、次のようなコードがありますとしましょう。
+
+```typescript
+const people: { name: string; age: number }[] = [
+  { name: "Alice", age: 25 },
+  { name: "Bob", age: 30 },
+  { name: "Charlie", age: 35 },
+];
+
+console.log(people); // [{name:"Alice",age:25},{name:"Bob",age:30},{name:"Charlie",age:35}]
+```
+
+この場合、people は名前と年齢を持つオブジェクトの配列ですわね。pathEq 関数を使えば、people の中から特定のプロパティと値の組み合わせに一致するオブジェクトを探すことができますわ。
+
+```typescript
+const isAlice = R.pathEq(["name"], "Alice");
+
+const alice = R.find(isAlice, people);
+
+console.log(alice); // {name:"Alice",age:25}
+```
+
+このコードでは、isAlice は pathEq 関数に["name"]と"Alice"という引数を渡して作られた関数ですわね。この関数はオブジェクトの中で name プロパティが"Alice"という値に等しいかどうかを返しますわ。isAlice に people の要素を渡すと、その条件に合致する場合は true、そうでない場合は false を返しますわ。R.find は配列から条件に一致する最初の要素を返す関数ですから ¹、R.find(isAlice, people)は people の中から名前が"Alice"であるオブジェクトを返しますわ。これで people[0]と書くよりも意味が明確になりますわね。また、pathEq 関数は存在しないプロパティや値に対しても false を返しますから ¹、安心して使えますわ。
+
+```typescript
+const isDavid = R.pathEq(["name"], "David");
+
+const david = R.find(isDavid, people);
+
+console.log(david); // undefined
+```
+
+このコードでは、isDavid は pathEq 関数に["name"]と"David"という引数を渡して作られた関数ですわね。しかし people オブジェクトには名前が"David"である人物がいませんから、isDavid(people)は false を返しますわ。R.find(isDavid, people)も undefined を返しますわ。以上が ramda.js の pathEq 関数についての説明ですわ。素敵な関数ですわね。お役に立てましたら幸いですわ。
+
+ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(3) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/14.

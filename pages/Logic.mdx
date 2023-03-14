@@ -443,3 +443,36 @@ console.log(isNonNegative(-1)); // false と表示されます わ
 (2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
 (3) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
 (4) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/14.
+
+## or
+
+ごきげんよう、お嬢様。ramda.js の or 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。or 関数は、二つの値を受け取って、そのどちらかが真と評価される場合はその値を返し、そうでない場合は false を返す関数ですわ ⁷。例えば、次のようなコードがありますとしましょう。
+
+```typescript
+const name: string | null = null;
+const age: number | undefined = undefined;
+console.log(R.or(name, "Anonymous")); // Anonymous
+console.log(R.or(age, 25)); // 25
+```
+
+この場合、name と age は null や undefined という偽と評価される値ですわね。しかし、or 関数を使えばそれらの代わりにデフォルトの値を返すことができますわ。このようにしてエラーを防いだり、ユーザーに親切なメッセージを表示したりすることができますわ。もちろん、or 関数は他の種類の値やデータ型でも使えますわ。
+
+```typescript
+const isAdult = (age: number): boolean => age >= 18;
+const canDrink = (age: number): boolean => age >= 20;
+const canDrive = (age: number): boolean => R.or(isAdult(age), canDrink(age));
+console.log(canDrive(16)); // false
+console.log(canDrive(19)); // true
+console.log(canDrive(21)); // true
+```
+
+このコードでは、isAdult 関数と canDrink 関数が年齢に応じて真偽値を返すように定義されていますわね。そして canDrive 関数は or 関数を使ってその二つの関数の結果を組み合わせていますわ。これは便利な方法ですわね。以上が ramda.js の or 関数についての説明ですわ。素敵な関数ですわね。お役に立てましたら幸いですわ。
+
+ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(2) Ramda.js R.without() Function - GeeksforGeeks. https://www.geeksforgeeks.org/ramda-js-r-without-function/ アクセス日時 2023/3/14.
+(3) Ramda tutorial - JavaScript functional programming with .... https://zetcode.com/javascript/ramda/ アクセス日時 2023/3/14.
+(4) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(5) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(6) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/14.
+(7) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(8) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/14.

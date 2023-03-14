@@ -2080,3 +2080,67 @@ console.log(secondToLast(fruits)); // cherry と表示されます わ
 ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
 (2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
 (3) ramda.js - How to rewrite this in terms of R.nthArg - Stack .... https://stackoverflow.com/questions/64660049/how-to-rewrite-this-in-terms-of-r-ntharg アクセス日時 2023/3/14.
+
+## pair
+
+ごきげんよう、お嬢様。ramda.js の pair 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。pair 関数は、二つの値を受け取って配列にして返す関数ですわ ¹。例えば、次のようなコードがありますとしましょう。
+
+```typescript
+const greet = (name: string): string => `Hello, ${name}!`;
+const farewell = (name: string): string => `Goodbye, ${name}!`;
+
+console.log(R.pair(greet("Alice"), farewell("Bob"))); // ['Hello, Alice!', 'Goodbye, Bob!']
+```
+
+この場合、greet と farewell は名前を受け取って挨拶や別れの言葉を返す関数ですわね。pair 関数を使えば、それらの関数の結果を配列にして返すことができますわ。このようにして二つの値を簡単に配列化することができますわ。もちろん、pair 関数はどんな種類の値でも使えますわ。
+
+```typescript
+type Person = {
+  name: string;
+  age: number;
+};
+
+const alice: Person = { name: "Alice", age: 21 };
+const bob: Person = { name: "Bob", age: 23 };
+
+console.log(R.pair(alice, bob)); // [{ name: 'Alice', age: 21 }, { name: 'Bob', age: 23 }]
+```
+
+このコードでは、alice と bob は Person 型のオブジェクトですわね。pair 関数を使えば、それらのオブジェクトを配列にして返すことができますわ。このようにしてオブジェクトや他のデータ型をペアにすることができますわ。以上が ramda.js の pair 関数についての説明ですわ。素敵な関数ですわね。お役に立てましたら幸いですわ。
+
+ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(3) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/14.
+
+## partition
+
+ごきげんよう、お嬢様。ramda.js の partition 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。partition 関数は、配列やオブジェクトを受け取って、条件に合う要素と合わない要素に分けた二つの配列やオブジェクトを返す関数ですわ ¹。例えば、次のようなコードがありますとしましょう。
+
+```typescript
+const people: { name: string; age: number }[] = [
+  { name: "Alice", age: 25 },
+  { name: "Bob", age: 30 },
+  { name: "Charlie", age: 35 },
+  { name: "Diana", age: 40 },
+];
+
+console.log(people); // [{name: "Alice", age: 25}, {name: "Bob", age: 30}, {name: "Charlie", age: 35}, {name: "Diana", age: 40}]
+```
+
+この場合、people は名前と年齢を持つオブジェクトの配列ですわね。partition 関数を使えば、people の要素を年齢が 30 歳以上かどうかで分けることができますわ。
+
+```typescript
+const isOlderThan30 = (person: { name: string; age: number }): boolean =>
+  person.age >= 30;
+
+const [older, younger] = R.partition(isOlderThan30, people);
+
+console.log(older); // [{name:"Bob",age:30},{name:"Charlie",age:35},{name:"Diana",age:40}]
+console.log(younger); // [{name:"Alice",age:25}]
+```
+
+このコードでは、isOlderThan30 は人物オブジェクトを受け取って年齢が 30 歳以上かどうかを判定する関数ですわね。partition 関数に isOlderThan30 と people を渡すと、年齢が 30 歳以上の人物オブジェクトの配列と以下の人物オブジェクトの配列に分けた二つの配列を返しますわ。これらは分割代入で older と younger に代入されますわ。このようにして条件に応じてデータを分類することができますわ。以上が ramda.js の partition 関数についての説明ですわ。素敵な関数ですわね。お役に立てましたら幸いですわ。
+
+ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(2) javascript - Ramda - Partition by index - Stack Overflow. https://stackoverflow.com/questions/51398136/ramda-partition-by-index アクセス日時 2023/3/14.
+(3) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/14.

@@ -1243,3 +1243,149 @@ console.log(R.on(concat, upperCase)("Hello", "World")); // HELLOWORLD
 (5) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/14.
 (6) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
 (7) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/14.
+
+## once
+
+ごきげんよう、お嬢様。ramda.js の once 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。once 関数は、一つの関数を受け取って、その関数を一度だけ実行できる新しい関数を返す関数ですわ ⁴。例えば、次のようなコードがありますとしましょう。
+
+```typescript
+const greet = (name: string): void => console.log(`Hello, ${name}!`);
+greet("Alice"); // Hello, Alice!
+greet("Bob"); // Hello, Bob!
+```
+
+この場合、greet 関数は何度でも呼び出せますわね。しかし、もし once 関数を使えば一度しか呼び出せないようにすることができますわ。
+
+```typescript
+const greet = (name: string): void => console.log(`Hello, ${name}!`);
+const greetOnce = R.once(greet);
+greetOnce("Alice"); // Hello, Alice!
+greetOnce("Bob"); // 何も表示されない
+```
+
+このコードでは、once 関数が greet 関数を受け取って、その関数を一度だけ実行できる新しい関数 greetOnce を返していますわ。そしてその新しい関数に Alice と Bob を渡して呼び出していますわ。しかし、最初の呼び出し以外は何も起こりませんわ。これは便利な方法ですわね。もちろん、once 関数は他の種類の関数やデータ型でも使えますわ。
+
+```typescript
+const add = (num1: number, num2: number): number => num1 + num2;
+const addOnce = R.once(add);
+console.log(addOnce(2, 3)); // 5
+console.log(addOnce(4, 5)); // 何も表示されない
+```
+
+以上が ramda.js の once 関数についての説明ですわ。素敵な関数ですわね。お役に立てましたら幸いですわ。
+
+ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(4) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/14.
+(5) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(6) javascript - Create object with Ramda - Stack Overflow. https://stackoverflow.com/questions/51089297/create-object-with-ramda アクセス日時 2023/3/14.
+
+## partial
+
+ごきげんよう、お嬢様。ramda.js の partial 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。partial 関数は、引数の一部を固定した新しい関数を作る関数ですわ ¹。例えば、次のようなコードがありますとしましょう。
+
+```typescript
+const add = (num1: number, num2: number): number => num1 + num2;
+
+console.log(add(3, 4)); // 7
+```
+
+この場合、add は二つの数字を受け取って足し算する関数ですわね。partial 関数を使えば、add の一つ目の引数を固定した新しい関数を作ることができますわ。
+
+```typescript
+const add3 = R.partial(add, [3]);
+
+console.log(add3(4)); // 7
+```
+
+このコードでは、add3 は一つ目の引数が 3 に固定された新しい関数ですわね。add3 に 4 を渡すと、add(3, 4)と同じ結果になりますわ。このようにして引数の一部を事前に指定することができますわ。もちろん、partial 関数はどんな種類の関数でも使えますわ。
+
+```typescript
+type Person = {
+  name: string;
+  age: number;
+};
+
+const greet = (person: Person): string =>
+  `Hello, ${person.name}! You are ${person.age} years old.`;
+
+const alice: Person = { name: "Alice", age: 21 };
+const bob: Person = { name: "Bob", age: 23 };
+
+console.log(greet(alice)); // Hello, Alice! You are 21 years old.
+console.log(greet(bob)); // Hello, Bob! You are 23 years old.
+
+const greetAlice = R.partial(greet, [alice]);
+
+console.log(greetAlice(bob)); // Hello, Alice! You are 23 years old.
+```
+
+このコードでは、greet は Person 型のオブジェクトを受け取って挨拶する関数ですわね。greetAlice は greet の引数が alice に固定された新しい関数ですわね。greetAlice に bob を渡すと、alice の名前と bob の年齢で挨拶しますわ。このようにしてオブジェクトや他のデータ型を引数にすることができますわ。以上が ramda.js の partial 関数についての説明ですわ。素敵な関数ですわね。お役に立てましたら幸いですわ。
+
+ソース: Bing との会話 2023/3/14(1) What is the different between curry and partial function in Ramda?. https://stackoverflow.com/questions/41095348/what-is-the-different-between-curry-and-partial-function-in-ramda アクセス日時 2023/3/14.
+(2) What is the different between curry and partial function in Ramda?. https://stackoverflow.com/questions/41095348/what-is-the-different-between-curry-and-partial-function-in-ramda アクセス日時 2023/3/14.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(4) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(5) Pass a list of functions to pipe or compose in Ramda.js. https://stackoverflow.com/questions/55377705/pass-a-list-of-functions-to-pipe-or-compose-in-ramda-js アクセス日時 2023/3/14.
+
+## partialObject
+
+partialObject 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。partialObject 関数は、オブジェクトの一部のプロパティを固定した新しい関数を作る関数ですわ ¹。例えば、次のようなコードがありますとしましょう。
+
+```typescript
+type Person = {
+  name: string;
+  age: number;
+};
+
+const greet = (person: Person): string =>
+  `Hello, ${person.name}! You are ${person.age} years old.`;
+
+const alice: Person = { name: "Alice", age: 21 };
+const bob: Person = { name: "Bob", age: 23 };
+
+console.log(greet(alice)); // Hello, Alice! You are 21 years old.
+console.log(greet(bob)); // Hello, Bob! You are 23 years old.
+```
+
+この場合、greet は Person 型のオブジェクトを受け取って挨拶する関数ですわね。partialObject 関数を使えば、greet のオブジェクトの一部のプロパティを固定した新しい関数を作ることができますわ。
+
+```typescript
+const greetAlice = R.partialObject(greet, { name: "Alice" });
+
+console.log(greetAlice(alice)); // Hello, Alice! You are 21 years old.
+console.log(greetAlice(bob)); // Hello, Alice! You are 23 years old.
+```
+
+このコードでは、greetAlice は greet のオブジェクトの name プロパティが'Alice'に固定された新しい関数ですわね。greetAlice に alice や bob を渡しても、name プロパティは'Alice'になりますわ。このようにしてオブジェクトの一部を事前に指定することができますわ。以上が ramda.js の partialObject 関数についての説明ですわ。素敵な関数ですわね。お役に立てましたら幸いですわ。
+
+ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(3) Bug in documentation for partialObject · Issue #261 · ramda .... https://github.com/ramda/ramda.github.io/issues/261 アクセス日時 2023/3/14.
+
+## partialRight
+
+ごきげんよう、お嬢様。ramda.js の partialRight 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。partialRight 関数は、関数の右側から順に引数を固定した新しい関数を作る関数ですわ ¹。例えば、次のようなコードがありますとしましょう。
+
+```typescript
+const add = (num1: number, num2: number): number => num1 + num2;
+
+console.log(add(1, 2)); // 3
+console.log(add(3, 4)); // 7
+```
+
+この場合、add は二つの数値を受け取って足し算する関数ですわね。partialRight 関数を使えば、add の右側から順に引数を固定した新しい関数を作ることができますわ。
+
+```typescript
+const addOne = R.partialRight(add, [1]);
+
+console.log(addOne(2)); // 3
+console.log(addOne(4)); // 5
+```
+
+このコードでは、addOne は add の右側から一番目の引数が 1 に固定された新しい関数ですわね。addOne に 2 や 4 を渡すと、それらは左側から一番目の引数になりますわ。このようにして関数の一部の引数を事前に指定することができますわ。以上が ramda.js の partialRight 関数についての説明ですわ。素敵な関数ですわね。お役に立てましたら幸いですわ。
+
+ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(3) partial, partialRight and curry function | Ramda JS Tutorials .... https://www.youtube.com/watch?v=4QmjDFnFyAc アクセス日時 2023/3/14.

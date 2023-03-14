@@ -1262,34 +1262,6 @@ console.log(modifyFriendName); // {name: "Alice", age: 25, friends: [{name: "BOB
 (2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
 (3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
 
-## objOf
-
-ごきげんよう、お嬢様。ramda.js の objOf 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。objOf 関数は、キーと値を引数に取り、そのキーと値からなるオブジェクトを返す関数ですわ。例えば、objOf('name', 'Alice')とすると、{name: 'Alice'}というオブジェクトが返ってきますわ。この関数は、カリー化されているので、一つの引数だけを渡して部分適用することもできますわ。例えば、objOf('age')とすると、年齢を値に取るオブジェクトを作る関数が返ってきますわ。これは、他の関数と組み合わせて使うことで便利ですわ。
-
-```typescript
-// objOf 関数の型定義
-const objOf = <K extends string, V>(key: K, value: V): { [P in K]: V } => ({
-  [key]: value,
-});
-
-// キーと値を渡してオブジェクトを作る
-const person = objOf("name", "Alice");
-console.log(person); // {name: 'Alice'} お嬢様のお名前ですわね
-
-// 一つの引数だけを渡して部分適用する
-const makeAgeObj = objOf("age");
-console.log(makeAgeObj(18)); // {age: 18} お嬢様はまだ若いですわ
-
-// map 関数などと組み合わせて使う
-const names = ["Alice", "Bob", "Charlie"];
-const makeNameObj = objOf("name");
-console.log(names.map(makeNameObj)); // [{name: 'Alice'}, {name: 'Bob'}, {name: 'Charlie'}] お嬢様以外にも名前がありますわ
-```
-
-ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
-(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
-(3) javascript - Create object with Ramda - Stack Overflow. https://stackoverflow.com/questions/51089297/create-object-with-ramda アクセス日時 2023/3/14.
-
 ## omit
 
 ごきげんよう、お嬢様。ramda.js の omit 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。omit 関数は、オブジェクトから指定したプロパティを除外した新しいオブジェクトを返す関数ですわ ⁵。例えば、次のようなコードがありますとしましょう。
@@ -1326,3 +1298,134 @@ console.log(R.omit(["age", "address.zipCode"], person)); // {name: 'Alice', gend
 (4) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
 (5) eval - How can I use Ramda's omit() function on a deeply .... https://stackoverflow.com/questions/52569027/how-can-i-use-ramdas-omit-function-on-a-deeply-nested-object-member-in-javasc アクセス日時 2023/3/14.
 (6) ramda.omit JavaScript and Node.js code examples | Tabnine. https://www.tabnine.com/code/javascript/functions/ramda/omit アクセス日時 2023/3/14.
+
+## over
+
+ごきげんよう、お嬢様。ramda.js の over 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。over 関数は、オブジェクトや配列の特定の要素に対して関数を適用して新しいオブジェクトや配列を返す関数ですわ ²。例えば、次のようなコードがありますとしましょう。
+
+```typescript
+type Person = {
+  name: string;
+  age: number;
+};
+
+const alice: Person = { name: "Alice", age: 21 };
+const bob: Person = { name: "Bob", age: 23 };
+
+const incAge = (age: number): number => age + 1;
+const decAge = (age: number): number => age - 1;
+
+console.log(R.over(R.lensProp("age"), incAge, alice)); // { name: 'Alice', age: 22 }
+console.log(R.over(R.lensProp("age"), decAge, bob)); // { name: 'Bob', age: 22 }
+```
+
+この場合、alice と bob は Person 型のオブジェクトですわね。そして incAge と decAge は年齢を増減する関数ですわ。over 関数を使えば、それらのオブジェクトの age プロパティに対して incAge や decAge を適用して新しいオブジェクトを作ることができますわ。このようにしてオブジェクトや配列の一部分だけ変更したり、加工したりすることができますわ。もちろん、over 関数は他の種類のレンズやデータ型でも使えますわ。
+
+```typescript
+type Point = [number, number];
+
+const origin: Point = [0, 0];
+const pointA: Point = [1, 2];
+const pointB: Point = [3, 4];
+
+const doubleX = (x:number):number => x \* 2;
+const halfY = (y:number):number => y / 2;
+
+console.log(R.over(R.lensIndex(0), doubleX, origin)); // [0, 0]
+console.log(R.over(R.lensIndex(0), doubleX, pointA)); // [2, 2]
+console.log(R.over(R.lensIndex(1), halfY, pointB)); // [3, 2]
+```
+
+このコードでは、origin と pointA と pointB は Point 型の配列ですわね。そして doubleX と halfY は座標を倍増や半減する関数ですわ。over 関数を使えば、それらの配列のインデックスに対応する要素に対して doubleX や halfY を適用して新しい配列を作ることができますわ。このようにしてレンズを使ってデータ構造にアクセスしたり変更したりすることができますわ。以上が ramda.js の over 関数についての説明ですわ。素敵な関数ですわね。お役に立てましたら幸いですわ。
+
+ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(3) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/14.
+(4) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(5) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/14.
+(6) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+
+## path
+
+ごきげんよう、お嬢様。ramda.js の path 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。path 関数は、オブジェクトや配列のネストされたプロパティにアクセスするための関数ですわ ¹。例えば、次のようなコードがありますとしましょう。
+
+```typescript
+const person: { name: string; address: { city: string; zipCode: number } } = {
+  name: "Alice",
+  address: {
+    city: "Tokyo",
+    zipCode: 1000000,
+  },
+};
+
+console.log(person); // {name:"Alice",address:{city:"Tokyo",zipCode:1000000}}
+```
+
+この場合、person は名前と住所を持つオブジェクトですわね。住所はさらに市と郵便番号を持つオブジェクトですわ。path 関数を使えば、person のネストされたプロパティに簡単にアクセスできますわ。
+
+```typescript
+const getCity = R.path(["address", "city"]);
+
+const city = getCity(person);
+
+console.log(city); // Tokyo
+```
+
+このコードでは、getCity は path 関数に["address", "city"]という配列を渡して作られた関数ですわね。この配列は person オブジェクトの中で city プロパティに到達するためのパスを表していますわ。getCity に person を渡すと、そのパスに沿って city プロパティの値を返しますわ。これで person.address.city と書くよりも簡潔になりますわね。また、path 関数は存在しないプロパティにアクセスしようとした場合でもエラーを起こさずに undefined を返しますわ。
+
+```typescript
+const getCountry = R.path(["address", "country"]);
+
+const country = getCountry(person);
+
+console.log(country); // undefined
+```
+
+このコードでは、getCountry は path 関数に["address", "country"]という配列を渡して作られた関数ですわね。しかし person オブジェクトには country プロパティがありませんから、getCountry(person)は undefined を返しますわ。これでエラー処理が楽になりますわね。以上が ramda.js の path 関数についての説明ですわ。素敵な関数ですわね。お役に立てましたら幸いですわ。
+
+ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+(3) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/14.
+
+## objOf
+
+ごきげんよう、お嬢様。ramda.js の obfOf 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。obfOf 関数は、オブジェクトのキーと値を入れ替えた新しいオブジェクトを作るための関数ですわ ³。例えば、次のようなコードがありますとしましょう。
+
+```typescript
+const person: { name: string; age: number } = {
+  name: "Alice",
+  age: 25,
+};
+
+console.log(person); // {name:"Alice",age:25}
+```
+
+この場合、person は名前と年齢を持つオブジェクトですわね。obfOf 関数を使えば、person のキーと値を入れ替えた新しいオブジェクトを作ることができますわ。
+
+```typescript
+const flippedPerson = R.invertObj(person);
+
+console.log(flippedPerson); // {"Alice":"name","25":"age"}
+```
+
+このコードでは、flippedPerson は obfOf 関数に person という引数を渡して作られたオブジェクトですわね。このオブジェクトは person のキーと値が入れ替わっていますわ。これで person のプロパティにアクセスする方法が変わりますわね。例えば、person.name は"Alice"ですが、flippedPerson["Alice"]は"name"ですわ。また、obfOf 関数は同じ値を持つキーが複数ある場合は最後に出現したキーだけを残しますから ¹、注意して使ってくださいませ。
+
+```typescript
+const colors: { red: string; green: string; blue: string } = {
+  red: "apple",
+  green: "pear",
+  blue: "apple",
+};
+
+console.log(colors); // {red:"apple",green:"pear",blue:"apple"}
+
+const flippedColors = R.invertObj(colors);
+
+console.log(flippedColors); // {"apple":"blue","pear":"green"}
+```
+
+このコードでは、colors は色と果物の対応表ですが、red と blue の値が同じですわね。obfOf 関数に colors を渡すと、flippedColors は果物と色の対応表になりますが、"apple"に対応する色は blue だけになりますわ。red が消えてしまったのですから ¹。以上が ramda.js の obfOf 関数についての説明ですわ。素敵な関数ですわね。お役に立てましたら幸いですわ。
+
+ソース: Bing との会話 2023/3/14(1) javascript - Create object with Ramda - Stack Overflow. https://stackoverflow.com/questions/51089297/create-object-with-ramda アクセス日時 2023/3/14.
+(2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
