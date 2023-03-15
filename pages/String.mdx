@@ -61,3 +61,43 @@ console.log(words); // [“Ramda”, “TypeScript”]
 このように、match 関数は文字列に対して正規表現を使ってパターンマッチングを行うことができますわ。2
 
 ramda.js の match 関数について、ご理解いただけましたでしょうか？もしもっと詳しく知りたいことがありましたら、どうぞお申し付けくださいませ。🙋‍♀️
+
+## replace
+
+ごきげんよう、お嬢様。ramda.js の replace 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。replace 関数は、文字列や正規表現にマッチする部分を別の文字列に置き換える関数ですわ。例えば、以下のように使えますわ。
+
+```typescript
+// replace 関数の型は以下の通りですわ。
+// replace: (pattern: string | RegExp, replacement: string) => (str: string) => string
+import \* as R from 'ramda';
+
+// "Hello"という文字列を"Goodbye"に置き換えますわ。
+const goodbye = R.replace("Hello", "Goodbye"); // (str: string) => string
+
+// console.log で結果を確認しますわ。
+console.log(goodbye); // [Function]と表示されますわ。
+
+// "Hello, world!"という文字列に対して goodbye 関数を適用しますわ。
+const result = goodbye("Hello, world!"); // "Goodbye, world!"
+
+// console.log で結果を確認しますわ。
+console.log(result); // "Goodbye, world!"と表示されますわ。
+
+// /o/g という正規表現（o が複数回出現する場合）にマッチする部分を"_"に置き換えますわ。
+const star = R.replace(/o/g, "_"); // (str: string) => string
+
+// console.log で結果を確認しますわ。
+console.log(star); // [Function]と表示されますわ。
+
+// "foo bar baz"という文字列に対して star 関数を適用しますわ。
+const result2 = star("foo bar baz"); // "f\*\* bar baz"
+
+// console.log で結果を確認しますわ。
+console.log(result2); // "f\*\* bar baz"と表示されますわ。
+```
+
+これで replace 関数の使い方が少しでもお分かりになったでしょうか？素敵な関数ですわね。もっと詳しく知りたい場合は ¹ や ³ などをご覧になってくださいませ。では、またお会いしましょう。さようなら 👋
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) Bracket syntax in Ramda replace function - Stack Overflow. https://stackoverflow.com/questions/75733128/bracket-syntax-in-ramda-replace-function アクセス日時 2023/3/15.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.

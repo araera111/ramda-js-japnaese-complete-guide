@@ -1806,3 +1806,47 @@ props 関数は、オブジェクトから必要なプロパティだけを取�
 (5) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
 (6) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/15.
 (7) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+
+## set
+
+ごきげんよう、お嬢様。ramda.js の set 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。set 関数は、オブジェクトのプロパティを指定したパスに沿って更新する関数ですわ。パスは配列か文字列で指定できますわ。ramda.js では、オブジェクトの不変性を保つために、新しいオブジェクトを返しますわ。
+
+では、具体例を見てみましょう。
+
+```typescript
+// set 関数のインポート
+import { set } from "ramda";
+
+// オブジェクトの定義
+const person = {
+  name: "Alice",
+  age: 25,
+  address: {
+    city: "Tokyo",
+    zip: "100-0000",
+  },
+};
+
+// set 関数で name プロパティを更新する
+const newName = set("name", "Bob", person);
+
+// 結果を確認する
+console.log(newName); // {name: "Bob", age: 25, address: {city: "Tokyo", zip: "100-0000"}}
+console.log(person); // {name: "Alice", age: 25, address: {city: "Tokyo", zip: "100-0000"}}
+
+// set 関数で address.city プロパティを更新する
+const newCity = set(["address", "city"], "Osaka", person);
+
+// 結果を確認する
+console.log(newCity); // {name: "Alice", age: 25, address: {city: "Osaka", zip: "100-0000"}}
+console.log(person); // {name: "Alice", age: 25, address: {city: "Tokyo", zip:"100-0000"}}
+```
+
+このようにして、set 関数はオブジェクトのプロパティを簡単に更新することができますわ。これは、オブジェクトの状態を管理するために役立ちますわね。素敵な関数ですわ。
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(3) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/15.
+(4) javascript - How to imitate lodash.set with Ramda - Stack .... https://stackoverflow.com/questions/59965261/how-to-imitate-lodash-set-with-ramda アクセス日時 2023/3/15.
+(5) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(6) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.

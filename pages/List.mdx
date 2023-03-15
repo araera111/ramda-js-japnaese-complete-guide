@@ -2416,7 +2416,8 @@ reduceWhile 関数は、条件によって反復処理を制御したいとき�
 (3) Ramda Documentation. https://ramdajs.com/0.19.0/docs/ アクセス日時 2023/3/15.
 
 ## reject
-ごきげんよう、お嬢様。ramda.jsのreject関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。reject関数は、filter関数と似ていますが、条件関数が偽を返す要素だけを残す関数ですわ。例えば、こんな感じですわ。
+
+ごきげんよう、お嬢様。ramda.js の reject 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。reject 関数は、filter 関数と似ていますが、条件関数が偽を返す要素だけを残す関数ですわ。例えば、こんな感じですわ。
 
 ```typescript
 // reject関数を使って、配列の中から偶数だけを取り除きますわ
@@ -2427,8 +2428,308 @@ console.log(removeEven(numbers)); // [1, 3, 5]
 // 配列の要素は左から右にチェックされましたが、偶数だったら残されませんでしたわ
 ```
 
-reject関数は、条件によって配列やオブジェクトから要素を除外したいときに便利ですわ。また、ramda.jsの方がJavaScriptのArray.prototype.filterメソッドよりもより柔軟で関数型プログラミングに適していますわ。素敵な関数ですわね。以上がreject関数の説明ですわ。ご理解いただけましたかしら？
+reject 関数は、条件によって配列やオブジェクトから要素を除外したいときに便利ですわ。また、ramda.js の方が JavaScript の Array.prototype.filter メソッドよりもより柔軟で関数型プログラミングに適していますわ。素敵な関数ですわね。以上が reject 関数の説明ですわ。ご理解いただけましたかしら？
 
 ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
 (2) javascript - Ramda: Rejects from predicate array - Stack Overflow. https://stackoverflow.com/questions/64651013/ramda-rejects-from-predicate-array アクセス日時 2023/3/15.
-(3) 【Ramda.js / Folktale】JavaScriptで (なるべく) 関数型に .... https://qiita.com/Guvalif/items/a4fe01a4c069836db4d8 アクセス日時 2023/3/15.
+(3) 【Ramda.js / Folktale】JavaScript で (なるべく) 関数型に .... https://qiita.com/Guvalif/items/a4fe01a4c069836db4d8 アクセス日時 2023/3/15.
+
+## remove
+
+ごきげんよう、お嬢様。ramda.js の remove 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。ramda.js は関数型プログラミングのためのライブラリですわ。remove 関数は、配列から指定した位置と個数の要素を取り除いた新しい配列を返す関数ですわ。例えば、以下のように使えますわ。
+
+```typescript
+// remove関数の型は以下の通りですわ。
+// remove: (start: number, count: number, list: any[]) => any[]
+import * as R from "ramda";
+
+// 配列から3番目から2個分の要素を取り除きますわ。
+const numbers = [1, 2, 3, 4, 5, 6];
+const removed = R.remove(2, 2, numbers); // [1, 2, 5, 6]
+
+// console.logで結果を確認しますわ。
+console.log(removed); // [1, 2, 5, 6]と表示されますわ。
+
+// 配列から空のオブジェクトを取り除きますわ。
+const objects = [{ a: 1 }, {}, { b: 2 }, {}, { c: 3 }];
+const notEmpty = R.complement(R.isEmpty); // 空でないことを判定する関数ですわ。
+const removedEmpty = R.filter(notEmpty, objects); // [{a: 1}, {b: 2}, {c: 3}]
+
+// console.logで結果を確認しますわ。
+console.log(removedEmpty); // [{a: 1}, {b: 2}, {c: 3}]と表示されますわ。
+```
+
+これで remove 関数の使い方が少しでもお分かりになったでしょうか？素敵な関数ですわね。もっと詳しく知りたい場合は ⁴ や ⁵ などをご覧になってくださいませ。では、またお会いしましょう。さようなら 👋
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) How to use Ramda remove to remove empty object from Array .... https://stackoverflow.com/questions/42122172/how-to-use-ramda-remove-to-remove-empty-object-from-array-of-objects アクセス日時 2023/3/15.
+(3) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(4) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(5) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/15.
+(6) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+
+## repeat
+
+ごきげんよう、お嬢様。ramda.js の repeat 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。repeat 関数は、指定した値を指定した回数だけ繰り返した新しい配列を返す関数ですわ。例えば、以下のように使えますわ。
+
+```typescript
+// repeat 関数の型は以下の通りですわ。
+// repeat: <T>(value: T, n: number) => T[]
+import \* as R from 'ramda';
+
+// "Hello"という文字列を 5 回繰り返しますわ。
+const hello = R.repeat("Hello", 5); // ["Hello", "Hello", "Hello", "Hello", "Hello"]
+
+// console.log で結果を確認しますわ。
+console.log(hello); // ["Hello", "Hello", "Hello", "Hello", "Hello"]と表示されますわ。
+
+// 0 という数字を 10 回繰り返しますわ。
+const zero = R.repeat(0, 10); // [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+// console.log で結果を確認しますわ。
+console.log(zero); // [0, 0, 0, 0, 0, 0, 0, 0, 0 ,]と表示されますわ。
+
+// {name: "Alice"}というオブジェクトを 3 回繰り返しますわ。
+const alice = R.repeat({name: "Alice"}, 3); // [{name: "Alice"}, {name: "Alice"}, {name: "Alice"}]
+
+// console.log で結果を確認しますわ。
+console.log(alice); // [{name: "Alice"}, {name: "Alice"}, {name: "Alice"}]と表示されますわ。
+```
+
+これで repeat 関数の使い方が少しでもお分かりになったでしょうか？素敵な関数ですわね。もっと詳しく知りたい場合は ¹ や ² などをご覧になってくださいませ。では、またお会いしましょう。さようなら 👋
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) javascript - Repeat value infinitely Ramda - Stack Overflow. https://stackoverflow.com/questions/75022982/repeat-value-infinitely-ramda アクセス日時 2023/3/15.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+
+## reverse
+
+ごきげんよう、お嬢様。ramda.js の reverse 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。reverse 関数は、配列や文字列の要素を逆順に並べ替える関数ですわ。例えば、以下のように使えますわ。
+
+```typescript
+// reverse 関数の型は以下の通りですわ。
+// reverse: <T>(list: T[]) => T[]
+import \* as R from 'ramda';
+
+// [1, 2, 3]という配列を逆順にしますわ。
+const reversedArray = R.reverse([1, 2, 3]); // [3, 2, 1]
+
+// console.log で結果を確認しますわ。
+console.log(reversedArray); // [3, 2, 1]と表示されますわ。
+
+// "abc"という文字列を逆順にしますわ。
+const reversedString = R.reverse("abc"); // "cba"
+
+// console.log で結果を確認しますわ。
+console.log(reversedString); // "cba"と表示されますわ。
+```
+
+これで reverse 関数の使い方が少しでもお分かりになったでしょうか？素敵な関数ですわね。もっと詳しく知りたい場合は ¹ や ³ などをご覧になってくださいませ。では、またお会いしましょう。さようなら 👋
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/15.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+
+## scan
+
+ごきげんよう、お嬢様。ramda.js の scan 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。scan 関数は、配列の要素に対して累積的に関数を適用し、その結果を配列として返す関数ですわ。例えば、以下のように使えますわ。
+
+```typescript
+// scan 関数の型は以下の通りですわ。
+// scan: <T, U>(fn: (acc: U, elem: T) => U, acc: U, list: T[]) => U[]
+import \* as R from 'ramda';
+
+// [1, 2, 3]という配列に対して加算を累積的に適用しますわ。
+const scannedArray = R.scan((acc:number, elem:number):number => acc + elem, 0, [1, 2, 3]); // [0, 1, 3, 6]
+
+// console.log で結果を確認しますわ。
+console.log(scannedArray); // [0, 1, 3, 6]と表示されますわ。
+
+// "abc"という文字列に対して連結を累積的に適用しますわ。
+const scannedString = R.scan((acc:string ,elem:string):string => acc + elem,"", "abc"); // ["", "a", "ab", "abc"]
+
+// console.log で結果を確認しますわ。
+console.log(scannedString); // ["", "a", "ab", "abc"]と表示されますわ。
+```
+
+これで scan 関数の使い方が少しでもお分かりになったでしょうか？素敵な関数ですわね。もっと詳しく知りたい場合は ¹ や ³ などをご覧になってくださいませ。では、またお会いしましょう。さようなら 👋
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/15.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+
+## sequence
+
+ごきげんよう、お嬢様。ramda.js の sequence 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。sequence 関数は、アプリカティブファンクターの配列を受け取って、その要素を入れ替えた新しい配列を返す関数ですわ。アプリカティブファンクターとは、値と適用する関数を持つオブジェクトのことですの。ramda.js では、Maybe や Either などがアプリカティブファンクターになりますわ。
+
+では、具体例を見てみましょう。
+
+```typescript
+// Maybe 型の定義
+type Maybe<T> = {
+  value: T | null;
+  map: (f: (x: T) => any) => Maybe<any>;
+  ap: (m: Maybe<any>) => Maybe<any>;
+};
+
+// Maybe 型のコンストラクタ
+const maybe = <T>(value: T | null): Maybe<T> => ({
+  value,
+  map(f) {
+    return this.value ? maybe(f(this.value)) : maybe(null);
+  },
+  ap(m) {
+    return this.value ? m.map(this.value) : maybe(null);
+  },
+});
+
+// add 関数の定義
+const add = (num1: number, num2: number): number => num1 + num2;
+
+// sequence 関数のインポート
+import { sequence } from "ramda";
+
+// アプリカティブファンクターの配列を作成
+const arr = [maybe(10), maybe(add), maybe(20)];
+
+// sequence 関数で要素を入れ替える
+const result = sequence(maybe, arr);
+
+// 結果を確認する
+console.log(result); // [Maybe(10), Maybe(20), Maybe(add)]
+console.log(result[2].ap(result[1]).ap(result[0])); // Maybe(30)
+```
+
+このようにして、sequence 関数はアプリカティブファンクターの配列から新しい配列を作成することができますわ。これは、複雑な処理を簡単に書くために役立ちますわね。素敵な関数ですわ。
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(3) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/15.
+(4) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(5) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/15.
+(6) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(7) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(8) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(9) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/15.
+
+## List
+
+ごきげんよう。ramda.js の slice 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。slice 関数は、配列や文字列の一部を切り出して新しい配列や文字列を作る関数ですわ。第一引数には切り出しの開始位置、第二引数には切り出しの終了位置（その位置は含まない）、第三引数には切り出す対象となる配列や文字列を指定しますわ。
+
+例えば
+
+```typescript
+// slice 関数のインポート
+import { slice } from "ramda";
+
+// 配列の定義
+const numbers: number[] = [1, 2, 3, 4, 5];
+
+// 配列から 2 番目から 4 番目まで（4 番目は含まない）切り出す
+const slicedNumbers: number[] = slice(1, 3, numbers);
+
+// 結果を確認する
+console.log(slicedNumbers); // [2, 3]
+```
+
+このようにして、配列から一部を切り出して新しい配列を作ることができますわ。slice 関数は不変性を保ちますので、元の配列は変更されませんわ。
+
+また
+
+```typescript
+// 文字列の定義
+const name: string = "Alice";
+
+// 文字列から1番目から3番目まで（3番目は含まない）切り出す
+const slicedName: string = slice(0, 2, name);
+
+// 結果を確認する
+console.log(slicedName); // "Al"
+```
+
+このようにして、文字列から一部を切り出して新しい文字列を作ることもできますわ。slice 関数はカリー化されていますので、引数が足りなければ部分適用された関数が返されますわ。
+
+例えば
+
+```typescript
+// 配列から先頭2つだけ取る関数を作る
+const takeTwo: (list: any[]) => any[] = slice(0, 2);
+
+// 文字列から先頭2つだけ取る関数も同じく作れる
+const takeTwoChars: (str: string) => string = slice(0, 2);
+
+// 結果を確認する
+console.log(takeTwo(numbers)); // [1, 2]
+console.log(takeTwoChars(name)); // "Al"
+```
+
+このようにして、slice 関数は汎用的に使える素敵な関数ですわ。お役に立てましたら幸いですわ。
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) Ramda.js - Slice Array's Inner Values - Stack Overflow. https://stackoverflow.com/questions/35924229/ramda-js-slice-arrays-inner-values アクセス日時 2023/3/15.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+
+## sort
+
+ごきげんよう、お嬢様。ramda.js の sort 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげますわ。ramda.js は関数型プログラミングをサポートする JavaScript ライブラリですので、sort 関数も関数を引数にとって配列をソートする高階関数ですわ。例えば、次のような配列があったとしますわ。
+
+```typescript
+// 年齢と名前のオブジェクトの配列
+const people: { age: number; name: string }[] = [
+  { age: 21, name: "Alice" },
+  { age: 23, name: "Bob" },
+  { age: 22, name: "Charlie" },
+];
+```
+
+この配列を年齢順にソートしたい場合は、sort 関数に年齢を取り出す関数（R.prop("age")）と比較する関数（R.ascend や R.descend）を渡してあげれば良いですわ。
+
+```typescript
+// ramda.jsのインポート
+import * as R from "ramda";
+
+// 年齢順にソートする関数
+const sortByAge = R.sort(R.ascend(R.prop("age")));
+
+// 配列をソートして新しい配列にする
+const sortedByAge = sortByAge(people);
+
+// 結果を確認する
+console.log(sortedByAge);
+// [
+//   { age: 21, name: 'Alice' },
+//   { age: 22, name: 'Charlie' },
+//   { age: 23, name: 'Bob' }
+// ]
+```
+
+名前順にソートしたい場合は、同じように名前を取り出す関数（R.prop("name")）と比較する関数（R.ascend や R.descend）を渡してあげれば良いですわ。
+
+```typescript
+// 名前順にソートする関数
+const sortByName = R.sort(R.descend(R.prop("name")));
+
+// 配列をソートして新しい配列にする
+const sortedByName = sortByName(people);
+
+// 結果を確認する
+console.log(sortedByName);
+// [
+//   { age: 23, name: 'Bob' },
+//   { age: 22, name: 'Charlie' },
+//   { age: 21, name: 'Alice' }
+// ]
+```
+
+このように、sort 関数は自由にソート条件を指定できる素敵な関数ですわ。もちろん、型安全性も保たれていますわ。参考までに、sort 関数の型定義は次のようになっていますわ。
+
+```typescript
+export function sort<T>(fn: (a: T, b: T) => number, list: T[]): T[];
+export function sort<T>(fn: (a: T, b: T) => number): (list: T[]) => T[];
+```
+
+これらの情報は ¹²³ から得られましたわ。ご満足いただけましたかしら?
+
+ソース: Bing との会話 2023/3/15(1) javascript - Sort with ramda - Stack Overflow. https://stackoverflow.com/questions/67030312/sort-with-ramda アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(3) javascript - Ramda sort array of nested object - Stack Overflow. https://stackoverflow.com/questions/60948978/ramda-sort-array-of-nested-object アクセス日時 2023/3/15.
