@@ -174,3 +174,69 @@ console.log(itemsWithStringName);
 ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
 (2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
 (3) Ramda applySpec - keep unmodified props - Stack Overflow. https://stackoverflow.com/questions/65007278/ramda-applyspec-keep-unmodified-props アクセス日時 2023/3/15.
+
+ごきげんよう、お嬢様。ramda.js の type 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。type 関数は、引数の型を文字列で返す関数ですわ。例えば、以下のように使えますわ。
+
+```typescript
+import * as R from "ramda";
+
+const age: number = 25; // 年齢は20歳以上にしておきますわ
+const name: string = "Alice"; // 名前はAliceとしますわ
+const hobbies: string[] = ["reading", "piano", "tennis"]; // 趣味は読書とピアノとテニスですわ
+
+console.log(R.type(age)); // "Number" と表示されますわ
+console.log(R.type(name)); // "String" と表示されますわ
+console.log(R.type(hobbies)); // "Array" と表示されますわ
+```
+
+## type
+
+このように、type 関数はプリミティブ型や配列などの組み込み型を判別するのに便利ですが、カスタム型やジェネリック型などの場合は、"Object" という一般的な文字列しか返しません。例えば、以下のようになります。
+
+```typescript
+interface Person<T> {
+  name: string;
+  age: number;
+  hobbies: T[];
+}
+
+const alice: Person<string> = {
+  name: "Alice",
+  age: 25,
+  hobbies: ["reading", "piano", "tennis"],
+};
+
+console.log(R.type(alice)); // "Object" と表示されますわ
+```
+
+これではあまり役に立ちませんね。そこで、ramda.js では propIs 関数や is 関数などを使って、より詳細な型チェックを行うことができます。propIs 関数は、オブジェクトの特定のプロパティが指定した型かどうかを判定します。is 関数は、引数が指定したコンストラクターから生成されたインスタンスかどうかを判定します。例えば、以下のように使えます。
+
+```typescript
+import * as R from "ramda";
+
+class Animal {
+  constructor(public name: string) {}
+}
+
+class Dog extends Animal {
+  constructor(public name: string, public breed: string) {
+    super(name);
+  }
+}
+
+const snoopy = new Dog("Snoopy", "Beagle"); // Snoopyくんです
+
+console.log(R.propIs(String, "name", snoopy)); // true を表示しますわ。nameプロパティが文字列型であることを確認できました。
+console.log(R.propIs(Number, "age", snoopy)); // false を表示しますわ。ageプロパティが存在しないためです。
+console.log(R.is(Animal, snoopy)); // true を表示しますわ。SnoopyくんがAnimalクラスから生成されたインスタンスであることを確認できました。
+console.log(R.is(Dog, snoopy)); // true を表示しますわ。SnoopyくんがDogクラスから生成されたインスタンスであることも確認できました。
+```
+
+以上が ramda.js の type 関数についての説明です。素敵な関数ですわね。他にも何かご質問ございますか？
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(3) 超強力な関数型プログラミング用ライブラリ Ramda.js を学ぼう #1 .... https://blog.recruit.co.jp/rmp/front-end/post-16249/ アクセス日時 2023/3/15.
+(4) Curry generic function with Ramda and Typescript. https://stackoverflow.com/questions/71379916/curry-generic-function-with-ramda-and-typescript アクセス日時 2023/3/15.
+(5) @types/ramda - npm. https://www.npmjs.com/package/@types/ramda アクセス日時 2023/3/15.
+(6) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.

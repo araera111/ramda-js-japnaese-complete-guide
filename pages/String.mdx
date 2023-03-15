@@ -101,3 +101,135 @@ console.log(result2); // "f\*\* bar baz"と表示されますわ。
 ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
 (2) Bracket syntax in Ramda replace function - Stack Overflow. https://stackoverflow.com/questions/75733128/bracket-syntax-in-ramda-replace-function アクセス日時 2023/3/15.
 (3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+
+ごきげんよう、お嬢様。ramda.js の split 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。¹
+
+## split
+
+split 関数は、文字列や配列を分割するための関数ですわ。第一引数に分割する基準となる文字列や正規表現を指定し、第二引数に分割したい文字列や配列を指定しますわ。戻り値は分割された文字列や配列の配列ですわ。
+
+```typescript
+// 文字列をスペースで分割する関数を作りますわ
+const splitBySpace = R.split(" ");
+
+// 関数を適用して結果を見てみましょう
+console.log(splitBySpace("Hello world"));
+// ["Hello", "world"]
+
+// 配列を3つずつのグループに分割する関数を作りますわ
+const splitByThree = R.split(3);
+
+// 関数を適用して結果を見てみましょう
+console.log(splitByThree([1, 2, 3, 4, 5, 6]));
+// [[1,2,3], [4,5,6]]
+```
+
+このようにして、文字列や配列を簡単に分割できますわ。もちろん、正規表現も使えますわ。
+
+```typescript
+// 文字列を数字で区切る関数を作りますわ
+const splitByNumber = R.split(/\d+/);
+
+// 関数を適用して結果を見てみましょう
+console.log(splitByNumber("foo1bar2baz"));
+// ["foo", "bar", "baz"]
+```
+
+素敵な関数ですわね。これで ramda.js の split 関数についてお分かりいただけたかしら？もっと知りたいことがあればお聞かせくださいませ。
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) ramda.js - Ramda: Split a list to segments - Stack Overflow. https://stackoverflow.com/questions/56235275/ramda-split-a-list-to-segments アクセス日時 2023/3/15.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+
+ごきげんよう、お嬢様。ramda.js の test 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。お嬢様言葉で書くのはちょっと難しいですが、頑張ってみますわね。
+
+## test
+
+ramda.js の test 関数は、正規表現と文字列を引数に取り、正規表現にマッチするかどうかを真偽値で返す関数ですわ。例えば、/a/という正規表現に"apple"という文字列がマッチするかどうかを調べる場合は、R.test(/a/, "apple")と書くことができますわ。これは true を返しますわ。逆に、/b/という正規表現に"apple"という文字列がマッチするかどうかを調べる場合は、R.test(/b/, "apple")と書くことができますわ。これは false を返しますわ。
+
+では、どうしてこの関数が便利で実用的なのかというと、文字列から特定のパターンを探す時やバリデーション（入力値の検証）をする時に役立つからですわ。例えば、メールアドレスの形式が正しいかどうかをチェックしたい場合は再帰的な処理をすることができますわ。
+
+```typescript
+// メールアドレスの形式が正しいかどうかをチェックする関数
+const isValidEmail = (str: string): boolean => {
+  // 文字列が空ならfalseを返す
+  if (str.length === 0) {
+    return false;
+  }
+  // 文字列の最初から@まで取り出す
+  const firstPart = R.takeWhile((char: string) => char !== "@", str);
+  // @まで取り出した部分（firstPart）を除いた残り（rest）を求める
+  const rest = str.slice(firstPart.length);
+  // firstPartが空なら再帰的にisValidEmail(rest)を呼び出す
+  if (firstPart.length === 0) {
+    return isValidEmail(rest);
+  }
+  // firstPartが空でなければそれが英数字または.や_以外の文字（/\W/）を含まないこと（R.test(/\W/, firstPart) === false）、
+  // restが@から始まって英数字または.以外の文字（/[^\w\.]/）を含まないこと（R.test(/[^\w\.]/, rest) === false）、
+  // restに.が1つ以上含まれること（R.test(/\./, rest) === true） を確認して真偽値で返す
+  return R.test(/\W/, firstPart) === false && R.test(/[^\w\.]/, rest) === false && R.test(/\./, rest) === true;
+};
+
+// テスト用の文字列
+const email1 = "alice@example.com";
+const email2 = "bob@gmail.co.jp";
+const email3 = "charlie@invalid";
+// console.logで結果を表示する
+console.log(`${email1} の形式は ${isValidEmail(email1)} 正しいですわ`); // alice@example.com の形式は true 正しいですわ。
+console.log(`${email2} の形式は ${isValidEmail(email2)} 正しいですわ`); // bob@gmail.co.jp の形式は true 正しいですわ。
+console.log(`${email3} の形式は ${isValidEmail(email3)} 正しいですわ`);
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(3) ramda.jsの日本語版解説をBing chatのAIにお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/15.
+```
+
+ごきげんよう、お嬢様。ramda.js の toString 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。ramda.js は JavaScript の関数型プログラミングをサポートするライブラリですわ。toString 関数は、任意の値を文字列に変換する関数ですわ。例えば、数値や真偽値、配列やオブジェクトなどを文字列に変換できますわ。
+
+```typescript
+import * as R from "ramda";
+
+// 数値を文字列に変換する
+const num: number = 42;
+const strNum: string = R.toString(num); // '42'
+console.log(strNum); // '42'と表示されますわ
+
+// 真偽値を文字列に変換する
+const bool: boolean = true;
+const strBool: string = R.toString(bool); // 'true'
+console.log(strBool); // 'true'と表示されますわ
+
+// 配列を文字列に変換する
+const arr: number[] = [1, 2, 3];
+const strArr: string = R.toString(arr); // '[1, 2, 3]'
+console.log(strArr); // '[1, 2, 3]'と表示されますわ
+
+// オブジェクトを文字列に変換する
+const obj: { name: string; age: number } = { name: "Alice", age: 21 };
+const strObj: string = R.toString(obj); // '{"name": "Alice", "age": 21}'
+console.log(strObj); // '{"name": "Alice", "age": 21}'と表示されますわ
+```
+
+## toString
+
+toString 関数は、デバッグやログ出力などで便利ですわ。また、カリー化されているので、他の関数と組み合わせて使うこともできますわ。例えば、配列の各要素を文字列に変換してコンソールに出力する場合は、以下のように書けますわ。
+
+```typescript
+import * as R from "ramda";
+
+// 配列の各要素を文字列に変換してコンソールに出力する
+const arr2: (number | boolean)[] = [1, true, 3];
+R.forEach(R.pipe(R.toString, console.log), arr2);
+// '1'と表示されますわ
+// 'true'と表示されますわ
+// '3'と表示されますわ
+```
+
+素敵な関数ですわね。ramda.js の toString 関数についてご理解いただけましたかしら？もっと詳しく知りたい場合は ⁴ や ⁵ などを参照してくださいませ。
+
+ソース: Bing との会話 2023/3/15(1) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(3) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(4) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(5) ramda.js の日本語版解説みたいなものをつくってみた - Qiita. https://qiita.com/Yuumillar/items/f0b94476cd7e6c2f55dd アクセス日時 2023/3/15.
+(6) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.

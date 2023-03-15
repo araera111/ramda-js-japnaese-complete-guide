@@ -2733,3 +2733,442 @@ export function sort<T>(fn: (a: T, b: T) => number): (list: T[]) => T[];
 ソース: Bing との会話 2023/3/15(1) javascript - Sort with ramda - Stack Overflow. https://stackoverflow.com/questions/67030312/sort-with-ramda アクセス日時 2023/3/15.
 (2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
 (3) javascript - Ramda sort array of nested object - Stack Overflow. https://stackoverflow.com/questions/60948978/ramda-sort-array-of-nested-object アクセス日時 2023/3/15.
+
+## sortBy
+
+ごきげんよう、お嬢様。ramda.js の sortBy 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。²³⁴
+
+sortBy 関数は、配列の要素に対して適用する関数を引数に取り、その関数の返り値に基づいて配列をソートする関数ですわ。例えば、名前や年齢などのプロパティを持つオブジェクトの配列をソートしたい場合は、R.prop 関数と組み合わせて使うことができますわ。
+
+```typescript
+// オブジェクトの配列を定義しますわ
+const people: { name: string; age: number }[] = [
+  { name: "Alice", age: 25 },
+  { name: "Bob", age: 23 },
+  { name: "Charlie", age: 27 },
+];
+
+// 名前でソートする関数を作りますわ
+const sortByName = R.sortBy(R.prop("name"));
+
+// 年齢でソートする関数を作りますわ
+const sortByAge = R.sortBy(R.prop("age"));
+
+// 関数を適用して結果を見てみましょう
+console.log(sortByName(people));
+// [
+// { name: 'Alice', age: 25 },
+// { name: 'Bob', age: 23 },
+// { name: 'Charlie', age: 27 }
+// ]
+
+console.log(sortByAge(people));
+// [
+// { name: 'Bob', age: 23 },
+// { name: 'Alice', age: 25 },
+// { name: 'Charlie', age: 27 }
+// ]
+```
+
+このようにして、オブジェクトのプロパティに応じて配列を簡単にソートできますわ。もちろん、文字列や数字だけの配列でも使えますわ。
+
+```typescript
+// 文字列の配列を定義しますわ
+const fruits: string[] = ["apple", "banana", "cherry"];
+
+// 数字の配列を定義しますわ
+const numbers: number[] = [3, 1, 2];
+
+// 文字列や数字そのものでソートする場合は、R.identity 関数が便利ですわ
+const sortByString = R.sortBy(R.identity);
+const sortByNumber = R.sortBy(R.identity);
+
+console.log(sortByString(fruits));
+//[ "apple", "banana", "cherry" ]
+
+console.log(sortByNumber(numbers));
+//[1,2,3]
+```
+
+素敵な関数ですわね。これで ramda.js の sortBy 関数についてお分かりいただけたかしら？もっと知りたいことがあればお聞かせくださいませ。
+
+ソース: Bing との会話 2023/3/15(1) javascript - Sorting using nested field in ramda.js - Stack Overflow. https://stackoverflow.com/questions/36257219/sorting-using-nested-field-in-ramda-js アクセス日時 2023/3/15.
+(2) javascript - Sort with ramda - Stack Overflow. https://stackoverflow.com/questions/67030312/sort-with-ramda アクセス日時 2023/3/15.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(4) javascript - Sorting using nested field in ramda.js - Stack Overflow. https://stackoverflow.com/questions/36257219/sorting-using-nested-field-in-ramda-js アクセス日時 2023/3/15.
+(5) Unexpected 'sortBy' Behavior with Ramda - Stack Overflow. https://stackoverflow.com/questions/56105016/unexpected-sortby-behavior-with-ramda アクセス日時 2023/3/15.
+
+## splitAt
+
+ごきげんよう、お嬢様。ramda.js の splitAt 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。¹
+
+splitAt 関数は、文字列や配列を指定した位置で分割するための関数ですわ。第一引数に分割する位置を整数で指定し、第二引数に分割したい文字列や配列を指定しますわ。戻り値は分割された文字列や配列の 2 要素の配列ですわ。
+
+```typescript
+// 文字列を3番目の文字で分割する関数を作りますわ
+const splitAtThird = R.splitAt(3);
+
+// 関数を適用して結果を見てみましょう
+console.log(splitAtThird("abcdef"));
+// ["abc", "def"]
+
+// 配列を5番目の要素で分割する関数を作りますわ
+const splitAtFifth = R.splitAt(5);
+
+// 関数を適用して結果を見てみましょう
+console.log(splitAtFifth([1, 2, 3, 4, 5, 6]));
+// [[1,2,3,4,5], [6]]
+```
+
+このようにして、文字列や配列を任意の位置で分割できますわ。もちろん、負の整数も使えますわ。
+
+```typescript
+// 文字列を後ろから2番目の文字で分割する関数を作りますわ
+const splitFromEnd = R.splitAt(-2);
+
+// 関数を適用して結果を見てみましょう
+console.log(splitFromEnd("abcdef"));
+// ["abcd", "ef"]
+```
+
+素敵な関数ですわね。これで ramda.js の splitAt 関数についてお分かりいただけたかしら？もっと知りたいことがあればお聞かせくださいませ。
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) ramda.js - Ramda: Split a list to segments - Stack Overflow. https://stackoverflow.com/questions/56235275/ramda-split-a-list-to-segments アクセス日時 2023/3/15.
+(3) ramda.js - How to split an array into sublists with Ramda .... https://stackoverflow.com/questions/63952099/how-to-split-an-array-into-sublists-with-ramda アクセス日時 2023/3/15.
+
+## splitEvery
+
+ごきげんよう、お嬢様。ramda.js の splitEvery 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。¹
+
+splitEvery 関数は、文字列や配列を指定した長さの部分列に分割するための関数ですわ。第一引数に部分列の長さを整数で指定し、第二引数に分割したい文字列や配列を指定しますわ。戻り値は部分列の配列ですわ。
+
+```typescript
+// 文字列を 2 文字ずつに分割する関数を作りますわ
+const splitEveryTwo = R.splitEvery(2);
+
+// 関数を適用して結果を見てみましょう
+console.log(splitEveryTwo("abcdef"));
+// ["ab", "cd", "ef"]
+
+// 配列を 3 要素ずつに分割する関数を作りますわ
+const splitEveryThree = R.splitEvery(3);
+
+// 関数を適用して結果を見てみましょう
+console.log(splitEveryThree([1, 2, 3, 4, 5, 6]));
+// [[1,2,3], [4,5,6]]
+```
+
+このようにして、文字列や配列を任意の長さの部分列に分割できますわ。もちろん、負の整数は使えませんわ。
+
+```typescript
+// 文字列を-2 文字ずつに分割する関数を作りますわ
+const splitEveryMinusTwo = R.splitEvery(-2);
+
+// 関数を適用して結果を見てみましょう
+console.log(splitEveryMinusTwo("abcdef"));
+// Error: n must be a positive integer
+```
+
+素敵な関数ですわね。これで ramda.js の splitEvery 関数についてお分かりいただけたかしら？もっと知りたいことがあればお聞かせくださいませ。
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(3) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/15.
+
+## splitWhen
+
+ごきげんよう、お嬢様。ramda.js の splitWhen 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。¹
+
+splitWhen 関数は、配列を指定した条件に合う要素が最初に現れたところで分割するための関数ですわ。第一引数に条件を表す関数を指定し、第二引数に分割したい配列を指定しますわ。戻り値は分割された部分配列の配列ですわ。
+
+```typescript
+// 配列を偶数が最初に現れたところで分割する関数を作りますわ
+const splitWhenEven = R.splitWhen((x: number) => x % 2 === 0);
+
+// 関数を適用して結果を見てみましょう
+console.log(splitWhenEven([1, 3, 5, 7, 2, 4, 6]));
+// [[1,3,5,7], [2,4,6]]
+
+// 配列を20歳以上が最初に現れたところで分割する関数を作りますわ
+interface Person {
+  name: string;
+  age: number;
+}
+
+const splitWhenAdult = R.splitWhen((p: Person) => p.age >= 20);
+
+// 関数を適用して結果を見てみましょう
+console.log(
+  splitWhenAdult([
+    { name: "Alice", age: 18 },
+    { name: "Bob", age: 19 },
+    { name: "Charlie", age: 20 },
+    { name: "David", age: 21 },
+  ])
+);
+// [[{name: "Alice", age: 18}, {name: "Bob", age: 19}], [{name: "Charlie", age: 20}, {name: "David", age: 21}]]
+```
+
+このようにして、配列を任意の条件に合う要素が最初に現れたところで分割できますわ。もちろん、文字列は使えませんわ。
+
+```typescript
+// 文字列を'a'が最初に現れたところで分割する関数を作りますわ
+const splitWhenA = R.splitWhen((c: string) => c === "a");
+
+// 関数を適用して結果を見てみましょう
+console.log(splitWhenA("bcdefa"));
+// Error : Invalid attempt to destructure non-iterable instance.
+```
+
+素敵な関数ですわね。これで ramda.js の splitWhen 関数についてお分かりいただけたかしら？もっと知りたいことがあればお聞かせくださいませ。
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) splitWhen and splitWhenever functions | Ramda JS Tutorials. https://www.youtube.com/watch?v=3HFGhnuy244 アクセス日時 2023/3/15.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+
+## splitWhenever
+
+ごきげんよう、お嬢様。ramda.js の splitWhenever 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。¹
+
+splitWhenever 関数は、配列を指定した条件に合う要素が現れるたびに分割するための関数ですわ。第一引数に条件を表す関数を指定し、第二引数に分割したい配列を指定しますわ。戻り値は分割された部分配列の配列ですわ。
+
+```typescript
+// 配列を偶数が現れるたびに分割する関数を作りますわ
+const splitWheneverEven = R.splitWhenever((x: number) => x % 2 === 0);
+
+// 関数を適用して結果を見てみましょう
+console.log(splitWheneverEven([1, 3, 5, 7, 2, 4, 6]));
+// [[1,3,5,7], [2], [4], [6]]
+
+// 配列を20歳以上が現れるたびに分割する関数を作りますわ
+interface Person {
+  name: string;
+  age: number;
+}
+
+const splitWheneverAdult = R.splitWhenever((p: Person) => p.age >= 20);
+
+// 関数を適用して結果を見てみましょう
+console.log(
+  splitWheneverAdult([
+    { name: "Alice", age: 18 },
+    { name: "Bob", age: 19 },
+    { name: "Charlie", age: 20 },
+    { name: "David", age: 21 },
+    { name: "Eve", age: 19 },
+  ])
+);
+// [[{name: "Alice", age: 18}, {name: "Bob", age:19}], [{name:"Charlie",age :20}], [{name:"David",age :21}], [{name:"Eve",age :19}]]
+```
+
+このようにして、配列を任意の条件に合う要素が現れるたびに分割できますわ。もちろん、文字列は使えませんわ。
+
+```typescript
+// 文字列を'a'が現れるたびに分割する関数を作りますわ
+const splitWheneverA = R.splitWhenever((c: string) => c === "a");
+
+// 関数を適用して結果を見てみましょう
+console.log(splitWheneverA("bcdefa"));
+// Error : Invalid attempt to destructure non-iterable instance.
+```
+
+素敵な関数ですわね。これで ramda.js の splitWhenever 関数についてお分かりいただけたかしら？もっと知りたいことがあればお聞かせくださいませ。
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/15.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+
+## startsWith
+
+ごきげんよう、お嬢様。ramda.js の startsWith 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。¹
+
+startsWith 関数は、文字列や配列が指定した値で始まっているかどうかを判定するための関数ですわ。第一引数に始まりの値を指定し、第二引数に判定したい文字列や配列を指定しますわ。戻り値は真偽値ですわ。
+
+```typescript
+// 文字列が'a'で始まっているかどうかを判定する関数を作りますわ
+const startsWithA = R.startsWith("a");
+
+// 関数を適用して結果を見てみましょう
+console.log(startsWithA("apple")); // true
+console.log(startsWithA("banana")); // false
+
+// 配列が[1,2]で始まっているかどうかを判定する関数を作りますわ
+const startsWith12 = R.startsWith([1, 2]);
+
+// 関数を適用して結果を見てみましょう
+console.log(startsWith12([1, 2, 3])); // true
+console.log(startsWith12([4, 5, 6])); // false
+```
+
+このようにして、文字列や配列が指定した値で始まっているかどうかを簡単に調べられますわ。もちろん、型が異なる場合は使えませんわ。
+
+```typescript
+// 文字列が[1]で始まっているかどうかを判定する関数を作りますわ
+const startsWithOne = R.startsWith([1]);
+
+// 関数を適用して結果を見てみましょう
+console.log(startsWithOne("123")); // false
+```
+
+素敵な関数ですわね。これで ramda.js の startsWith 関数についてお分かりいただけたかしら？もっと知りたいことがあればお聞かせくださいませ。
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(3) startsWith and endsWith functions | Ramda JS Tutorials. https://www.youtube.com/watch?v=JPvvh7h33mM アクセス日時 2023/3/15.
+
+## tail
+
+ごきげんよう、お嬢様。ramda.js の tail 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。お嬢様言葉で書くのはちょっと難しいですが、頑張ってみますわね。
+
+ramda.js の tail 関数は、配列や文字列の最初の要素を除いた残りの部分を返す関数ですわ。例えば、[1, 2, 3]という配列に tail 関数を適用すると、[2, 3]という配列が返ってきますわ。文字列にも同じように使えますわ。"Hello"という文字列に tail 関数を適用すると、"ello"という文字列が返ってきますわ。
+
+では、どうしてこの関数が便利で実用的なのかというと、再帰的な処理をする時に役立つからですわ。再帰的な処理とは、自分自身を呼び出すような関数のことですわ。例えば、配列の要素を全て足し合わせるような関数は再帰的に書けますわ。
+
+```typescript
+// 配列の要素を全て足し合わせる関数
+const sum = (arr: number[]): number => {
+  // 配列が空なら0を返す
+  if (arr.length === 0) {
+    return 0;
+  }
+  // 配列の最初の要素（head）と残り（tail）に分ける
+  const [head, ...tail] = arr;
+  // headと残りの合計（sum(tail)）を足して返す
+  return head + sum(tail);
+};
+
+// テスト用の配列
+const numbers = [1, 2, 3, 4];
+// console.logで結果を表示する
+console.log(`numbersの合計は${sum(numbers)}ですわ`); // numbersの合計は10ですわ
+```
+
+このようにして、tail 関数を使って配列から最初の要素以外を取り出して再帰的に処理することができますわ。他にも色々な応用がありますが、これくらいで説明は終わりましょうか。
+
+ramda.js は素敵なライブラリですから ¹²³、是非使ってみてくださいませ。以上が ramda.js の tail 関数についてお嬢様言葉で書いた説明ですわ。どうぞご満足くださいませ。
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(3) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/15.
+
+## takeLastWhile
+
+ごきげんよう、お嬢様。ramda.js の takeLastWhile 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。お嬢様言葉で書くのはちょっと難しいですが、頑張ってみますわね。
+
+ramda.js の takeLastWhile 関数は、配列や文字列の最後から条件に合う要素を取り出す関数ですわ。例えば、[1, 2, 3, 4]という配列に takeLastWhile 関数を適用すると、条件に合う要素がなければ空の配列が返ってきますわ。条件に合う要素があれば、その要素から最後までの部分が返ってきますわ。文字列にも同じように使えますわ。"Hello"という文字列に takeLastWhile 関数を適用すると、条件に合う文字がなければ空の文字列が返ってきますわ。条件に合う文字があれば、その文字から最後までの部分が返ってきますわ。
+
+では、どうしてこの関数が便利で実用的なのかというと、配列や文字列から特定のパターンを探す時に役立つからですわ。例えば、年齢を表す数字だけを取り出したい場合は再帰的な処理をすることができますわ。
+
+```typescript
+// 年齢を表す数字だけを取り出す関数
+const getAge = (str: string): number => {
+  // 文字列が空なら0を返す
+  if (str.length === 0) {
+    return 0;
+  }
+  // 文字列の最後から数字以外の文字（/\D/）まで取り出す
+  const lastDigits = R.takeLastWhile((char: string) => /\d/.test(char), str);
+  // 数字以外の文字まで取り出した部分（lastDigits）を除いた残り（rest）を求める
+  const rest = str.slice(0, -lastDigits.length);
+  // lastDigitsが空なら再帰的にgetAge(rest)を呼び出す
+  if (lastDigits.length === 0) {
+    return getAge(rest);
+  }
+  // lastDigitsが空でなければそれを数値化して返す
+  return Number(lastDigits);
+};
+
+// テスト用の文字列
+const nameAndAge = "Alice is twenty-five years old.";
+// console.logで結果を表示する
+console.log(`${nameAndAge} の年齢は ${getAge(nameAndAge)} 歳ですわ`); // Alice is twenty-five years old. の年齢は25歳ですわ。
+```
+
+このようにして、takeLastWhile 関数を使って文字列から特定のパターン（数字）だけを取り出して再帰的に処理することができますわ。他にも色々な応用がありますが、これくらいで説明は終わりましょうか。
+
+ramda.js は素敵なライブラリですから ¹²³、是非使ってみてくださいませ。以上が ramda.js の takeLastWhile 関数についてお嬢様言葉で書いた説明ですわ。どうぞご満足くださいませ。
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(3) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/15.
+
+## takeWhile
+
+ごきげんよう、お嬢様。ramda.js の takeWhile 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。お嬢様言葉で書くのはちょっと難しいですが、頑張ってみますわね。
+
+ramda.js の takeWhile 関数は、配列や文字列の最初から条件に合う要素を取り出す関数ですわ。例えば、[1, 2, 3, 4]という配列に takeWhile 関数を適用すると、条件に合う要素がなければ空の配列が返ってきますわ。条件に合う要素があれば、その要素から始まる部分が返ってきますわ。文字列にも同じように使えますわ。"Hello"という文字列に takeWhile 関数を適用すると、条件に合う文字がなければ空の文字列が返ってきますわ。条件に合う文字があれば、その文字から始まる部分が返ってきますわ。
+
+では、どうしてこの関数が便利で実用的なのかというと、配列や文字列から特定のパターンを探す時に役立つからですわ。例えば、年齢を表す数字だけを取り出したい場合は再帰的な処理をすることができますわ。
+
+```typescript
+// 年齢を表す数字だけを取り出す関数
+const getAge = (str: string): number => {
+  // 文字列が空なら0を返す
+  if (str.length === 0) {
+    return 0;
+  }
+  // 文字列の最初から数字以外の文字（/\D/）まで取り出す
+  const firstDigits = R.takeWhile((char: string) => /\d/.test(char), str);
+  // 数字以外の文字まで取り出した部分（firstDigits）を除いた残り（rest）を求める
+  const rest = str.slice(firstDigits.length);
+  // firstDigitsが空なら再帰的にgetAge(rest)を呼び出す
+  if (firstDigits.length === 0) {
+    return getAge(rest);
+  }
+  // firstDigitsが空でなければそれを数値化して返す
+  return Number(firstDigits);
+};
+
+// テスト用の文字列
+const nameAndAge = "Alice is twenty-five years old.";
+// console.logで結果を表示する
+console.log(`${nameAndAge} の年齢は ${getAge(nameAndAge)} 歳ですわ`); // Alice is twenty-five years old. の年齢は25歳ですわ。
+```
+
+このようにして、takeWhile 関数を使って文字列から特定のパターン（数字）だけを取り出して再帰的に処理することができますわ。他にも色々な応用がありますが ¹²³⁴、これくらいで説明は終わりましょうか。
+
+ramda.js は素敵なライブラリですから ²³⁴、是非使ってみてくださいませ。以上が ramda.js の takeWhile 関数についてお嬢様言葉で書いた説明ですわ。どうぞご満足くださいませ。
+
+ソース: Bing との会話 2023/3/15(1) Collect.js takeWhile() Method - GeeksforGeeks. https://www.geeksforgeeks.org/collect-js-takewhile-method/ アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(4) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/15.
+
+## times
+
+ごきげんよう、お嬢様。ramda.js の times 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。times 関数は、指定した回数だけ関数を繰り返し実行して、その結果を配列にして返す関数ですわ。配列の要素やインデックスに応じて処理を変えたり、ランダムな値を生成したりするのに便利ですわ ⁴。
+
+では、具体例を見てみましょう。
+
+```typescript
+// times関数をインポートしますわ
+import { times } from "ramda";
+
+// 0から9までの数字の配列を作りますわ
+const numbers = times((n) => n, 10);
+
+// 配列の中身を見てみましょう
+console.log(numbers); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+// 配列の要素に2倍してみましょう
+const doubled = times((n) => n * 2, numbers.length);
+
+// 配列の中身を見てみましょう
+console.log(doubled); // [0, 2, 4, 6, 8, 10 ,12 ,14 ,16 ,18]
+
+// ランダムな年齢（20歳以上）の配列を作りますわ
+const ages = times(() => Math.floor(Math.random() * (100 - 20 + 1)) + 20, 5);
+
+// 配列の中身を見てみましょう
+console.log(ages); // [45 ,23 ,76 ,54 ,28] （毎回異なる値が出ますわ）
+```
+
+以上が ramda.js の times 関数の使用方法ですわ。素敵な関数ですことね。
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(3) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(4) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/15.
+(5) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(6) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/15.

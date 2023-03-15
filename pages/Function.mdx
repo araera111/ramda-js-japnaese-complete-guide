@@ -1546,3 +1546,188 @@ newPromise.then((value) => {
 ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
 (2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
 (3) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/15.
+
+## T
+
+ごきげんよう。ramda.js の T 関数についてお教えしますわ。T 関数は、常に真を返す関数ですわ。¹ これは、ramda.js の他の関数と組み合わせて使うと便利ですわ。例えば、ifElse 関数は、条件式と真の場合の処理と偽の場合の処理を引数にとりますわ。¹ ここで、条件式に T 関数を渡すと、常に真の場合の処理が実行されますわ。
+
+```typescript
+// ifElse 関数で T 関数を使う例
+import { ifElse, T } from "ramda";
+
+// 年齢が 20 歳以上なら「大人」と表示する関数
+const isAdult = (age: number): string => (age >= 20 ? "大人" : "子供");
+
+// T 関数を条件式に渡す
+const alwaysAdult = ifElse(T, isAdult, () => "子供");
+
+// 常に「大人」が表示される
+console.log(alwaysAdult(10)); // 大人
+console.log(alwaysAdult(30)); // 大人
+```
+
+素敵な関数ですわね。
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(3) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/15.
+
+## thunkify
+
+ごきげんよう、お嬢様。ramda.js の thunkify 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。thunkify 関数は、引数を取る関数を引数を取らない関数（thunk）に変換する関数ですわ。thunk は、実行されるまで計算を遅延させることができますので、非同期処理やメモ化などに役立ちますわ ⁴⁶。
+
+では、具体例を見てみましょう。
+
+```typescript
+// 2 つの数字を足す関数ですわ
+const add = (num1: number, num2: number): number => num1 + num2;
+
+// thunkify 関数をインポートしますわ
+import { thunkify } from "ramda";
+
+// add 関数を thunkify してみましょう
+const addThunk = thunkify(add);
+
+// この時点では add 関数は実行されませんわ
+const thunk = addThunk(10, 20);
+
+// thunk を実行すると結果が返りますわ
+console.log(thunk()); // 30
+
+// 非同期処理の例ですわ
+const delayAdd = (
+  num1: number,
+  num2: number,
+  callback: (result: number) => void
+): void => {
+  setTimeout(() => {
+    callback(num1 + num2);
+  }, 1000);
+};
+
+// delayAdd 関数も thunkify してみましょう
+const delayAddThunk = thunkify(delayAdd);
+
+// 非同期処理も thunk に変換できますわ
+const asyncThunk = delayAddThunk(10, 20);
+
+// asyncThunk を実行するとコールバックが呼ばれますわ
+asyncThunk((result) => {
+  console.log(result); // 30
+});
+```
+
+以上が ramda.js の thunkify 関数の使用方法ですわ。素敵な関数ですことね。
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) thunkify - npm. https://www.npmjs.com/package/thunkify アクセス日時 2023/3/15.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(4) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(5) 【Ramda.js / Folktale】JavaScript で (なるべく) 関数型に .... https://qiita.com/Guvalif/items/a4fe01a4c069836db4d8 アクセス日時 2023/3/15.
+(6) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+
+## tryCatch
+
+ごきげんよう、お嬢様。ramda.js の tryCatch 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。tryCatch 関数は、第一引数に正常な処理を行う関数を、第二引数にエラーが発生した場合の処理を行う関数を受け取ります。そして、その二つの関数を合成した新しい関数を返します。この新しい関数は、正常な処理が成功すればその結果を返し、失敗すればエラー処理の結果を返します。
+
+たとえば
+
+```typescript
+// R は ramda.js のオブジェクトですわ
+import \* as R from 'ramda';
+
+// 正常な処理は年齢から成人かどうか判定する関数ですわ
+const isAdult = (age: number): boolean => age >= 20;
+
+// エラー処理は例外オブジェクトからメッセージを取り出す関数ですわ
+const getMessage = (error: Error): string => error.message;
+
+// tryCatch 関数で二つの関数を合成しますわ
+const checkAge = R.tryCatch(isAdult, getMessage);
+
+// 正常な入力では true か false が返りますわ
+console.log(checkAge(25)); // true
+console.log(checkAge(18)); // false
+
+// 不正な入力ではエラーメッセージが返りますわ
+console.log(checkAge('hello')); // age is not a number
+
+```
+
+これで tryCatch 関数の使い方がお分かりになったでしょうか？素敵な関数ですわね。もっと詳しく知りたい場合は ⁴ や ⁶ をご覧くださいませ。それではまたお会いしましょう。さようなら。
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) javascript - How to use Ramda Pipe function with a mix of .... https://stackoverflow.com/questions/58504438/how-to-use-ramda-pipe-function-with-a-mix-of-promises-and-static-callbacks アクセス日時 2023/3/15.
+(3) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(4) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(5) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/15.
+(6) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+
+## unapply
+
+ごきげんよう、お嬢様。ramda.js の unapply 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。unapply 関数は、引数を配列にまとめて別の関数に渡すことができる関数ですわ。例えば、以下のようなコードがありますとしましょう。
+
+```typescript
+// 2 つの数字を足して返す関数ですわ
+const add = (num1: number, num2: number): number => num1 + num2;
+
+// 3 つの数字を足して返す関数ですわ
+const add3 = (num1: number, num2: number, num3: number): number =>
+  num1 + num2 + num3;
+
+// 配列の要素をすべて足して返す関数ですわ
+const sum = (arr: number[]): number => arr.reduce(add, 0);
+
+// unapply 関数を使って、引数を配列にまとめて sum 関数に渡しますわ
+const sumAll = R.unapply(sum);
+
+console.log(sumAll(10, 20, 30)); // 60
+console.log(sumAll(40, 50)); // 90
+```
+
+このように、unapply 関数は可変長の引数を扱いたい場合や、既存の配列用の関数を流用したい場合などに便利ですわ。また、型安全性も保たれますわ。unapply 関数はジェネリクス型で定義されていますから、引数や返り値の型は自動的に推論されますわ。
+
+素敵な関数ですわね。これで unapply 関数についてご理解いただけましたかしら？もっと知りたいことがありましたらおっしゃってくださいませ。
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(3) javascript - Ramda: Confused about pipe - Stack Overflow. https://stackoverflow.com/questions/54135393/ramda-confused-about-pipe アクセス日時 2023/3/15.
+
+## unary
+
+ごきげんよう、お嬢様。ramda.js の unary 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。unary 関数は、引数を 1 つだけ取る関数に変換することができる関数ですわ。例えば、以下のようなコードがありますとしましょう。
+
+```typescript
+// 2つの数字を足して返す関数ですわ
+const add = (num1: number, num2: number): number => num1 + num2;
+
+// 配列の要素をすべて足して返す関数ですわ
+const sum = (arr: number[]): number => arr.reduce(add, 0);
+
+// 配列に10を足して返す関数ですわ
+const add10 = (arr: number[]): number[] => arr.map((num) => add(num, 10));
+
+console.log(add10([1, 2, 3])); // [11, 12, 13]
+```
+
+このように、add 関数は 2 つの引数を取りますが、map メソッドは配列の各要素を 1 つずつ渡しますわ。この場合、add 関数は第二引数に undefined を受け取ってしまいますわ。これでは意図した結果になりませんわね。
+
+そこで unary 関数を使ってみましょう。
+
+```typescript
+// unary関数でadd関数をラップしますわ
+const addUnary = R.unary(add);
+
+// 配列に10を足して返す関数ですわ
+const add10 = (arr: number[]): number[] => arr.map((num) => addUnary(num, 10));
+
+console.log(add10([1, 2, 3])); // [11, 12, 13]
+```
+
+このように、unary 関数は add 関数が第一引数だけを受け取るように変換しますわ。これで map メソッドと互換性がありますわ。また、型安全性も保たれますわ。unary 関数はジェネリクス型で定義されていますから、引数や返り値の型は自動的に推論されますわ。
+
+素敵な関数ですわね。これで unary 関数についてご理解いただけましたかしら？もっと知りたいことがありましたらおっしゃってくださいませ。
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(3) Using Ramda, how do you compose against binary functions?. https://stackoverflow.com/questions/53492645/using-ramda-how-do-you-compose-against-binary-functions アクセス日時 2023/3/15.

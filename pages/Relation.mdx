@@ -570,3 +570,160 @@ console.log(olderThan30);
 ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
 (2) javascript - Ramda.js - propEq(String → a → Object → .... https://stackoverflow.com/questions/46135213/ramda-js-propeqstring-%e2%86%92-a-%e2%86%92-object-%e2%86%92-boolean-what-this-notation-mean アクセス日時 2023/3/15.
 (3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+
+## sortWith
+
+ごきげんよう、お嬢様。ramda.js の sortWith 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。¹²³
+
+sortWith 関数は、配列の要素に対して適用する比較関数の配列を引数に取り、その比較関数の順番に基づいて配列をソートする関数ですわ。例えば、名前や年齢などのプロパティを持つオブジェクトの配列をソートしたい場合は、R.ascend や R.descend 関数と組み合わせて使うことができますわ。
+
+```typescript
+// オブジェクトの配列を定義しますわ
+const people: { name: string; age: number }[] = [
+  { name: "Alice", age: 25 },
+  { name: "Bob", age: 23 },
+  { name: "Charlie", age: 27 },
+];
+
+// 名前で昇順にソートし、同じ名前なら年齢で降順にソートする関数を作りますわ
+const sortByNameAndAge = R.sortWith([
+  R.ascend(R.prop("name")),
+  R.descend(R.prop("age")),
+]);
+
+// 関数を適用して結果を見てみましょう
+console.log(sortByNameAndAge(people));
+// [
+// { name: 'Alice', age: 25 },
+// { name: 'Bob', age: 23 },
+// { name: 'Charlie', age: 27 }
+// ]
+```
+
+このようにして、複数の条件で配列を簡単にソートできますわ。もちろん、文字列や数字だけの配列でも使えますわ。
+
+```typescript
+// 文字列の配列を定義しますわ
+const fruits: string[] = ["apple", "banana", "cherry"];
+
+// 数字の配列を定義しますわ
+const numbers: number[] = [3, 1, 2];
+
+// 文字列や数字そのものでソートする場合は、R.ascend や R.descend 関数に R.identity 関数が便利ですわ
+const sortByString = R.sortWith([R.ascend(R.identity)]);
+const sortByNumber = R.sortWith([R.descend(R.identity)]);
+
+console.log(sortByString(fruits));
+//[ "apple", "banana", "cherry" ]
+
+console.log(sortByNumber(numbers));
+//[3,2,1]
+```
+
+素敵な関数ですわね。これで ramda.js の sortWith 関数についてお分かりいただけたかしら？もっと知りたいことがあればお聞かせくださいませ。
+
+ソース: Bing との会話 2023/3/15(1) [Ramda] 使用 sortWith 輕鬆達成多欄位排序條件 | 全端開發 .... https://fullstackladder.dev/blog/2021/10/10/ramda-multiple-sort-using-sort-with/ アクセス日時 2023/3/15.
+(2) javascript - Sort with ramda - Stack Overflow. https://stackoverflow.com/questions/67030312/sort-with-ramda アクセス日時 2023/3/15.
+(3) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(4) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/15.
+
+## symmetricDifference
+
+ごきげんよう、お嬢様。ramda.js の symmetricDifference 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。¹
+
+symmetricDifference 関数は、二つの配列の対称差集合を返す関数ですわ。対称差集合とは、どちらか一方の配列にだけ含まれる要素の集まりですわ。第一引数に一つ目の配列を指定し、第二引数に二つ目の配列を指定しますわ。戻り値は新しい配列ですわ。
+
+```typescript
+// 一つ目の配列を作りますわ
+const arr1 = [1, 2, 3];
+
+// 二つ目の配列を作りますわ
+const arr2 = [3, 4, 5];
+
+// 二つの配列の対称差集合を求める関数を作りますわ
+const symDiff = R.symmetricDifference(arr1, arr2);
+
+// 関数を適用して結果を見てみましょう
+console.log(symDiff); // [1,2,4,5]
+```
+
+このようにして、二つの配列からどちらか一方にだけ含まれる要素を取り出せますわ。もちろん、型が異なる場合は使えませんわ。
+
+```typescript
+// 一つ目の配列を作りますわ
+const arr3 = ["a", "b", "c"];
+
+// 二つ目の配列を作りますわ
+const arr4 = [1, "b", 3];
+
+// 二つの配列の対称差集合を求める関数を作りますわ
+const symDiff2 = R.symmetricDifference(arr3, arr4);
+
+// 関数を適用して結果を見てみましょう
+console.log(symDiff2); // Error: Type 'string' is not assignable to type 'number'.
+```
+
+素敵な関数ですわね。これで ramda.js の symmetricDifference 関数についてお分かりいただけたかしら？もっと知りたいことがあればお聞かせくださいませ。
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(3) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/15.
+
+## symmetricDifferenceWith
+
+ごきげんよう、お嬢様。ramda.js の symmetricDifferenceWith 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。¹
+
+symmetricDifferenceWith 関数は、二つの配列の対称差集合を返す関数ですが、要素の比較に任意の関数を使えるようにしたものですわ。第一引数に比較関数を指定し、第二引数に一つ目の配列を指定し、第三引数に二つ目の配列を指定しますわ。戻り値は新しい配列ですわ。
+
+```typescript
+// 比較関数を作りますわ
+const compare = (
+  a: { name: string; age: number },
+  b: { name: string; age: number }
+): boolean => a.name === b.name;
+
+// 一つ目の配列を作りますわ
+const arr1 = [
+  { name: "Alice", age: 25 },
+  { name: "Bob", age: 30 },
+  { name: "Charlie", age: 35 },
+];
+
+// 二つ目の配列を作りますわ
+const arr2 = [
+  { name: "Alice", age: 28 },
+  { name: "David", age: 32 },
+  { name: "Eve", age: 40 },
+];
+
+// 二つの配列の対称差集合を求める関数を作りますわ
+const symDiffWith = R.symmetricDifferenceWith(compare, arr1, arr2);
+
+// 関数を適用して結果を見てみましょう
+console.log(symDiffWith); // [{name:'Bob',age:30},{name:'Charlie',age:35},{name:'David',age:32},{name:'Eve',age:40}]
+```
+
+このようにして、二つの配列からどちらか一方にだけ含まれる要素を取り出せますが、名前が同じでも年齢が違っても同じ要素とみなせますわ。もちろん、型が異なる場合は使えませんわ。
+
+```typescript
+// 比較関数を作りますわ
+const compare2 = (a: number, b: string): boolean => a.toString() === b;
+
+// 一つ目の配列を作りますわ
+const arr3 = [1, 2, 3];
+
+// 二つ目の配列を作りますわ
+const arr4 = ["1", "4", "5"];
+
+// 二つの配列の対称差集合を求める関数を作りますわ
+const symDiffWith2 = R.symmetricDifferenceWith(compare2, arr3, arr4);
+
+// 関数を適用して結果を見てみましょう
+console.log(symDiffWith2); // Error : Type 'string' is not assignable to type 'number'.
+```
+
+素敵な関数ですわね。これで ramda.js の symmetricDifferenceWith 関数についてお分かりいただけたかしら？もっと知りたいことがあればお聞かせくださいませ。
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) @ramda/symmetricdifferencewith - npm. https://www.npmjs.com/package/@ramda/symmetricdifferencewith アクセス日時 2023/3/15.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
