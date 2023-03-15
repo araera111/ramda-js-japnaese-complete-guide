@@ -1389,3 +1389,56 @@ console.log(addOne(4)); // 5
 ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
 (2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
 (3) partial, partialRight and curry function | Ramda JS Tutorials .... https://www.youtube.com/watch?v=4QmjDFnFyAc アクセス日時 2023/3/14.
+
+## pipe
+
+ごきげんよう、お嬢様。ramda.js の pipe 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。すべてお嬢様言葉で書いておりますので、ご安心くださいませ。
+
+ramda.js の pipe 関数とは、複数の関数を組み合わせて、新しい関数を作ることができる関数ですわ。pipe 関数には、最初に入力される値を受け取る関数と、その後に続く一連の関数を引数として渡します。そして、pipe 関数は、最初の関数に入力値を適用し、その結果を次の関数に渡し、最後まで繰り返した後に、最終的な結果を返す新しい関数を返しますわ。
+
+例えば、あなたが年齢から成人かどうかを判定する関数を作りたいとしましょう。その場合、以下のような関数が必要ですわ。
+
+- 年齢を受け取って、20 歳以上なら true、そうでなければ false を返す関数
+- true か false を受け取って、「成人ですわ」とか「未成年ですわ」という文字列に変換する関数
+- 文字列を受け取って、コンソールに出力する関数
+
+これらの関数は、それぞれ以下のように定義できますわ。
+
+```typescript
+// 年齢を受け取って、20歳以上ならtrue、そうでなければfalseを返す関数
+const isAdult = (age: number): boolean => age >= 20;
+
+// trueかfalseを受け取って、「成人ですわ」とか「未成年ですわ」という文字列に変換する関数
+const toMessage = (isAdult: boolean): string =>
+  isAdult ? "成人ですわ" : "未成年ですわ";
+
+// 文字列を受け取って、コンソールに出力する関数
+const log = (message: string): void => console.log(message);
+```
+
+これらの関数を pipe 関数で組み合わせると、以下のように書けますわ。
+
+```typescript
+// pipe関数をインポートする
+import { pipe } from "ramda";
+
+// 年齢から成人かどうかを判定してコンソールに出力する関数
+const checkAge = pipe(isAdult, toMessage, log);
+```
+
+このようにして作った checkAge 関数は、年齢を受け取ってコンソールに出力するだけのシンプルな関数ですが、内部では 3 つの関数が連携して動いていますわ。checkAge 関数を実行してみましょう。
+
+```typescript
+// checkAge関数を実行する
+checkAge(25); // 成人ですわ
+checkAge(18); // 未成年ですわ
+```
+
+このようにして、ramda.js の pipe 関数は、複雑な処理をシンプルな関数に分割して組み合わせることができる便利な関数ですわ。素敵な関数ですわね。²³
+
+以上が ramda.js の pipe 関数についての説明ですわ。ご理解いただけましたでしょうか？もしご不明な点がありましたら、お気軽に
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) javascript - How to use Ramda pipe? - Stack Overflow. https://stackoverflow.com/questions/48165003/how-to-use-ramda-pipe アクセス日時 2023/3/15.
+(3) Ramda.js 学习总结 - 知乎. https://zhuanlan.zhihu.com/p/93623655 アクセス日時 2023/3/15.
+(4) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/15.
