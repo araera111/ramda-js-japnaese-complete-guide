@@ -515,3 +515,58 @@ console.log(david); // undefined
 ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
 (2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
 (3) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/14.
+
+## propEq
+
+ごきげんよう、お嬢様。ramda.js の propEq 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげますわ。¹
+
+propEq 関数は、オブジェクトの特定のプロパティが指定した値と等しいかどうかを判定する関数ですわ。つまり、propEq(name, value, obj)は、obj[name] === value と同じことですわ。
+
+propEq 関数は、オブジェクトの配列に対して filter や find などの関数と組み合わせて使うと便利ですわ。例えば、次のようなオブジェクトの配列があるとしますわ。
+
+```typescript
+// オブジェクトの配列
+const people: { name: string; age: number; gender: string }[] = [
+  { name: "Alice", age: 25, gender: "female" },
+  { name: "Bob", age: 30, gender: "male" },
+  { name: "Charlie", age: 28, gender: "male" },
+  { name: "Diana", age: 23, gender: "female" },
+];
+```
+
+この配列から、名前が Alice の人を探したい場合は、propEq 関数に"name"と"Alice"を渡して作った関数を find に渡しますわ。
+
+```typescript
+// ramda.jsのpropEq関数とfind関数をインポート
+import { propEq, find } from "ramda";
+
+// 名前がAliceの人を探す関数
+const findAlice = find(propEq("name", "Alice"));
+
+// 配列から名前がAliceの人を探す
+const alice = findAlice(people);
+
+// 名前がAliceの人をコンソールに出力
+console.log("名前がAliceの人はこちらですわ");
+console.log(alice);
+```
+
+このように、propEq 関数はオブジェクトの特定のプロパティが指定した値と等しいかどうかを判定することができますわ。他にも、年齢や性別などのプロパティに対しても同じように使えますわ。
+
+```typescript
+// 年齢が30歳以上の人を探す関数
+const findOlderThan30 = find(propEq("age", 30));
+
+// 配列から年齢が30歳以上の人を探す
+const olderThan30 = findOlderThan30(people);
+
+// 年齢が30歳以上の人をコンソールに出力
+console.log("年齢が30歳以上の人はこちらですわ");
+console.log(olderThan30);
+```
+
+これで、ramda.js の propEq 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげましたわ。素敵な関数ですわね。²
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) javascript - Ramda.js - propEq(String → a → Object → .... https://stackoverflow.com/questions/46135213/ramda-js-propeqstring-%e2%86%92-a-%e2%86%92-object-%e2%86%92-boolean-what-this-notation-mean アクセス日時 2023/3/15.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.

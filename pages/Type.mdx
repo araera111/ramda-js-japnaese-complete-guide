@@ -119,3 +119,58 @@ console.log(isEmpty(Infinity)); // true と出力されるのですわ
 ```
 
 以上が、ramda.js の isNil 関数についての説明でしたわ。ご理解いただけましたでしょうか？もし、もっと詳しく知りたいことがありましたら、お気軽にお尋ねくださいませ。には、ramda.js の他の関数についても詳しく説明されていますわ。ご参考になさってくださいませ。では、またお会いしましょう。ごきげんよう。🎀
+
+## propls
+
+ごきげんよう、お嬢様。ramda.js の propIs 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげますわ。¹
+
+propIs 関数は、オブジェクトの特定のプロパティが指定した型と一致するかどうかを判定する関数ですわ。つまり、propIs(type, name, obj)は、typeof obj[name] === type と同じことですわ。
+
+propIs 関数は、オブジェクトの配列に対して filter や find などの関数と組み合わせて使うと便利ですわ。例えば、次のようなオブジェクトの配列があるとしますわ。
+
+```typescript
+// オブジェクトの配列
+const items: { name: string; price: number | string; quantity: number }[] = [
+  { name: "apple", price: 100, quantity: 5 },
+  { name: "banana", price: 80, quantity: 3 },
+  { name: "orange", price: "sold out", quantity: 0 },
+  { name: "grape", price: 200, quantity: 2 },
+];
+```
+
+この配列から、価格が数値型のものだけを抽出したい場合は、propIs 関数に"number"と"price"を渡して作った関数を filter に渡しますわ。
+
+```typescript
+// ramda.jsのpropIs関数とfilter関数をインポート
+import { propIs, filter } from "ramda";
+
+// 価格が数値型のものだけを抽出する関数
+const filterByNumberPrice = filter(propIs("number", "price"));
+
+// 配列から価格が数値型のものだけを抽出する
+const itemsWithNumberPrice = filterByNumberPrice(items);
+
+// 価格が数値型のものだけをコンソールに出力
+console.log("価格が数値型のものはこちらですわ");
+console.log(itemsWithNumberPrice);
+```
+
+このように、propIs 関数はオブジェクトの特定のプロパティが指定した型と一致するかどうかを判定することができますわ。他にも、名前や数量などのプロパティに対しても同じように使えますわ。
+
+```typescript
+// 名前が文字列型のものだけを抽出する関数
+const filterByStringName = filter(propIs("string", "name"));
+
+// 配列から名前が文字列型のものだけを抽出する
+const itemsWithStringName = filterByStringName(items);
+
+// 名前が文字列型のものだけをコンソールに出力
+console.log("名前が文字列型のものはこちらですわ");
+console.log(itemsWithStringName);
+```
+
+これで、ramda.js の propIs 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげましたわ。素敵な関数ですわね。²
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(3) Ramda applySpec - keep unmodified props - Stack Overflow. https://stackoverflow.com/questions/65007278/ramda-applyspec-keep-unmodified-props アクセス日時 2023/3/15.

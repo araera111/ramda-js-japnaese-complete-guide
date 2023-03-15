@@ -1442,3 +1442,107 @@ checkAge(18); // 未成年ですわ
 (2) javascript - How to use Ramda pipe? - Stack Overflow. https://stackoverflow.com/questions/48165003/how-to-use-ramda-pipe アクセス日時 2023/3/15.
 (3) Ramda.js 学习总结 - 知乎. https://zhuanlan.zhihu.com/p/93623655 アクセス日時 2023/3/15.
 (4) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/15.
+
+## pipeWith
+
+ごきげんよう、お嬢様。ramda.js の pipeWith 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげますわ。すべてお嬢様言葉で書いておりますので、ご安心くださいませ。
+
+ramda.js の pipeWith 関数は、第一引数に関数を受け取り、第二引数に関数の配列を受け取り、配列の先頭から順に関数を適用していく関数ですわ。第一引数の関数は、配列の各関数の結果を次の関数に渡す方法を定義しますわ。例えば、第一引数に R.then という関数を渡すと、配列の各関数が Promise を返す場合に、非同期処理を順番に実行できますわ ¹。
+
+typescript 形式で、具体例を示しておりますわ。
+
+```typescript
+// 以下の関数は、年齢から成人かどうかを判定する関数ですわ。
+const isAdult = (age: number): boolean => age >= 20;
+
+// 以下の関数は、成人かどうかからメッセージを返す関数ですわ。
+const getMessage = (isAdult: boolean): string =>
+  isAdult ? "あなたは成人ですわ" : "あなたは未成年ですわ";
+
+// 以下の関数は、メッセージをコンソールに出力する関数ですわ。
+const printMessage = (message: string): void => console.log(message);
+
+// pipeWith 関数を使って、上記の 3 つの関数を組み合わせますわ。
+// 第一引数に R.call という関数を渡しておりますわ。これは、第一引数に関数を受け取り、第二引数以降にその関数の引数を受け取り、その関数を呼び出す関数ですわ ²。
+// これにより、配列の各関数が普通の値（Promise ではない）を返す場合にも、pipeWith 関数が正しく動作しますわ。
+const checkAge = R.pipeWith(R.call, [isAdult, getMessage, printMessage]);
+
+// checkAge 関数に年齢を渡して実行しますわ。
+checkAge(25); // あなたは成人ですわ
+checkAge(18); // あなたは未成年ですわ
+```
+
+素敵な関数ですわね。ramda.js の pipeWith 関数は、様々な種類の関数を組み合わせて新しい関数を作ることができますわ。お嬢様もぜひ試してみてくださいませ。以上が私の回答ですわ。ご満足いただけましたでしょうか？😊
+
+ソース: Bing との会話 2023/3/15(1) javascript - How to use Ramda Pipe function with a mix of .... https://stackoverflow.com/questions/58504438/how-to-use-ramda-pipe-function-with-a-mix-of-promises-and-static-callbacks アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(3) ramda pipeWith JavaScript Examples. https://www.programcreek.com/javascript/?api=ramda.pipeWith アクセス日時 2023/3/15.
+
+### pipe と pipeWith の違い
+
+pipe と pipeWith の違いを説明してさしあげますわ。
+
+ramda.js の pipe 関数は、関数の配列を受け取り、配列の先頭から順に関数を適用していく関数ですわ。配列の各関数は、前の関数の結果を引数に受け取りますわ。例えば、R.pipe([f, g, h])(x)は、h(g(f(x)))と同じですわ。
+
+ramda.js の pipeWith 関数は、第一引数に関数を受け取り、第二引数に関数の配列を受け取り、配列の先頭から順に関数を適用していく関数ですわ。第一引数の関数は、配列の各関数の結果を次の関数に渡す方法を定義しますわ。例えば、R.pipeWith(R.then, [f, g, h])(x)は、f(x).then(g).then(h)と同じですわ ¹。
+
+つまり、pipe 関数は、配列の各関数が普通の値（Promise ではない）を返す場合に使えますわ。pipeWith 関数は、配列の各関数が Promise や undefined などの特殊な値を返す場合にも使えますわ。pipeWith 関数は、pipe 関数よりも柔軟性が高いですわ ²。
+
+以上が私の回答ですわ。ご理解いただけましたでしょうか？😊
+
+## promap
+
+ごきげんよう、お嬢様。ramda.js の promap 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげますわ。¹
+
+promap 関数は、ファンクターと呼ばれる特殊なオブジェクトに対して、その前後に関数を適用することができる関数ですわ。ファンクターとは、map メソッドを持つオブジェクトのことですわ。例えば、配列や Promise などがファンクターですわ。
+
+promap 関数は、ファンクターに対して、その前に f 関数を適用してから、その後に g 関数を適用することができますわ。つまり、promap(f, g, functor)は、functor.map(f).map(g)と同じことですわ。
+
+```typescript
+// ramda.jsのpromap関数をインポート
+import { promap } from "ramda";
+
+// 配列をファンクターとして使う
+const array: number[] = [1, 2, 3];
+
+// 配列の各要素に2を足す関数
+const addTwo = (x: number): number => x + 2;
+
+// 配列の各要素を2倍する関数
+const double = (x: number): number => x * 2;
+
+// promap関数にaddTwo, double, arrayを渡して新しい配列を作る
+const newArray: number[] = promap(addTwo, double, array);
+
+// 新しい配列をコンソールに出力
+console.log("配列の各要素に2を足してから2倍しましたわ");
+console.log(newArray);
+```
+
+このように、promap 関数は配列に対して前後に関数を適用することができますわ。他にも、Promise などのファンクターに対しても同じように使えますわ。
+
+```typescript
+// Promiseをファンクターとして使う
+const promise: Promise<number> = Promise.resolve(10);
+
+// Promiseの値に5を足す関数
+const addFive = (x: number): number => x + 5;
+
+// Promiseの値を3で割る関数
+const divideByThree = (x: number): number => x / 3;
+
+// promap関数にaddFive, divideByThree, promiseを渡して新しいPromiseを作る
+const newPromise: Promise<number> = promap(addFive, divideByThree, promise);
+
+// 新しいPromiseの値をコンソールに出力
+newPromise.then((value) => {
+  console.log("Promiseの値に5を足してから3で割りましたわ");
+  console.log(value);
+});
+```
+
+これで、ramda.js の promap 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげましたわ。素敵な関数ですわね。²
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(3) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/15.

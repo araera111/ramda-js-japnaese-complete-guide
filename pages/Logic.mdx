@@ -514,3 +514,38 @@ console.log(isAlice(person)); // trueと表示されますわ。
 ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
 (2) javascript - How to rewrite a FP library Ramda.js function .... https://stackoverflow.com/questions/66417178/how-to-rewrite-a-fp-library-ramda-js-function-called-pathsatisfies-in-vanilla アクセス日時 2023/3/14.
 (3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
+
+## propSatisfies
+
+ごきげんよう、お嬢様。ramda.js の propSatisfies 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。propSatisfies 関数は、オブジェクトのプロパティがある条件を満たすかどうかを判定する関数ですわ。例えば、こんな感じですわ。
+
+```typescript
+// オブジェクトの配列を作りますわ
+const people = [
+  { name: "Alice", age: 25, gender: "female" },
+  { name: "Bob", age: 30, gender: "male" },
+  { name: "Charlie", age: 35, gender: "male" },
+];
+
+// propSatisfies 関数を使って、年齢が 30 歳以上の人だけをフィルターしますわ
+const isOlderThan30 = R.propSatisfies((age: number) => age >= 30, "age");
+const olderPeople = R.filter(isOlderThan30, people);
+console.log(olderPeople); // [{ name: "Bob", age: 30, gender: "male" }, { name: "Charlie", age: 35, gender: "male" }]
+
+// propSatisfies 関数はカリー化されているので、部分適用もできますわ
+const isFemale = R.propSatisfies(
+  (gender: string) => gender === "female",
+  "gender"
+);
+const femalePeople = R.filter(isFemale, people);
+console.log(femalePeople); // [{ name: "Alice", age: 25, gender: "female" }]
+```
+
+propSatisfies 関数は、オブジェクトのプロパティに対して任意の条件を適用したいときに便利ですわ。また、カリー化されているので、他の関数と組み合わせたり、部分適用したりすることができますわ。素敵な関数ですわね。以上が propSatisfies 関数の説明ですわ。ご理解いただけましたかしら？
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) Using Ramdas 'propSatisfies' Method with variable Object .... https://stackoverflow.com/questions/36099208/using-ramdas-propsatisfies-method-with-variable-object-key-name アクセス日時 2023/3/15.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(4) Using Ramdas 'propSatisfies' Method with variable Object .... https://stackoverflow.com/questions/36099208/using-ramdas-propsatisfies-method-with-variable-object-key-name アクセス日時 2023/3/15.
+(5) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(6) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.

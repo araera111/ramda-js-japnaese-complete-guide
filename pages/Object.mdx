@@ -1657,3 +1657,152 @@ console.log(peopleWithNameStartingWithA); // { alice: { name: 'Alice', age: 25, 
 (3) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
 (4) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/14.
 (5) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/14.
+
+## project
+
+ごきげんよう、お嬢様。ramda.js の project 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげますわ。¹
+
+project 関数は、オブジェクトの配列から特定のプロパティだけを抽出して新しい配列を作る関数ですわ。例えば、人の名前と年齢を持つオブジェクトの配列があったとします。このとき、project 関数を使って名前だけを抽出することができますわ。
+
+```typescript
+// 人の名前と年齢を持つオブジェクトの配列
+const people: { name: string; age: number }[] = [
+  { name: "Alice", age: 25 },
+  { name: "Bob", age: 30 },
+  { name: "Charlie", age: 35 },
+];
+
+// ramda.js の project 関数をインポート
+import { project } from "ramda";
+
+// project 関数に抽出したいプロパティの配列を渡して新しい関数を作る
+const getName = project(["name"]);
+
+// getName 関数にオブジェクトの配列を渡して名前だけを抽出する
+const names: string[] = getName(people);
+
+// 新しい配列をコンソールに出力
+console.log("人の名前だけが抽出されましたわ");
+console.log(names);
+```
+
+このように、project 関数はオブジェクトの配列から特定のプロパティだけを簡単に抽出することができますわ。他にも、例えば年齢だけを抽出したり、複数のプロパティを抽出したりすることができますわ。
+
+```typescript
+// 年齢だけを抽出する関数
+const getAge = project(["age"]);
+
+// 年齢だけを抽出する
+const ages: number[] = getAge(people);
+
+// 新しい配列をコンソールに出力
+console.log("人の年齢だけが抽出されましたわ");
+console.log(ages);
+```
+
+```typescript
+// 名前と年齢だけを抽出する関数
+const getNameAndAge = project(["name", "age"]);
+
+// 名前と年齢だけを抽出する
+const nameAndAges: { name: string; age: number }[] = getNameAndAge(people);
+
+// 新しい配列をコンソールに出力
+console.log("人の名前と年齢だけが抽出されましたわ");
+console.log(nameAndAges);
+```
+
+これで、ramda.js の project 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげましたわ。素敵な関数ですわね。²
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(3) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/15.
+
+## propOr
+
+ごきげんよう、お嬢様。ramda.js の propOr 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげますわ。¹
+
+propOr 関数は、オブジェクトの特定のプロパティが存在する場合はその値を返し、存在しない場合はデフォルトの値を返す関数ですわ。つまり、propOr(defaultValue, name, obj)は、obj[name]が undefined や null でなければ obj[name]を、そうでなければ defaultValue を返すということですわ。
+
+propOr 関数は、オブジェクトの配列に対して map や forEach などの関数と組み合わせて使うと便利ですわ。例えば、次のようなオブジェクトの配列があるとしますわ。
+
+```typescript
+// オブジェクトの配列
+const persons: { name: string; age?: number }[] = [
+  { name: "Alice", age: 25 },
+  { name: "Bob" },
+  { name: "Charlie", age: 30 },
+];
+```
+
+この配列から、年齢が存在する場合はその値を、存在しない場合は"unknown"という文字列を返す関数を作りたい場合は、propOr 関数に"unknown"と"age"を渡して作った関数を map に渡しますわ。
+
+```typescript
+// ramda.js の propOr 関数と map 関数をインポート
+import { propOr, map } from "ramda";
+
+// 年齢が存在する場合はその値を、存在しない場合は"unknown"という文字列を返す関数
+const getAgeOrUnknown = propOr("unknown", "age");
+
+// 配列から年齢または"unknown"を取り出す
+const ages = map(getAgeOrUnknown, persons);
+
+// 年齢または"unknown"をコンソールに出力
+console.log("年齢はこちらですわ");
+console.log(ages);
+```
+
+このように、propOr 関数はオブジェクトの特定のプロパティが存在する場合はその値を返し、存在しない場合はデフォルトの値を返すことができますわ。他にも、名前や趣味などのプロパティに対しても同じように使えますわ。
+
+```typescript
+// 名前が存在する場合はその値を、存在しない場合は"anonymous"という文字列を返す関数
+const getNameOrAnonymous = propOr("anonymous", "name");
+
+// 配列から名前または"anonymous"を取り出す
+const names = map(getNameOrAnonymous, persons);
+
+// 名前または"anonymous"をコンソールに出力
+console.log("名前はこちらですわ");
+console.log(names);
+```
+
+これで、ramda.js の propOr 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげましたわ。素敵な関数ですわね。²
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) TypeScript Ramda propOr return type - Stack Overflow. https://stackoverflow.com/questions/65715847/typescript-ramda-propor-return-type アクセス日時 2023/3/15.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+
+## props
+
+ごきげんよう、お嬢様。ramda.js の props 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。props 関数は、オブジェクトのプロパティの配列を取って、そのプロパティの値の配列を返す関数ですわ。例えば、こんな感じですわ。
+
+```typescript
+// オブジェクトの配列を作りますわ
+const people = [
+  { name: "Alice", age: 25, gender: "female" },
+  { name: "Bob", age: 30, gender: "male" },
+  { name: "Charlie", age: 35, gender: "male" },
+];
+
+// props関数を使って、名前と年齢の配列を取り出しますわ
+const namesAndAges = R.props(["name", "age"]);
+console.log(namesAndAges(people[0])); // ["Alice", 25]
+console.log(namesAndAges(people[1])); // ["Bob", 30]
+console.log(namesAndAges(people[2])); // ["Charlie", 35]
+
+// props関数はカリー化されているので、部分適用もできますわ
+const getNames = R.props(["name"]);
+console.log(getNames(people[0])); // ["Alice"]
+console.log(getNames(people[1])); // ["Bob"]
+console.log(getNames(people[2])); // ["Charlie"]
+```
+
+props 関数は、オブジェクトから必要なプロパティだけを取り出したいときに便利ですわ。また、カリー化されているので、他の関数と組み合わせたり、部分適用したりすることができますわ。素敵な関数ですわね。以上が props 関数の説明ですわ。ご理解いただけましたかしら？
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(3) Ramda applySpec - keep unmodified props - Stack Overflow. https://stackoverflow.com/questions/65007278/ramda-applyspec-keep-unmodified-props アクセス日時 2023/3/15.
+(4) Apply logical NOT to propEq and filter in ramda. https://stackoverflow.com/questions/35921591/apply-logical-not-to-propeq-and-filter-in-ramda アクセス日時 2023/3/15.
+(5) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(6) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/15.
+(7) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.

@@ -2144,3 +2144,291 @@ console.log(younger); // [{name:"Alice",age:25}]
 ソース: Bing との会話 2023/3/14(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/14.
 (2) javascript - Ramda - Partition by index - Stack Overflow. https://stackoverflow.com/questions/51398136/ramda-partition-by-index アクセス日時 2023/3/14.
 (3) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/14.
+
+## pluck
+
+ごきげんよう、お嬢様。ramda.js の pluck 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげますわ。¹
+
+pluck 関数は、オブジェクトの配列から特定のプロパティの値を抽出して新しい配列を作る関数ですわ。例えば、人々の名前と年齢を持つオブジェクトの配列があったとします。このとき、pluck 関数を使って名前だけを取り出すことができますわ。
+
+```typescript
+// 人々の名前と年齢を持つオブジェクトの配列
+const people: { name: string; age: number }[] = [
+  { name: "Alice", age: 20 },
+  { name: "Bob", age: 21 },
+  { name: "Charlie", age: 22 },
+];
+
+// ramda.jsのpluck関数をインポート
+import { pluck } from "ramda";
+
+// pluck関数にプロパティ名を渡して新しい関数を作る
+const getName = pluck("name");
+
+// getName関数にオブジェクトの配列を渡して名前だけを取り出す
+const names: string[] = getName(people);
+
+// 名前の配列をコンソールに出力
+console.log("人々の名前はこちらですわ");
+console.log(names);
+```
+
+このように、pluck 関数はオブジェクトの配列から特定のプロパティの値を簡単に取り出すことができますわ。他にも、例えば年齢だけを取り出したり、別のプロパティ名を指定したりすることができますわ。
+
+```typescript
+// pluck関数にプロパティ名を渡して新しい関数を作る
+const getAge = pluck("age");
+
+// getAge関数にオブジェクトの配列を渡して年齢だけを取り出す
+const ages: number[] = getAge(people);
+
+// 年齢の配列をコンソールに出力
+console.log("人々の年齢はこちらですわ");
+console.log(ages);
+```
+
+これで、ramda.js の pluck 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげましたわ。素敵な関数ですわね。²
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(3) pluck, project and range functions | Ramda JS Tutorials. https://www.youtube.com/watch?v=HTNtjZluGQA アクセス日時 2023/3/15.
+
+## prepend
+
+ごきげんよう、お嬢様。ramda.js の prepend 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげますわ。¹
+
+prepend 関数は、配列の先頭に要素を追加して新しい配列を作る関数ですわ。例えば、動物の名前を持つ配列があったとします。このとき、prepend 関数を使って"cat"という要素を先頭に追加することができますわ。
+
+```typescript
+// 動物の名前を持つ配列
+const animals: string[] = ["dog", "cow", "pig"];
+
+// ramda.js の prepend 関数をインポート
+import { prepend } from "ramda";
+
+// prepend 関数に要素を渡して新しい関数を作る
+const addCat = prepend("cat");
+
+// addCat 関数に配列を渡して先頭に"cat"を追加する
+const animalsWithCat: string[] = addCat(animals);
+
+// 新しい配列をコンソールに出力
+console.log("動物の名前に猫ちゃんが加わりましたわ");
+console.log(animalsWithCat);
+```
+
+このように、prepend 関数は配列の先頭に要素を簡単に追加することができますわ。他にも、例えば数字の配列に 0 を追加したり、別の要素を指定したりすることができますわ。
+
+```typescript
+// 数字の配列
+const numbers: number[] = [1, 2, 3];
+
+// prepend 関数に要素を渡して新しい関数を作る
+const addZero = prepend(0);
+
+// addZero 関数に配列を渡して先頭に 0 を追加する
+const numbersWithZero: number[] = addZero(numbers);
+
+// 新しい配列をコンソールに出力
+console.log("数字の先頭にゼロが加わりましたわ");
+console.log(numbersWithZero);
+```
+
+これで、ramda.js の prepend 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてさしあげましたわ。素敵な関数ですわね。²
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(3) append and prepend functions | Ramda JS Tutorials - YouTube. https://www.youtube.com/watch?v=H6juGCd7sxY アクセス日時 2023/3/15.
+
+## range
+
+ごきげんよう、お嬢様。ramda.js の range 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。range 関数は、ある範囲の整数の配列を作る関数ですわ。例えば、こんな感じですわ。
+
+```typescript
+// range関数を使って、0から9までの整数の配列を作りますわ
+const numbers = R.range(0, 10);
+console.log(numbers); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+// range関数は、開始値を含みますが、終了値を含みませんわ
+const numbers2 = R.range(5, 10);
+console.log(numbers2); // [5, 6, 7, 8, 9]
+
+// range関数は、ステップを指定することはできませんわ
+// ステップを指定したい場合は、別の関数を作る必要がありますわ
+const rangeWithStep = (start: number, end: number, step: number): number[] => {
+  const result = [];
+  for (let i = start; i < end; i += step) {
+    result.push(i);
+  }
+  return result;
+};
+const numbers3 = rangeWithStep(0, 10, 2);
+console.log(numbers3); // [0, 2, 4, 6, 8]
+```
+
+range 関数は、ある範囲の整数の配列が必要なときに便利ですわ。また、他の関数と組み合わせたりすることもできますわ。素敵な関数ですわね。以上が range 関数の説明ですわ。ご理解いただけましたかしら？
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(3) ramda.js - Range with step in Ramda - Stack Overflow. https://stackoverflow.com/questions/55467201/range-with-step-in-ramda アクセス日時 2023/3/15.
+(4) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(5) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(6) 6 Powerful Ramda Functions For JavaScript | by Tate .... https://betterprogramming.pub/6-powerful-ramda-functions-for-javascript-7b0326c3f1d1 アクセス日時 2023/3/15.
+
+## reduce
+
+ごきげんよう、お嬢様。ramda.js の reduce 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。reduce 関数は、ある配列の要素を順番に処理して、一つの値にまとめる関数ですわ。例えば、こんな感じですわ。
+
+```typescript
+// reduce関数を使って、配列の要素の合計を求めますわ
+const sum = R.reduce((acc: number, x: number): number => acc + x, 0);
+const numbers = [1, 2, 3, 4, 5];
+console.log(sum(numbers)); // 15
+
+// reduce関数は、初期値を指定することができますわ
+// 初期値は、最初の引数に渡されますわ
+const product = R.reduce((acc: number, x: number): number => acc * x, 1);
+console.log(product(numbers)); // 120
+
+// reduce関数は、配列以外の値も処理することができますわ
+// 例えば、文字列を連結したりしますわ
+const concat = R.reduce((acc: string, x: string): string => acc + x, "");
+const names = ["Alice", "Bob", "Charlie"];
+console.log(concat(names)); // "AliceBobCharlie"
+```
+
+reduce 関数は、ある配列の要素を一つの値にまとめるときに便利ですわ。また、他の関数と組み合わせたりすることもできますわ。素敵な関数ですわね。以上が reduce 関数の説明ですわ。ご理解いただけましたかしら？
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(3) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/15.
+(4) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(5) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(6) Reduce Array of Array of Objects Using Ramda - Stack Overflow. https://stackoverflow.com/questions/65602396/reduce-array-of-array-of-objects-using-ramda アクセス日時 2023/3/15.
+
+## reduceBy
+
+ごきげんよう、お嬢様。ramda.js の reduceBy 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。reduceBy 関数は、ある配列の要素をグループ分けして、それぞれのグループに対して reduce 関数を適用する関数ですわ。例えば、こんな感じですわ。
+
+```typescript
+// reduceBy関数を使って、人々の年齢別に人数をカウントしますわ
+const countByAge = R.reduceBy(
+  (acc: number, person: { name: string; age: number }): number => acc + 1,
+  0
+);
+const people = [
+  { name: "Alice", age: 21 },
+  { name: "Bob", age: 23 },
+  { name: "Charlie", age: 21 },
+  { name: "David", age: 25 },
+  { name: "Eve", age: 23 },
+];
+console.log(countByAge(R.prop("age"), people)); // {21: 2, 23: 2, 25: 1}
+
+// reduceBy関数は、グループ分けのキーを自由に指定することができますわ
+// 例えば、名前の最初の文字でグループ分けしたりしますわ
+const groupByInitial = R.reduceBy(
+  (acc: string[], person: { name: string; age: number }): string[] =>
+    R.append(person.name, acc),
+  []
+);
+console.log(groupByInitial(R.head, people)); // {"A": ["Alice"], "B": ["Bob"], "C": ["Charlie"], "D": ["David"], "E": ["Eve"]}
+```
+
+reduceBy 関数は、ある配列の要素をグループ分けして、それぞれのグループに対して何らかの処理をするときに便利ですわ。また、他の関数と組み合わせたりすることもできますわ。素敵な関数ですわね。以上が reduceBy 関数の説明ですわ。ご理解いただけましたかしら？
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) ramda.js - Ramda reduce from array to object? - Stack Overflow. https://stackoverflow.com/questions/66938902/ramda-reduce-from-array-to-object アクセス日時 2023/3/15.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(4) Reduce Array of Array of Objects Using Ramda - Stack Overflow. https://stackoverflow.com/questions/65602396/reduce-array-of-array-of-objects-using-ramda アクセス日時 2023/3/15.
+(5) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(6) ramda reduce JavaScript Examples. https://www.programcreek.com/javascript/?api=ramda.reduce アクセス日時 2023/3/15.
+
+## reduced
+
+ごきげんよう、お嬢様。ramda.js の reduced 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。reduced 関数は、reduce 関数の中で使われる関数で、現在の値を返すとともに、これ以上の反復処理を終了することを示す関数ですわ。例えば、こんな感じですわ。
+
+```typescript
+// reduced関数を使って、配列の要素の合計が10を超えたら処理を終了しますわ
+const sumUntil10 = R.reduce(
+  (acc: number, x: number): number | R.Reduced<number> => {
+    if (acc + x > 10) {
+      return R.reduced(acc); // これ以上の反復処理を終了しますわ
+    } else {
+      return acc + x; // 現在の合計値を返しますわ
+    }
+  },
+  0
+);
+const numbers = [1, 2, 3, 4, 5, 6];
+console.log(sumUntil10(numbers)); // 6
+// 配列の要素は1 + 2 + 3 + 4 = 10までしか加算されませんでしたわ
+```
+
+reduced 関数は、reduce 関数の中で何らかの条件によって反復処理を早期に終了したいときに便利ですわ。また、他の関数と組み合わせたりすることもできますわ。素敵な関数ですわね。以上が reduced 関数の説明ですわ。ご理解いただけましたかしら？
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(3) How to resolve incorrect return result from Ramda reduce .... https://stackoverflow.com/questions/56396101/how-to-resolve-incorrect-return-result-from-ramda-reduce-function-javascript アクセス日時 2023/3/15.
+(4) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(5) ramda.js - Ramda reduce from array to object? - Stack Overflow. https://stackoverflow.com/questions/66938902/ramda-reduce-from-array-to-object アクセス日時 2023/3/15.
+(6) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+
+## reduceRight
+
+ごきげんよう、お嬢様。ramda.js の reduceRight 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。reduceRight 関数は、reduce 関数と同じように、配列の要素を左から右ではなく、右から左に反復処理して一つの値にまとめる関数ですわ。例えば、こんな感じですわ。
+
+```typescript
+// reduceRight 関数を使って、配列の要素を逆順に連結しますわ
+const reverseConcat = R.reduceRight(
+  (acc: string, x: string): string => acc + x,
+  ""
+);
+const words = ["お", "嬢", "様", "言", "葉"];
+console.log(reverseConcat(words)); // 葉言様嬢お
+// 配列の要素は右から左に連結されましたわ
+```
+
+reduceRight 関数は、reduce 関数と同じように、他の関数と組み合わせたりすることもできますわ。また、JavaScript の Array.prototype.reduceRight メソッドと似ていますが、ramda.js の方がより柔軟で関数型プログラミングに適していますわ。素敵な関数ですわね。以上が reduceRight 関数の説明ですわ。ご理解いただけましたかしら？
+
+ソース: Bing との会話 2023/3/15(1) Array.prototype.reduceRight() - JavaScript | MDN. https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(3) Array.prototype.reduceRight() - JavaScript | MDN - Mozilla. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/ReduceRight アクセス日時 2023/3/15.
+
+## reduceWhile
+
+ごきげんよう、お嬢様。ramda.js の reduceWhile 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。reduceWhile 関数は、reduce 関数と似ていますが、条件関数が真を返す間だけ反復処理を続ける関数ですわ。例えば、こんな感じですわ。
+
+```typescript
+// reduceWhile関数を使って、配列の要素を足し合わせますが、合計が100を超えたら止めますわ
+const isSumLessThan100 = (acc: number, x: number): boolean => acc + x < 100;
+const add = (a: number, b: number): number => a + b;
+const sumUntil100 = R.reduceWhile(isSumLessThan100, add, 0);
+const numbers = [10, 20, 30, 40, 50];
+console.log(sumUntil100(numbers)); // 60
+// 配列の要素は右から左に足されましたが、合計が100を超えたら止まりましたわ
+```
+
+reduceWhile 関数は、条件によって反復処理を制御したいときに便利ですわ。また、ramda.js の方が JavaScript の Array.prototype.reduce メソッドよりもより柔軟で関数型プログラミングに適していますわ。素敵な関数ですわね。以上が reduceWhile 関数の説明ですわ。ご理解いただけましたかしら？
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+(3) Ramda Documentation. https://ramdajs.com/0.19.0/docs/ アクセス日時 2023/3/15.
+
+## reject
+ごきげんよう、お嬢様。ramda.jsのreject関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。reject関数は、filter関数と似ていますが、条件関数が偽を返す要素だけを残す関数ですわ。例えば、こんな感じですわ。
+
+```typescript
+// reject関数を使って、配列の中から偶数だけを取り除きますわ
+const isEven = (n: number): boolean => n % 2 === 0;
+const removeEven = R.reject(isEven);
+const numbers = [1, 2, 3, 4, 5];
+console.log(removeEven(numbers)); // [1, 3, 5]
+// 配列の要素は左から右にチェックされましたが、偶数だったら残されませんでしたわ
+```
+
+reject関数は、条件によって配列やオブジェクトから要素を除外したいときに便利ですわ。また、ramda.jsの方がJavaScriptのArray.prototype.filterメソッドよりもより柔軟で関数型プログラミングに適していますわ。素敵な関数ですわね。以上がreject関数の説明ですわ。ご理解いただけましたかしら？
+
+ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
+(2) javascript - Ramda: Rejects from predicate array - Stack Overflow. https://stackoverflow.com/questions/64651013/ramda-rejects-from-predicate-array アクセス日時 2023/3/15.
+(3) 【Ramda.js / Folktale】JavaScriptで (なるべく) 関数型に .... https://qiita.com/Guvalif/items/a4fe01a4c069836db4d8 アクセス日時 2023/3/15.
