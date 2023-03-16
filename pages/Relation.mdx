@@ -25,12 +25,61 @@ R.equals(a, b); //=> true
 
 ## union
 
-2 つの配列の集合ですね。重複は取り除かれます。  
-ところで、なんでこれ List じゃなくて Relation なんだろう。
+ごきげんよう、お嬢様。ramda.js の union 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。union 関数は、二つの配列を受け取って、その配列の要素を重複なく結合した新しい配列を返す関数ですわ。union 関数は、二つの引数を取りますわ。一つ目と二つ目は、どちらも配列ですわ。このようにすると、一つ目と二つ目の配列に含まれる要素をすべて含む新しい配列が作られますわ。ただし、同じ要素が複数回出現した場合は、最初に出現したものだけが残りますわ。
 
-```ts
-R.union([1, 2, 3], [2, 3, 4]); //=> [1, 2, 3, 4]
+例えば、
+
+```typescript
+const union = <T>(arr1: T[], arr2: T[]): T[] => R.union(arr1, arr2);
 ```
+
+とすると、union は任意の型の要素からなる二つの配列を結合する関数ですわ。
+
+```typescript
+console.log(union([1, 2, 3], [3, 4, 5])); // [1, 2, 3, 4, 5]
+// console.log([1], [2], [3], [4], [5]); // 配列の要素
+// console.log([3]が重複していますが最初に出現したものだけ残っています); // コメント
+```
+
+ではもう少し複雑な例を見てみましょうか。オブジェクトからなる配列を結合する場合は、
+
+```typescript
+const unionWith =
+  <T>(pred: (a: T, b: T) => boolean) =>
+  (arr1: T[], arr2: T[]): T[] =>
+    R.unionWith(pred)(arr1)(arr2);
+const personEq = (
+  a: { name: string; age: number },
+  b: { name: string; age: number }
+): boolean => a.name === b.name && a.age === b.age;
+```
+
+と定義しておきますわ。ここで personEq はオブジェクトが同じ名前と年齢を持っているかどうか判定する関数ですわ。
+
+```typescript
+console.log(
+  unionWith(personEq)(
+    [
+      { name: "Alice", age: 25 },
+      { name: "Bob", age: 30 },
+    ],
+    [
+      { name: "Alice", age: 25 },
+      { name: "Charlie", age: 35 },
+    ]
+  )
+); // [{name:"Alice", age:25}, {name:"Bob", age:30}, {name:"Charlie", age:35}]
+// console.log([{name:"Alice", age:25}], [{name:"Bob", age:30}], [{name:"Charlie", age:35}]); // 配列の要素
+// console.log([{name:"Alice", age:25}]が重複していますが最初に出現したものだけ残っています); // コメント
+```
+
+このようにしてお嬢様は任意の型や条件で配列を結合することができますわ。
+
+素敵な関数ですことね。
+
+ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/16.
+(3) union and unionWith functions | Ramda JS Tutorials - YouTube. https://www.youtube.com/watch?v=Stkcu5lkbC4 アクセス日時 2023/3/16.
 
 ## max
 
@@ -727,3 +776,47 @@ console.log(symDiffWith2); // Error : Type 'string' is not assignable to type 'n
 ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
 (2) @ramda/symmetricdifferencewith - npm. https://www.npmjs.com/package/@ramda/symmetricdifferencewith アクセス日時 2023/3/15.
 (3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+
+## unionWith
+
+ごきげんよう、お嬢様。ramda.js の unionWith 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。unionWith 関数は、二つの配列と一つの比較関数を受け取って、その配列の要素を比較関数に基づいて重複なく結合した新しい配列を返す関数ですわ。unionWith 関数は、カリー化された三つの引数を取りますわ。一つ目は、二つの要素が等しいかどうか判定する比較関数ですわ。二つ目と三つ目は、どちらも配列ですわ。このようにすると、一つ目の比較関数に従って二つ目と三つ目の配列に含まれる要素をすべて含む新しい配列が作られますわ。ただし、同じ要素が複数回出現した場合は、最初に出現したものだけが残りますわ。
+
+例えば、
+
+```typescript
+const unionWith =
+  <T>(pred: (a: T, b: T) => boolean) =>
+  (arr1: T[], arr2: T[]): T[] =>
+    R.unionWith(pred)(arr1)(arr2);
+const personEq = (
+  a: { name: string; age: number },
+  b: { name: string; age: number }
+): boolean => a.name === b.name && a.age === b.age;
+```
+
+と定義しておきますわ。ここで personEq はオブジェクトが同じ名前と年齢を持っているかどうか判定する関数ですわ。
+
+```typescript
+console.log(
+  unionWith(personEq)(
+    [
+      { name: "Alice", age: 25 },
+      { name: "Bob", age: 30 },
+    ],
+    [
+      { name: "Alice", age: 25 },
+      { name: "Charlie", age: 35 },
+    ]
+  )
+); // [{name:"Alice", age:25}, {name:"Bob", age:30}, {name:"Charlie", age:35}]
+// console.log([{name:"Alice", age:25}], [{name:"Bob", age:30}], [{name:"Charlie", age:35}]); // 配列の要素
+// console.log([{name:"Alice", age:25}]が重複していますが最初に出現したものだけ残っています); // コメント
+```
+
+このようにしてお嬢様は任意の型や条件で配列を結合することができますわ。
+
+素敵な関数ですことね。
+
+ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(2) union and unionWith functions | Ramda JS Tutorials - YouTube. https://www.youtube.com/watch?v=Stkcu5lkbC4 アクセス日時 2023/3/16.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/16.

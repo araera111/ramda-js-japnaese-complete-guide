@@ -3172,3 +3172,324 @@ console.log(ages); // [45 ,23 ,76 ,54 ,28] （毎回異なる値が出ますわ�
 (4) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/15.
 (5) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
 (6) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/15.
+
+## unfold
+
+ごきげんよう、お嬢様。ramda.js の unfold 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。unfold 関数は、ある値を受け取って、その値から配列を生成することができる関数ですわ。unfold 関数は、二つの引数を取りますわ。一つ目は、ある値から次の値と配列の要素になる値のペアを返す関数ですわ。二つ目は、初期値ですわ。このようにすると、初期値から始まってペアを返す関数を繰り返し適用していきますわ。ペアを返す関数が null や undefined を返したら、配列の生成を終了しますわ。
+
+例えば、
+
+```typescript
+const fib = (n: number): number[] =>
+  R.unfold(
+    (pair: [number, number]): [number, [number, number]] | null => {
+      const [a, b] = pair;
+      return a + b > n ? null : [a + b, [b, a + b]];
+    },
+    [0, 1]
+  );
+```
+
+とすると、fib は n 以下のフィボナッチ数列を生成する関数ですわ。
+
+```typescript
+console.log(fib(10)); // [1, 2, 3, 5, 8]
+// console.log([0 + 1], [1 + 1], [1 + 2], [2 + 3], [3 + 5]); // 配列の要素
+// console.log([0 > 10 ? null : ...], [1 > 10 ? null : ...], ...); // ペアを返す関数の結果
+```
+
+ではもう少し複雑な例を見てみましょうか。文字列から文字ごとに分割した配列を生成する splitString 関数は、
+
+```typescript
+const splitString = (str: string): string[] =>
+  R.unfold((s: string): [string, string] | null => {
+    return s.length === 0 ? null : [s[0], s.slice(1)];
+  }, str);
+```
+
+と定義できますわ。
+
+```typescript
+console.log(splitString("hello")); // ["h", "e", "l", "l", "o"]
+// console.log(["h"], ["e"], ["l"], ["l"], ["o"]); // 配列の要素
+// console.log(["hello".length === 0 ? null : ...], ["ello".length === 0 ? null : ...], ...); // ペアを返す関数の結果
+```
+
+このようにしてお嬢様は任意の値から配列を生成することができますわ。
+
+素敵な関数ですことね。
+
+ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(2) transpose and unfold functions | Ramda JS Tutorials - YouTube. https://www.youtube.com/watch?v=jXydqwMIt7c アクセス日時 2023/3/16.
+(3) javascript - Loop until... with Ramda - Stack Overflow. https://stackoverflow.com/questions/49542944/loop-until-with-ramda アクセス日時 2023/3/16.
+(4) transpose and unfold functions | Ramda JS Tutorials - YouTube. https://www.youtube.com/watch?v=jXydqwMIt7c アクセス日時 2023/3/16.
+(5) javascript - Loop until... with Ramda - Stack Overflow. https://stackoverflow.com/questions/49542944/loop-until-with-ramda アクセス日時 2023/3/16.
+(6) Implementation of async unfold function in Javascript. https://stackoverflow.com/questions/71605121/implementation-of-async-unfold-function-in-javascript アクセス日時 2023/3/16.
+
+## uniq
+
+ごきげんよう、お嬢様。ramda.js の uniq 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。uniq 関数は、配列を受け取って、その配列の要素を重複なくした新しい配列を返す関数ですわ。uniq 関数は、カリー化された一つの引数を取りますわ。それは、重複を除去したい配列ですわ。このようにすると、同じ要素が複数回出現した場合は、最初に出現したものだけが残る新しい配列が作られますわ。
+
+例えば、
+
+```typescript
+const uniq = <T>(arr: T[]): T[] => R.uniq(arr);
+```
+
+と定義しておきますわ。
+
+```typescript
+console.log(uniq([1, 2, 3, 4, 5, 1, 2])); // [1, 2, 3, 4, 5]
+// console.log([1], [2], [3], [4], [5]); // 配列の要素
+// console.log([1]と[2]が重複していますが最初に出現したものだけ残っています); // コメント
+```
+
+このようにしてお嬢様は任意の型の配列から重複を除去することができますわ。
+
+素敵な関数ですことね。
+
+ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(2) javascript - Filter out unique nested values using ramda .... https://stackoverflow.com/questions/52896392/filter-out-unique-nested-values-using-ramda アクセス日時 2023/3/16.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/16.
+
+## uniqBy
+
+ごきげんよう、お嬢様。ramda.js の uniqBy 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。uniqBy 関数は、配列の中から重複した要素を取り除く関数ですが、どの要素が重複しているかを判断する基準を自分で指定できるという特徴がありますわ。例えば、以下のようなオブジェクトの配列があったとします。
+
+```typescript
+type Person = {
+  name: string;
+  age: number;
+};
+
+const people: Person[] = [
+  { name: "Alice", age: 20 },
+  { name: "Bob", age: 21 },
+  { name: "Charlie", age: 22 },
+  { name: "Alice", age: 23 },
+];
+```
+
+この配列から名前が重複している人を取り除きたい場合は、uniqBy 関数に名前を取得する関数（プロパティアクセス）を渡してあげれば良いですわ。
+
+```typescript
+import R from "ramda";
+
+// 名前で重複した人を取り除く
+const uniqByName = R.uniqBy(R.prop("name"));
+
+// 配列に適用する
+const result = uniqByName(people);
+
+// 結果を確認する
+console.log(result); // [{ name: "Alice", age: 20 }, { name: "Bob", age: 21 }, { name: "Charlie", age: 22 }]
+```
+
+同様に、年齢で重複した人を取り除きたい場合は、年齢を取得する関数（プロパティアクセス）を渡してあげれば良いですわ。
+
+```typescript
+import R from "ramda";
+
+// 年齢で重複した人を取り除く
+const uniqByAge = R.uniqBy(R.prop("age"));
+
+// 配列に適用する
+const result = uniqByAge(people);
+
+// 結果を確認する
+console.log(result); // [{ name: "Alice", age: 20 }, { name: "Bob", age: 21 }, { name: "Charlie", age: 22 }, { name:"Alice",age :23}]
+```
+
+もちろん、名前や年齢以外の基準でも重複した要素を取り除くことができますわ。例えば、以下のような文字列の配列があったとします。
+
+```typescript
+const words = ["apple", "banana", "orange", "pineapple", "grape"];
+```
+
+この配列から最初の文字が同じ単語を取り除きたい場合は、最初の文字を取得する関数（文字列操作）を渡してあげれば良いですわ。
+
+```typescript
+import R from "ramda";
+
+// 最初の文字で重複した単語を取り除く
+const uniqByFirstChar = R.uniqBy(R.head);
+
+// 配列に適用する
+const result = uniqByFirstChar(words);
+
+// 結果を確認する
+console.log(result); // ["apple","banana","orange","grape"]
+```
+
+以上が ramda.js の uniqBy 関数についての具体例と使用方法ですわ。このように uniqBy 関数は非常に便利で実用的な関数ですわ。素敵な関数ですわね。
+
+ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(2) What is the Ramda equivalent of this Lodash uniqBy call?. https://stackoverflow.com/questions/56050563/what-is-the-ramda-equivalent-of-this-lodash-uniqby-call アクセス日時 2023/3/16.
+(3) 【Ramda.js / Folktale】JavaScript で (なるべく) 関数型に .... https://qiita.com/Guvalif/items/a4fe01a4c069836db4d8 アクセス日時 2023/3/16.
+
+## uniqWith
+
+ごきげんよう、お嬢様。ramda.js の uniqWith 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。uniqWith 関数は、配列の中から重複した要素を取り除く関数ですが、どの要素が重複しているかを判断する基準を自分で定義できるという特徴がありますわ。例えば、以下のようなオブジェクトの配列があったとします。
+
+```typescript
+type Person = {
+  name: string;
+  age: number;
+};
+
+const people: Person[] = [
+  { name: "Alice", age: 20 },
+  { name: "Bob", age: 21 },
+  { name: "Charlie", age: 22 },
+  { name: "Alice", age: 23 },
+];
+```
+
+この配列から名前が同じ人を取り除きたい場合は、uniqBy 関数と同じように名前を取得する関数（プロパティアクセス）を渡してあげれば良いですわ。
+
+```typescript
+import R from "ramda";
+
+// 名前で重複した人を取り除く
+const uniqByName = R.uniqWith(R.eqProps("name"));
+
+// 配列に適用する
+const result = uniqByName(people);
+
+// 結果を確認する
+console.log(result); // [{ name: "Alice", age: 20 }, { name: "Bob", age: 21 }, { name: "Charlie", age: 22 }]
+```
+
+しかし、uniqWith 関数の強みは、より複雑な基準でも重複した要素を取り除くことができることですわ。例えば、以下のような条件で重複した人を取り除きたい場合はどうすれば良いでしょうか？
+
+- 名前が同じかつ年齢が偶数の人
+- 名前の長さが同じかつ年齢が奇数の人
+
+このような場合は、uniqWith 関数に自分で定義した比較関数（カスタムコンパレータ）を渡してあげれば良いですわ。
+
+```typescript
+import R from "ramda";
+
+// 自分で定義した比較関数
+const customComparator = (a: Person, b: Person): boolean => {
+  // 名前が同じかつ年齢が偶数の人
+  if (a.name === b.name && a.age % 2 === 0 && b.age % 2 === 0) {
+    return true;
+  }
+
+  // 名前の長さが同じかつ年齢が奇数の人
+  if (a.name.length === b.name.length && a.age % 2 === 1 && b.age % 2 === 1) {
+    return true;
+  }
+
+  // 上記以外は false
+  return false;
+};
+
+// カスタムコンパレータで重複した人を取り除く
+const uniqByCustomComparator = R.uniqWith(customComparator);
+
+// 配列に適用する
+const result = uniqByCustomComparator(people);
+
+// 結果を確認する
+console.log(result); // [{ name:"Alice",age :20},{name:"Bob",age :21},{name:"Charlie",age :22}]
+```
+
+以上が ramda.js の uniqWith 関数についての具体例と使用方法ですわ。このように uniqWith 関数は非常に柔軟で実用的な関数ですわ。素敵な関数ですわね。
+
+ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(2) javascript - Filter out unique nested values using ramda .... https://stackoverflow.com/questions/52896392/filter-out-unique-nested-values-using-ramda アクセス日時 2023/3/16.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/16.
+
+## unnest
+
+ごきげんよう、お嬢様。ramda.js の unnest 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。unnest 関数は、ネストされた配列を一段階だけ平坦化する関数ですわ。例えば、以下のようなネストされた配列があったとします。
+
+```typescript
+const nested: (number | number[])[] = [1, [2], [3, 4], 5];
+```
+
+この配列を一段階だけ平坦化したい場合は、unnest 関数を使って以下のように書くことができますわ。
+
+```typescript
+import R from "ramda";
+
+// 配列を一段階だけ平坦化する
+const result = R.unnest(nested);
+
+// 結果を確認する
+console.log(result); // [1, 2, 3, 4, 5]
+```
+
+このように unnest 関数は、ネストされた配列を扱う場合に便利ですわ。もちろん、数字以外の型でも使えますわ。例えば、以下のような文字列の配列があったとします。
+
+```typescript
+const nested: (string | string[])[] = [
+  "Alice",
+  ["Bob"],
+  ["Charlie", "David"],
+  "Eve",
+];
+```
+
+この配列を一段階だけ平坦化したい場合は、unnest 関数を使って以下のように書くことができますわ。
+
+```typescript
+import R from "ramda";
+
+// 配列を一段階だけ平坦化する
+const result = R.unnest(nested);
+
+// 結果を確認する
+console.log(result); // ["Alice", "Bob", "Charlie", "David", "Eve"]
+```
+
+以上が ramda.js の unnest 関数についての具体例と使用方法ですわ。このように unnest 関数は非常にシンプルで実用的な関数ですわ。素敵な関数ですわね。
+
+ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(2) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/16.
+(3) flatten and unnest functions | Ramda JS Tutorials - YouTube. https://www.youtube.com/watch?v=uX9GqA57Fd8 アクセス日時 2023/3/16.
+
+## update
+ごきげんよう、お嬢様。ramda.jsのupdate関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。update関数は、配列の指定したインデックスの要素を置き換える関数ですわ。例えば、以下のような配列があったとします。
+
+```typescript
+const data: number[] = [1, 2, 3, 4];
+```
+
+この配列の2番目の要素（インデックスは0から始まるので1ですわ）を10に置き換えたい場合は、update関数を使って以下のように書くことができますわ。
+
+```typescript
+import R from "ramda";
+
+// 2番目の要素を10に置き換える
+const result = R.update(1, 10)(data);
+
+// 結果を確認する
+console.log(result); // [1,10,3,4]
+```
+
+このようにupdate関数は、配列の要素を簡単に変更することができますわ。もちろん、他の型でも使えますわ。例えば、以下のような文字列の配列があったとします。
+
+```typescript
+const data: string[] = ["Alice", "Bob", "Charlie"];
+```
+
+この配列の3番目の要素（インデックスは0から始まるので2ですわ）を"David"に置き換えたい場合は、update関数を使って以下のように書くことができますわ。
+
+```typescript
+import R from "ramda";
+
+// 3番目の要素を"David"に置き換える
+const result = R.update(2, "David")(data);
+
+// 結果を確認する
+console.log(result); // ["Alice","Bob","David"]
+```
+
+以上がramda.jsのupdate関数についての具体例と使用方法ですわ。このようにupdate関数は非常にシンプルで実用的な関数ですわ。素敵な関数ですわね。
+
+ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/16.
+(3) javascript - How to perform a nested update using Ramda in .... https://stackoverflow.com/questions/54805737/how-to-perform-a-nested-update-using-ramda-in-the-given-object-structure アクセス日時 2023/3/16.

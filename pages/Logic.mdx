@@ -549,3 +549,57 @@ propSatisfies 関数は、オブジェクトのプロパティに対して任意
 (4) Using Ramdas 'propSatisfies' Method with variable Object .... https://stackoverflow.com/questions/36099208/using-ramdas-propsatisfies-method-with-variable-object-key-name アクセス日時 2023/3/15.
 (5) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
 (6) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+
+## unless
+
+ごきげんよう、お嬢様。ramda.js の unless 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。unless 関数は、条件が満たされない場合にだけ関数を適用する関数ですわ。例えば、以下のような文字列の配列があったとします。
+
+```typescript
+const names: string[] = ["Alice", "Bob", "Charlie", "David"];
+```
+
+この配列から"Alice"以外の名前に"さん"を付け加えたい場合は、unless 関数と equals 関数を使って以下のように書くことができますわ。
+
+```typescript
+import R from "ramda";
+
+// 名前が"Alice"でない場合にだけ"さん"を付け加える
+const addSanUnlessAlice = R.unless(R.equals("Alice"), R.concat(R.__, "さん"));
+
+// 配列に適用する
+const result = R.map(addSanUnlessAlice, names);
+
+// 結果を確認する
+console.log(result); // ["Alice", "Bobさん", "Charlieさん", "Davidさん"]
+```
+
+このように unless 関数は、特定の条件下でだけ処理をスキップしたい場合に便利ですわ。もちろん、文字列以外の型でも使えますわ。例えば、以下のような年齢の配列があったとします。
+
+```typescript
+const ages: number[] = [20, 21, 22, 23];
+```
+
+この配列から 20 歳未満の人以外には成人という文字列を付け加えたい場合は、unless 関数と lt 関数（小さい）を使って以下のように書くことができますわ。
+
+```typescript
+import R from "ramda";
+
+// 年齢が20歳未満でない場合にだけ成人という文字列を付け加える
+const addAdultUnlessUnder20 = R.unless(
+  R.lt(R.__, 20),
+  (age) => `${age}歳（成人）`
+);
+
+// 配列に適用する
+const result = R.map(addAdultUnlessUnder20, ages);
+
+// 結果を確認する
+console.log(result); // ["20歳（成人）", "21歳（成人）", "22歳（成人）", "23歳（成人）"]
+```
+
+以上が ramda.js の unless 関数についての具体例と使用方法ですわ。このように unless 関数は非常にシンプルで実用的な関数ですわ。素敵な関数ですわね。
+
+ソース: Bing との会話 2023/3/16(1) Ramda.js R.without() Function - GeeksforGeeks. https://www.geeksforgeeks.org/ramda-js-r-without-function/ アクセス日時 2023/3/16.
+(2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/16.
+(4) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/16.

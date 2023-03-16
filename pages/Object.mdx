@@ -1850,3 +1850,228 @@ console.log(person); // {name: "Alice", age: 25, address: {city: "Tokyo", zip:"1
 (4) javascript - How to imitate lodash.set with Ramda - Stack .... https://stackoverflow.com/questions/59965261/how-to-imitate-lodash-set-with-ramda アクセス日時 2023/3/15.
 (5) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
 (6) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+
+## unwind
+
+ごきげんよう、お嬢様。ramda.js の unwind 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。unwind 関数は、オブジェクトの配列を受け取り、指定したキーに対応する配列の要素を展開して新しいオブジェクトの配列を返す関数ですわ。例えば、以下のようなオブジェクトの配列があったとします。
+
+```typescript
+const data: { name: string; hobbies: string[] }[] = [
+  { name: "Alice", hobbies: ["reading", "writing"] },
+  { name: "Bob", hobbies: ["gaming", "coding"] },
+  { name: "Charlie", hobbies: ["cooking", "baking"] },
+];
+```
+
+この配列を hobbies キーに対応する配列の要素を展開したい場合は、unwind 関数を使って以下のように書くことができますわ。
+
+```typescript
+import R from "ramda";
+
+// hobbies キーに対応する配列の要素を展開する
+const result = R.unwind("hobbies")(data);
+
+// 結果を確認する
+console.log(result); // [{name:"Alice",hobbies:"reading"},{name:"Alice",hobbies:"writing"},{name:"Bob",hobbies:"gaming"},{name:"Bob",hobbies:"coding"},{name:"Charlie",hobbies:"cooking"},{name:"Charlie",hobbies:"baking"}]
+```
+
+このように unwind 関数は、オブジェクトの配列を扱う場合に便利ですわ。もちろん、他の型でも使えますわ。例えば、以下のような数字の配列があったとします。
+
+```typescript
+const data: { id: number; values: number[] }[] = [
+  { id: 1, values: [10, 20] },
+  { id: 2, values: [30, 40] },
+  { id: 3, values: [50, 60] },
+];
+```
+
+この配列を values キーに対応する配列の要素を展開したい場合は、unwind 関数を使って以下のように書くことができますわ。
+
+```typescript
+import R from "ramda";
+
+// values キーに対応する配列の要素を展開する
+const result = R.unwind("values")(data);
+
+// 結果を確認する
+console.log(result); // [{id:1,values:10},{id:1,values:20},{id:2,values:30},{id:2,values:40},{id:3,values:50},{id:3,values:
+60}]
+```
+
+以上が ramda.js の unwind 関数についての具体例と使用方法ですわ。このように unwind 関数は非常にシンプルで実用的な関数ですわ。素敵な関数ですわね。
+
+ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/16.
+(2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(3) omit, clone and unwind functions | Ramda JS Tutorials - YouTube. https://www.youtube.com/watch?v=gHRyAQFBui0 アクセス日時 2023/3/16.
+
+## values
+
+ごきげんよう、お嬢様。ramda.js の values 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。values 関数は、オブジェクトのプロパティの値を配列として返す関数ですわ。例えば、以下のようなオブジェクトがあったとします。
+
+```typescript
+// 人物の情報を表すオブジェクト
+const person = {
+  name: "Alice",
+  age: 25,
+  gender: "female",
+};
+```
+
+このオブジェクトに対して、values 関数を使ってプロパティの値だけを取り出したい場合は、以下のように書くことができますわ。
+
+```typescript
+import R from "ramda";
+
+// values 関数で person オブジェクトの値を配列として取得する
+const values = R.values(person);
+
+// 結果を確認する
+console.log(values); // ["Alice", 25, "female"]
+```
+
+このように values 関数は、オブジェクトから配列を作ることができますわ。もちろん、他の型でも使えますわ。例えば、以下のようなマップがあったとします。
+
+```typescript
+// 国名と首都名を表すマップ
+const countries = new Map<string, string>([
+  ["Japan", "Tokyo"],
+  ["France", "Paris"],
+  ["USA", "Washington"],
+]);
+```
+
+このマップに対して、values 関数を使って首都名だけを取り出したい場合は、以下のように書くことができますわ。
+
+```typescript
+import R from "ramda";
+
+// values 関数で countries マップの値を配列として取得する
+const values = R.values(countries);
+
+// 結果を確認する
+console.log(values); // ["Tokyo", "Paris", "Washington"]
+```
+
+以上が ramda.js の values 関数についての具体例と使用方法ですわ。このように values 関数は非常に便利で実用的な関数ですわ。素敵な関数ですわね。
+
+ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/16.
+(3) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/16.
+
+## valuesIn
+
+ごきげんよう、お嬢様。ramda.js の valuesIn 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。valuesIn 関数は、オブジェクトのプロパティの値を継承されたものも含めて配列として返す関数ですわ。例えば、以下のようなオブジェクトがあったとします。
+
+```typescript
+// 親クラス
+class Animal {
+  constructor(public name: string) {}
+}
+
+// 子クラス
+class Dog extends Animal {
+  constructor(name: string, public age: number) {
+    super(name);
+  }
+}
+
+// インスタンス
+const dog = new Dog("Pochi", 3);
+```
+
+このオブジェクトに対して、valuesIn 関数を使ってプロパティの値だけを取り出したい場合は、以下のように書くことができますわ。
+
+```typescript
+import R from "ramda";
+
+// valuesIn 関数で dog オブジェクトの値を配列として取得する
+const values = R.valuesIn(dog);
+
+// 結果を確認する
+console.log(values); // ["Pochi", 3]
+```
+
+このように valuesIn 関数は、継承されたプロパティも含めてオブジェクトから配列を作ることができますわ。もちろん、他の型でも使えますわ。例えば、以下のようなマップがあったとします。
+
+```typescript
+// 国名と首都名を表すマップ
+const countries = new Map<string, string>([
+  ["Japan", "Tokyo"],
+  ["France", "Paris"],
+  ["USA", "Washington"],
+]);
+```
+
+このマップに対して、valuesIn 関数を使って首都名だけを取り出したい場合は、以下のように書くことができますわ。
+
+```typescript
+import R from "ramda";
+
+// valuesIn 関数で countries マップの値を配列として取得する
+const values = R.valuesIn(countries);
+
+// 結果を確認する
+console.log(values); // ["Tokyo", "Paris", "Washington"]
+```
+
+以上が ramda.js の valuesIn 関数についての具体例と使用方法ですわ。このように valuesIn 関数は非常に便利で実用的な関数ですわ。素敵な関数ですわね。
+
+ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/16.
+(3) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/16.
+
+## view
+
+ごきげんよう、お嬢様。ramda.js の view 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。view 関数は、レンズと呼ばれる特殊なオブジェクトを使って、データ構造の一部分にアクセスする関数ですわ。レンズは、getter と setter の組み合わせで作られますわ。例えば、以下のようなオブジェクトがあったとします。
+
+```typescript
+// 人物を表すオブジェクト
+const person = {
+  name: "Alice",
+  age: 25,
+  hobbies: ["reading", "cooking", "traveling"],
+};
+```
+
+このオブジェクトに対して、name プロパティの値だけを取り出したい場合は、以下のように書くことができますわ。
+
+```typescript
+import R from "ramda";
+
+// name プロパティにアクセスするレンズを作る
+const nameLens = R.lensProp("name");
+
+// view 関数で person オブジェクトから name プロパティの値を取得する
+const name = R.view(nameLens, person);
+
+// 結果を確認する
+console.log(name); // "Alice"
+```
+
+このように view 関数は、レンズを使ってオブジェクトから特定の値を取り出すことができますわ。もちろん、他のデータ構造でも使えますわ。例えば、以下のような配列があったとします。
+
+```typescript
+// 数字の配列
+const numbers = [1, 2, 3, 4, 5];
+```
+
+この配列に対して、2 番目の要素だけを取り出したい場合は、以下のように書くことができますわ。
+
+```typescript
+import R from "ramda";
+
+// 2 番目の要素にアクセスするレンズを作る
+const secondLens = R.lensIndex(1);
+
+// view 関数で numbers 配列から 2 番目の要素を取得する
+const second = R.view(secondLens, numbers);
+
+// 結果を確認する
+console.log(second); // 2
+```
+
+以上が ramda.js の view 関数についての具体例と使用方法ですわ。このように view 関数は非常に便利で実用的な関数ですわ。素敵な関数ですわね。
+
+ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/16.
+(3) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/16.

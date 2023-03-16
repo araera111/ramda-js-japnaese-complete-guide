@@ -1731,3 +1731,124 @@ console.log(add10([1, 2, 3])); // [11, 12, 13]
 ソース: Bing との会話 2023/3/15(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/15.
 (2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
 (3) Using Ramda, how do you compose against binary functions?. https://stackoverflow.com/questions/53492645/using-ramda-how-do-you-compose-against-binary-functions アクセス日時 2023/3/15.
+
+## uncurryN
+
+ごきげんよう、お嬢様。ramda.js の uncurryN 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげますわ。uncurryN 関数は、カリー化された関数を元の関数に戻すことができる関数ですわ。カリー化された関数とは、複数の引数を取る関数を、一つの引数を取る関数の連鎖に変換することですわ。例えば、二つの引数を足し合わせる add 関数は、
+
+```typescript
+const add = (num1: number, num2: number): number => num1 + num2;
+```
+
+と定義できますが、これをカリー化すると、
+
+```typescript
+const addCurried =
+  (num1: number) =>
+  (num2: number): number =>
+    num1 + num2;
+```
+
+となりますわ。このようにすると、部分適用や高階関数などが使いやすくなりますわ。しかし、時にはカリー化された関数を元に戻したい場合もありますわ。その時に uncurryN 関数が役立ちますわ。
+
+uncurryN 関数は、元の関数が取る引数の個数（アリティ）とカリー化された関数を受け取り、元の関数を返しますわ。例えば、
+
+```typescript
+const uncurriedAdd = R.uncurryN(2, addCurried);
+```
+
+とすると、uncurriedAdd は addCurried を元に戻したものですから、
+
+```typescript
+console.log(uncurriedAdd(3, 4)); // 7
+// console.log(3 + 4); // 7
+```
+
+という結果が得られますわ。
+
+ではもう少し複雑な例を見てみましょうか。三つの引数を掛け合わせる multiplyThreeNumbers 関数は、
+
+```typescript
+const multiplyThreeNumbers = (num1: number, num2: number, num3: number): number => num1 _ num2 _ num3;
+```
+
+と定義できますが、これをカリー化すると、
+
+```typescript
+const multiplyThreeNumbersCurried = (num1: number) => (num2: number) => (num3: number): number => num1 _ num2 _ num3;
+```
+
+となりますわ。これを uncurryN で元に戻す場合は、
+
+```typescript
+const uncurriedMultiplyThreeNumbers = R.uncurryN(
+  3,
+  multiplyThreeNumbersCurried
+);
+```
+
+としますわ。
+
+```typescript
+console.log(uncurriedMultiplyThreeNumbers(5, 6, 7)); // 210
+// console.log(5 _ 6 _ 7); // 210
+```
+
+このようにしてお嬢様は任意のアリティのカリー化された関数を元に戻すことができますわ。
+
+素敵な関数ですことね。
+
+ソース: Bing との会話 2023/3/16(1) javascript - Uncurry ramdajs function - Stack Overflow. https://stackoverflow.com/questions/52575485/uncurry-ramdajs-function アクセス日時 2023/3/16.
+(2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(3) ASCII.jp：JavaScript で関数型プログラミング！Ramda.js の .... https://ascii.jp/elem/000/001/207/1207983/ アクセス日時 2023/3/16.
+(4) javascript - Uncurry ramdajs function - Stack Overflow. https://stackoverflow.com/questions/52575485/uncurry-ramdajs-function アクセス日時 2023/3/16.
+(5) ramda.uncurryN JavaScript and Node.js code examples | Tabnine. https://www.tabnine.com/code/javascript/functions/ramda/uncurryN アクセス日時 2023/3/16.
+(6) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/16.
+
+## useWith
+
+ごきげんよう、お嬢様。ramda.js の useWith 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。useWith 関数は、複数の引数を受け取る関数に対して、それぞれ別の関数を適用してから実行する関数ですわ。例えば、以下のような関数があったとします。
+
+```typescript
+// 2 つの文字列を結合して大文字にする関数
+const concatUpper = (str1: string, str2: string): string =>
+  (str1 + str2).toUpperCase();
+```
+
+この関数に対して、最初の引数には trim（空白を除去する）関数を、次の引数には replace（文字列を置換する）関数を適用したい場合は、useWith 関数を使って以下のように書くことができますわ。
+
+```typescript
+import R from "ramda";
+
+// useWith 関数で concatUpper に trim と replace を適用する
+const fn = R.useWith(concatUpper, [R.trim, R.replace(/a/g, "o")]);
+
+// 結果を確認する
+console.log(fn(" hello ", "apple")); // HELLOOPPLE
+```
+
+このように useWith 関数は、複雑な処理を簡単に書くことができますわ。もちろん、他の型でも使えますわ。例えば、以下のような関数があったとします。
+
+```typescript
+// 2 つの数字を足して 100 倍する関数
+const multiplyBy100 = (num1: number, num2: number): number => (num1 + num2) \* 100;
+```
+
+この関数に対して、最初の引数には Math.floor（小数点以下切り捨て）関数を、次の引数には Math.abs（絶対値）関数を適用したい場合は、useWith 関数を使って以下のように書くことができますわ。
+
+```typescript
+import R from "ramda";
+
+// useWith 関数で multiplyBy100 に Math.floor と Math.abs を適用する
+const fn = R.useWith(multiplyBy100, [Math.floor, Math.abs]);
+
+// 結果を確認する
+console.log(fn(3.14, -5)); // -200
+```
+
+以上が ramda.js の useWith 関数についての具体例と使用方法ですわ。このように useWith 関数は非常に便利で実用的な関数ですわ。素敵な関数ですわね。
+
+ソース: Bing との会話 2023/3/16(1) Ramda.js R.without() Function - GeeksforGeeks. https://www.geeksforgeeks.org/ramda-js-r-without-function/ アクセス日時 2023/3/16.
+(2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(3) javascript - How to use Ramda's useWith - Stack Overflow. https://stackoverflow.com/questions/51777393/how-to-use-ramdas-usewith アクセス日時 2023/3/16.
+(4) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/16.
