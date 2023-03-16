@@ -3452,13 +3452,14 @@ console.log(result); // ["Alice", "Bob", "Charlie", "David", "Eve"]
 (3) flatten and unnest functions | Ramda JS Tutorials - YouTube. https://www.youtube.com/watch?v=uX9GqA57Fd8 アクセス日時 2023/3/16.
 
 ## update
-ごきげんよう、お嬢様。ramda.jsのupdate関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。update関数は、配列の指定したインデックスの要素を置き換える関数ですわ。例えば、以下のような配列があったとします。
+
+ごきげんよう、お嬢様。ramda.js の update 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えてあげましょう。update 関数は、配列の指定したインデックスの要素を置き換える関数ですわ。例えば、以下のような配列があったとします。
 
 ```typescript
 const data: number[] = [1, 2, 3, 4];
 ```
 
-この配列の2番目の要素（インデックスは0から始まるので1ですわ）を10に置き換えたい場合は、update関数を使って以下のように書くことができますわ。
+この配列の 2 番目の要素（インデックスは 0 から始まるので 1 ですわ）を 10 に置き換えたい場合は、update 関数を使って以下のように書くことができますわ。
 
 ```typescript
 import R from "ramda";
@@ -3470,13 +3471,13 @@ const result = R.update(1, 10)(data);
 console.log(result); // [1,10,3,4]
 ```
 
-このようにupdate関数は、配列の要素を簡単に変更することができますわ。もちろん、他の型でも使えますわ。例えば、以下のような文字列の配列があったとします。
+このように update 関数は、配列の要素を簡単に変更することができますわ。もちろん、他の型でも使えますわ。例えば、以下のような文字列の配列があったとします。
 
 ```typescript
 const data: string[] = ["Alice", "Bob", "Charlie"];
 ```
 
-この配列の3番目の要素（インデックスは0から始まるので2ですわ）を"David"に置き換えたい場合は、update関数を使って以下のように書くことができますわ。
+この配列の 3 番目の要素（インデックスは 0 から始まるので 2 ですわ）を"David"に置き換えたい場合は、update 関数を使って以下のように書くことができますわ。
 
 ```typescript
 import R from "ramda";
@@ -3488,8 +3489,177 @@ const result = R.update(2, "David")(data);
 console.log(result); // ["Alice","Bob","David"]
 ```
 
-以上がramda.jsのupdate関数についての具体例と使用方法ですわ。このようにupdate関数は非常にシンプルで実用的な関数ですわ。素敵な関数ですわね。
+以上が ramda.js の update 関数についての具体例と使用方法ですわ。このように update 関数は非常にシンプルで実用的な関数ですわ。素敵な関数ですわね。
 
 ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
 (2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/16.
 (3) javascript - How to perform a nested update using Ramda in .... https://stackoverflow.com/questions/54805737/how-to-perform-a-nested-update-using-ramda-in-the-given-object-structure アクセス日時 2023/3/16.
+
+## without
+
+ごきげんよう、お嬢様。ramda.js の without 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。¹
+
+without 関数は、ふたつの引数をとる関数ですわ。ひとつめの引数は、list1 と呼ばれる配列ですわ。この配列は、除外したい要素の集合ですわ。ふたつめの引数は、list2 と呼ばれる配列ですわ。
+
+without 関数は、新しい配列を返しますわ。この配列は、list2 から list1 に含まれる要素をすべて取り除いたものですわ。
+
+具体例として、色の名前が入った配列から特定の色を除外する関数を作ってみましょうか。
+
+```typescript
+import { without } from "ramda";
+
+// list1: 除外したい色の名前
+const list1 = ["red", "green", "blue"];
+
+// without関数で新しい関数を作る
+const removeColors = without(list1);
+
+// 新しい関数で色の名前が入った配列を処理する
+console.log(removeColors(["red", "yellow", "green", "pink"])); // ["yellow", "pink"] (赤・緑・青が除外される)
+console.log(removeColors(["purple", "orange", "black"])); // ["purple", "orange", "black"] (何も変化しない)
+```
+
+このようにして、without 関数は指定した要素を簡単に除外することができますわ。
+
+素敵な関数ですわね。
+
+ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/16.
+(3) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/16.
+
+## xprod
+
+ごきげんよう、お嬢様。ramda.js の xprod 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。²
+
+xprod 関数は、ふたつの引数をとる関数ですわ。ひとつめの引数は、list1 と呼ばれる配列ですわ。ふたつめの引数は、list2 と呼ばれる配列ですわ。
+
+xprod 関数は、新しい配列を返しますわ。この配列は、list1 と list2 の直積ですわ。つまり、list1 の各要素と list2 の各要素の組み合わせをすべて含む配列ですわ。
+
+具体例として、色やサイズが入った配列から商品の組み合わせを作る関数を作ってみましょうか。
+
+```typescript
+import { xprod } from "ramda";
+
+// list1: 色
+const list1 = ["赤", "青", "緑"];
+
+// list2: サイズ
+const list2 = ["S", "M", "L"];
+
+// xprod関数で新しい関数を作る
+const createProducts = xprod(list1);
+
+// 新しい関数でサイズが入った配列を処理する
+console.log(createProducts(list2)); // [["赤", "S"], ["赤", "M"], ["赤", "L"], ["青", "S"], ["青", "M"], ["青", "L"], ["緑", "S"], ["緑", "M"], ["緑", "L"]] (色とサイズの直積)
+```
+
+このようにして、xprod 関数は指定した要素の直積を簡単に求めることができますわ。
+
+素敵な関数ですわね。
+
+ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(2) javascript - Grouped cross-product in Ramda - Stack Overflow. https://stackoverflow.com/questions/49153469/grouped-cross-product-in-ramda アクセス日時 2023/3/16.
+(3) 超強力な関数型プログラミング用ライブラリ Ramda.js を学ぼう #1 .... https://blog.recruit.co.jp/rmp/front-end/post-16249/ アクセス日時 2023/3/16.
+
+ごきげんよう、お嬢様。ramda.js の zip 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。¹
+
+## zip
+
+zip 関数は、ふたつの引数をとる関数ですわ。ひとつめの引数は、list1 と呼ばれる配列ですわ。ふたつめの引数は、list2 と呼ばれる配列ですわ。
+
+zip 関数は、新しい配列を返しますわ。この配列は、list1 と list2 の要素をペアにしたものですわ。ただし、list1 と list2 の長さが異なる場合は、短い方に合わせますわ。
+
+具体例として、名前や年齢が入った配列から人物オブジェクトを作る関数を作ってみましょうか。
+
+```typescript
+import { zip } from "ramda";
+
+// list1: 名前
+const list1 = ["Alice", "Bob", "Charlie"];
+
+// list2: 年齢
+const list2 = [25, 30, 35];
+
+// zip関数で新しい関数を作る
+const createPeople = zip(list1);
+
+// 新しい関数で年齢が入った配列を処理する
+console.log(createPeople(list2)); // [["Alice", 25], ["Bob", 30], ["Charlie", 35]] (名前と年齢のペア)
+```
+
+このようにして、zip 関数は指定した要素をペアにすることができますわ。
+
+素敵な関数ですわね。
+
+ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/16.
+(3) ramda.js - How to use a predefined function with R.zipWith .... https://stackoverflow.com/questions/64165671/how-to-use-a-predefined-function-with-r-zipwith アクセス日時 2023/3/16.
+
+ごきげんよう、お嬢様。ramda.js の zipObj 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。³
+
+## zipObj
+
+zipObj 関数は、ふたつの引数をとる関数ですわ。ひとつめの引数は、keys と呼ばれる文字列の配列ですわ。ふたつめの引数は、values と呼ばれる任意の型の配列ですわ。
+
+zipObj 関数は、新しいオブジェクトを返しますわ。このオブジェクトは、keys と values の要素を対応させたものですわ。ただし、keys と values の長さが異なる場合は、短い方に合わせますわ。
+
+具体例として、名前や年齢が入った配列から人物オブジェクトを作る関数を作ってみましょうか。
+
+```typescript
+import { zipObj } from "ramda";
+
+// keys: オブジェクトのキー
+const keys = ["name", "age"];
+
+// values: オブジェクトの値
+const values = ["Alice", 25];
+
+// zipObj関数で新しい関数を作る
+const createPerson = zipObj(keys);
+
+// 新しい関数で値が入った配列を処理する
+console.log(createPerson(values)); // {name: "Alice", age: 25} (人物オブジェクト)
+```
+
+このようにして、zipObj 関数は指定したキーと値を対応させることができますわ。
+
+素敵な関数ですわね。
+
+ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(2) Convert array of arrays to object of arrays, using ramda. https://stackoverflow.com/questions/69158566/convert-array-of-arrays-to-object-of-arrays-using-ramda アクセス日時 2023/3/16.
+(3) Convert array of arrays to object of arrays, using ramda. https://stackoverflow.com/questions/69158566/convert-array-of-arrays-to-object-of-arrays-using-ramda アクセス日時 2023/3/16.
+(4) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/16.
+(5) ramda.js - Ramda reduce from array to object? - Stack Overflow. https://stackoverflow.com/questions/66938902/ramda-reduce-from-array-to-object アクセス日時 2023/3/16.
+
+## zipWith
+
+ごきげんよう、お嬢様。ramda.js の zipWith 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。³
+
+zipWith 関数は、ふたつの配列とひとつの関数を引数にとる関数ですわ。この関数は、配列の要素同士を対応させて、引数に渡した関数で処理した結果を新しい配列にして返しますわ。
+
+具体例として、年齢が入ったふたつの配列から平均年齢が入った新しい配列を作る関数を作ってみましょうか。
+
+```typescript
+import { zipWith } from "ramda";
+
+// 平均値を求める関数
+const average = (a: number, b: number): number => (a + b) / 2;
+
+// 年齢が入ったふたつの配列
+const ages1 = [25, 30, 35];
+const ages2 = [28, 32, 40];
+
+// zipWith関数で新しい関数を作る
+const averageAges = zipWith(average);
+
+// 新しい関数で年齢が入ったふたつの配列を処理する
+console.log(averageAges(ages1, ages2)); // [26.5, 31, 37.5] (平均年齢が入った新しい配列)
+```
+
+このようにして、zipWith 関数は指定した関数で配列の要素同士を処理することができますわ。
+
+素敵な関数ですわね。
+
+ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(2) ramda.js - How to use a predefined function with R.zipWith .... https://stackoverflow.com/questions/64165671/how-to-use-a-predefined-function-with-r-zipwith アクセス日時 2023/3/16.
+(3) ramda.js - Ramda zipWith, one argument - Stack Overflow. https://stackoverflow.com/questions/57844974/ramda-zipwith-one-argument アクセス日時 2023/3/16.

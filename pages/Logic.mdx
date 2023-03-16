@@ -603,3 +603,70 @@ console.log(result); // ["20歳（成人）", "21歳（成人）", "22歳（成�
 (2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
 (3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/16.
 (4) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/16.
+
+## when
+
+ごきげんよう、お嬢様。ramda.js の when 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。¹
+
+when 関数は、ふたつの引数をとる関数ですわ。ひとつめの引数は、predicate と呼ばれる真偽値を返す関数ですわ。ふたつめの引数は、transformer と呼ばれる値を変換する関数ですわ。
+
+when 関数は、新しい関数を返しますわ。この新しい関数は、任意の値を引数にとりますわ。predicate がその値に対して真（true）を返した場合は、transformer がその値に適用された結果を返しますわ。predicate がその値に対して偽（false）を返した場合は、その値自体を返しますわ。
+
+具体例として、年齢に応じてメッセージを変える関数を作ってみましょうか。
+
+```typescript
+import { when } from "ramda";
+
+// predicate: 年齢が20歳以上かどうか判定する関数
+const isAdult = (age: number): boolean => age >= 20;
+
+// transformer: メッセージに「様」を付け加える関数
+const addHonorific = (message: string): string => message + "様";
+
+// when関数で新しい関数を作る
+const greet = when(isAdult, addHonorific);
+
+// 新しい関数でメッセージを生成する
+console.log(greet("こんにちは")); // こんにちは
+console.log(greet("お誕生日おめでとうございます")); // お誕生日おめでとうございます様
+```
+
+このようにして、when 関数は条件分岐の処理を簡潔に書くことができますわ。
+
+素敵な関数ですわね。
+
+ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/16.
+(3) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/16.
+
+## xor
+
+ごきげんよう、お嬢様。ramda.js の xor 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。¹
+
+xor 関数は、ふたつの引数をとる関数ですわ。ひとつめの引数は、list1 と呼ばれる配列ですわ。ふたつめの引数は、list2 と呼ばれる配列ですわ。
+
+xor 関数は、新しい配列を返しますわ。この配列は、list1 と list2 の対称差集合ですわ。つまり、どちらか一方にだけ含まれる要素の集合ですわ。
+
+具体例として、人物の名前が入った配列から共通する名前を除外する関数を作ってみましょうか。
+
+```typescript
+import { xor } from "ramda";
+
+// list1: あなたが知っている人物の名前
+const list1 = ["Alice", "Bob", "Charlie"];
+
+// xor 関数で新しい関数を作る
+const excludeCommonNames = xor(list1);
+
+// 新しい関数で人物の名前が入った配列を処理する
+console.log(excludeCommonNames(["Alice", "David", "Eve"])); // ["Bob", "Charlie", "David", "Eve"] (Alice が共通するため除外される)
+console.log(excludeCommonNames(["Frank", "Grace"])); // ["Alice", "Bob", "Charlie", "Frank", "Grace"] (何も共通しない)
+```
+
+このようにして、xor 関数は指定した要素の対称差集合を簡単に求めることができますわ。
+
+素敵な関数ですわね。
+
+ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/16.
+(3) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/16.

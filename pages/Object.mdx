@@ -2075,3 +2075,110 @@ console.log(second); // 2
 ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
 (2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/16.
 (3) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/3/16.
+
+## where
+
+ごきげんよう、お嬢様。ramda.js の where 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。¹
+
+where 関数は、ふたつの引数をとる関数ですわ。ひとつめの引数は、spec と呼ばれるオブジェクトですわ。このオブジェクトは、プロパティ名と対応する predicate 関数のペアを持ちますわ。ふたつめの引数は、testObj と呼ばれるオブジェクトですわ。
+
+where 関数は、真偽値を返しますわ。spec のすべてのプロパティ名に対して、testObj が同じプロパティ名を持ち、かつその値が predicate 関数に適合する場合は真（true）を返しますわ。そうでない場合は偽（false）を返しますわ。
+
+具体例として、人物オブジェクトが特定の条件に合致するかどうか判定する関数を作ってみましょうか。
+
+```typescript
+import { where } from "ramda";
+
+// spec: 人物オブジェクトが満たすべき条件
+const spec = {
+  name: (name: string): boolean => name.length > 3, // 名前が3文字より長い
+  age: (age: number): boolean => age >= 20, // 年齢が20歳以上
+};
+
+// where関数で新しい関数を作る
+const isEligible = where(spec);
+
+// 新しい関数で人物オブジェクトを判定する
+console.log(isEligible({ name: "Alice", age: 25 })); // true
+console.log(isEligible({ name: "Bob", age: 19 })); // false
+```
+
+このようにして、where 関数は複雑な条件分岐の処理を簡潔に書くことができますわ。
+
+素敵な関数ですわね。
+
+ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/16.
+(3) ramda.js の日本語版解説を Bing chat の AI にお嬢様言葉でやらせ .... https://qiita.com/Yuumillar/items/b0a513bf7dce4b30239f アクセス日時 2023/3/16.
+
+## whereAny
+
+ごきげんよう、お嬢様。ramda.js の whereAny 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。²
+
+whereAny 関数は、ふたつの引数をとる関数ですわ。ひとつめの引数は、spec と呼ばれるオブジェクトですわ。このオブジェクトは、プロパティ名と対応する predicate 関数のペアを持ちますわ。ふたつめの引数は、testObj と呼ばれるオブジェクトですわ。
+
+whereAny 関数は、真偽値を返しますわ。spec のいずれかのプロパティ名に対して、testObj が同じプロパティ名を持ち、かつその値が predicate 関数に適合する場合は真（true）を返しますわ。そうでない場合は偽（false）を返しますわ。
+
+具体例として、人物オブジェクトが特定の条件のどれか一つでも満たすかどうか判定する関数を作ってみましょうか。
+
+```typescript
+import { whereAny } from "ramda";
+
+// spec: 人物オブジェクトが満たす可能性のある条件
+const spec = {
+  name: (name: string): boolean => name.startsWith("A"), // 名前がAで始まる
+  age: (age: number): boolean => age >= 30, // 年齢が30歳以上
+};
+
+// whereAny関数で新しい関数を作る
+const isCandidate = whereAny(spec);
+
+// 新しい関数で人物オブジェクトを判定する
+console.log(isCandidate({ name: "Alice", age: 25 })); // true (名前がAで始まる)
+console.log(isCandidate({ name: "Bob", age: 35 })); // true (年齢が30歳以上)
+console.log(isCandidate({ name: "Charlie", age: 28 })); // false (どちらも満たさない)
+```
+
+このようにして、whereAny 関数は複雑な条件分岐の処理を簡潔に書くことができますわ。
+
+素敵な関数ですわね。
+
+ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(2) javascript - Ramda: whereAny? - Stack Overflow. https://stackoverflow.com/questions/55688667/ramda-whereany アクセス日時 2023/3/16.
+(3) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/16.
+
+## whereEq
+
+ごきげんよう、お嬢様。ramda.js の whereEq 関数について、わかりやすい具体例とともにできるだけ便利で実用的な使用方法を教えて差し上げますわ。¹
+
+whereEq 関数は、ふたつの引数をとる関数ですわ。ひとつめの引数は、spec と呼ばれるオブジェクトですわ。このオブジェクトは、プロパティ名と対応する値のペアを持ちますわ。ふたつめの引数は、testObj と呼ばれるオブジェクトですわ。
+
+whereEq 関数は、真偽値を返しますわ。spec のすべてのプロパティ名に対して、testObj が同じプロパティ名を持ち、かつその値が spec の値と厳密に等しい場合は真（true）を返しますわ。そうでない場合は偽（false）を返しますわ。
+
+具体例として、人物オブジェクトが特定の条件をすべて満たすかどうか判定する関数を作ってみましょうか。
+
+```typescript
+import { whereEq } from "ramda";
+
+// spec: 人物オブジェクトが満たさなければならない条件
+const spec = {
+  name: "Alice", // 名前がAlice
+  age: 30, // 年齢が30歳
+};
+
+// whereEq関数で新しい関数を作る
+const isAlice = whereEq(spec);
+
+// 新しい関数で人物オブジェクトを判定する
+console.log(isAlice({ name: "Alice", age: 30 })); // true (条件をすべて満たす)
+console.log(isAlice({ name: "Bob", age: 30 })); // false (名前が違う)
+console.log(isAlice({ name: "Alice", age: 25 })); // false (年齢が違う)
+```
+
+このようにして、whereEq 関数は厳密な条件分岐の処理を簡潔に書くことができますわ。
+
+素敵な関数ですわね。
+
+ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/16.
+(3) where, whereAny and whereEq functions | Ramda JS Tutorials. https://www.youtube.com/watch?v=-vN1niw-UN0 アクセス日時 2023/3/16.
