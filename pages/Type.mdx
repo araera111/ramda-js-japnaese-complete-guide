@@ -240,3 +240,24 @@ console.log(R.is(Dog, snoopy)); // true を表示しますわ。SnoopyくんがD
 (4) Curry generic function with Ramda and Typescript. https://stackoverflow.com/questions/71379916/curry-generic-function-with-ramda-and-typescript アクセス日時 2023/3/15.
 (5) @types/ramda - npm. https://www.npmjs.com/package/@types/ramda アクセス日時 2023/3/15.
 (6) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+
+## isNotNil
+
+お嬢様、こんにちは。ramda.js の「isNotNil」関数は、引数が null または undefined でない場合に true を返します。以下は、typescript 形式での関数の引数と返り値です。
+
+例えば、以下のようなコードを書くことができます。
+
+```typescript
+import { isNotNil } from "ramda";
+
+const someValue = null;
+if (isNotNil(someValue)) {
+  console.log("someValue is not null or undefined");
+} else {
+  console.log("someValue is null or undefined");
+}
+```
+
+上記のコードでは、someValue が null または undefined でない場合に、'someValue is not null or undefined'が console.log されます。もし someValue が null または undefined であれば、'someValue is null or undefined'が console.log されます。
+
+以上ですわ。何か他にお答えすることはありますか？🌸

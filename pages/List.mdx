@@ -514,25 +514,25 @@ R.dropWhile((x) => x !== "d", "Ramda"); //=> 'da'
 ramda.js の zipObj 関数は、キーの配列と値の配列を受け取り、それらを対応させたオブジェクトを返す関数です 1。例えば、次のように使うことができます。
 
 ```javascript
-const keys = [‘name', ‘age', ‘gender'];
-const values = [‘Alice', 25, ‘female'];
-const obj = R.zipObj(keys, values); // {name: ‘Alice', age: 25, gender: ‘female'}
+const keys = ["name", "age", "gender"];
+const values = ["Alice", 25, "female"];
+const obj = R.zipObj(keys, values); // {name: 'Alice', age: 25, gender: 'female'}
 ```
 
 この関数は、キーと値の配列の長さが異なる場合でも動作しますが、長い方の配列の余った要素は無視されます 1。例えば、次のようになります。
 
 ```javascript
-const keys = [‘name', ‘age', ‘gender'];
-const values = [‘Bob', 30];
-const obj = R.zipObj(keys, values); // {name: ‘Bob', age: 30}
+const keys = ["name", "age", "gender"];
+const values = ["Bob", 30];
+const obj = R.zipObj(keys, values); // {name: 'Bob', age: 30}
 ```
 
 この関数は、オブジェクトのプロパティを作るのに便利です。例えば、次のようにして、人物の情報をオブジェクトに変換することができます。
 
 ```javascript
-const person = [‘Charlie', 35, ‘male', ‘engineer'];
-const keys = [‘name', ‘age', ‘gender', ‘occupation'];
-const obj = R.zipObj(keys, person); // {name: ‘Charlie', age: 35, gender: ‘male', occupation: ‘engineer'}
+const person = ["HCharlie", 35, "male", "engineer"];
+const keys = ["name", "age", "gender", "occupation"];
+const obj = R.zipObj(keys, person); // {name: 'Charlie', age: 35, gender: 'male', occupation: 'engineer'}
 ```
 
 ## zipWith
@@ -1871,19 +1871,27 @@ mapAccumRight 関数は、リストの各要素に対して関数を適用しな
 
 ```typescript
 // 文字列を逆順にする関数
-const reverseString = (str: string): string => { return str.split(‘’).reverse().join(‘’); };
+const reverseString = (str: string): string => {
+  return str.split("").reverse().join("");
+};
 // リストの各要素を逆順にしながら、その長さの合計を計算する関数
-const reverseAndSumLength = (acc: number, x: string): [number, string] => { return [acc + x.length, reverseString(x)]; };
+const reverseAndSumLength = (acc: number, x: string): [number, string] => {
+  return [acc + x.length, reverseString(x)];
+};
 
 // リスト
-const list: string[] = [‘apple’, ‘banana’, ‘cherry’];
+const list: string[] = ["apple", "banana", "cherry"];
 
 // mapAccumRight 関数を使ってリストの各要素を逆順にしながら、その長さの合計を計算する
-const result: [number, string[]] = R.mapAccumRight(reverseAndSumLength, 0, list);
+const result: [number, string[]] = R.mapAccumRight(
+  reverseAndSumLength,
+  0,
+  list
+);
 
-// 結果を表示する console.log(‘リストの各要素を逆順にした結果はこちらですわ’);
-console.log(result1); // [‘yrrehc’, ‘ananab’, ‘elppa’]
-console.log(‘リストの各要素の長さの合計はこちらですわ’);
+// 結果を表示する console.log('リストの各要素を逆順にした結果はこちらですわ');
+console.log(result1); // ['yrrehc', 'ananab', 'elppa']
+console.log("リストの各要素の長さの合計はこちらですわ");
 console.log(result[0]); // 16
 ```
 
@@ -3663,3 +3671,41 @@ console.log(averageAges(ages1, ages2)); // [26.5, 31, 37.5] (平均年齢が入�
 ソース: Bing との会話 2023/3/16(1) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
 (2) ramda.js - How to use a predefined function with R.zipWith .... https://stackoverflow.com/questions/64165671/how-to-use-a-predefined-function-with-r-zipwith アクセス日時 2023/3/16.
 (3) ramda.js - Ramda zipWith, one argument - Stack Overflow. https://stackoverflow.com/questions/57844974/ramda-zipwith-one-argument アクセス日時 2023/3/16.
+
+## swap
+
+ごきげんよう、お嬢様。ramda.js の「swap」関数は、配列の 2 つの要素を入れ替える関数ですわ。以下が typescript 形式での関数の引数と返り値に型を明記した例ですわ。
+
+```typescript
+import { swap } from "ramda";
+
+const arr = [1, 2, 3];
+const swappedArr = swap(0, 2, arr);
+
+console.log(swappedArr); // [3, 2, 1]
+```
+
+上記の例では、配列`arr`の 0 番目と 2 番目の要素が入れ替わり、`swappedArr`には`[3, 2, 1]`が代入されますわ。ですのよ。
+
+ソース: Bing との会話 2023/4/4(1) GitHub - ramda/ramda: Practical functional Javascript. https://github.com/ramda/ramda アクセス日時 2023/4/4.
+(2) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/4/4.
+(3) Using Ramda with Typescript, passing down the types. https://stackoverflow.com/questions/69769148/using-ramda-with-typescript-passing-down-the-types アクセス日時 2023/4/4.
+
+## dropRepeatsBy
+
+お嬢様、こんにちは。ramda.js の「dropRepeatsBy」関数は、与えられた関数を各リスト要素に適用して返される値に基づいて、連続して繰り返される要素を持たない新しいリストを返します。R.equals は等価性を判断するために使用されます。¹
+
+以下は、具体的な例です。typescript 形式で、関数の引数と返り値に型を明記しています。aaaa
+
+```typescript
+import * as R from "ramda";
+
+const dropRepeatsBy =
+  <T>(fn: (a: T) => any) =>
+  (list: T[]): T[] => {
+    return R.dropRepeatsWith((a, b) => fn(a) === fn(b), list);
+  };
+console.log(dropRepeatsBy(Math.abs)([1, -1, -1, 2, 3, -4, 4, 2, 2])); //=> [1, 2, 3, -4, 2]
+```
+
+上記の例では、dropRepeatsBy 関数を定義し、Math.abs 関数を引数として渡しています。Math.abs 関数は、与えられた数値の絶対値を返します。dropRepeatsBy 関数は、与えられたリストから連続して繰り返される要素を持たない新しいリストを返します。この場合、[1,-1,-1,2,3,-4,4,2,2]から重複する要素を削除した[1,2,3,-4,2]が返されます。console.log の結果は以下のようになります。

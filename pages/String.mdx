@@ -233,3 +233,25 @@ R.forEach(R.pipe(R.toString, console.log), arr2);
 (4) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
 (5) ramda.js の日本語版解説みたいなものをつくってみた - Qiita. https://qiita.com/Yuumillar/items/f0b94476cd7e6c2f55dd アクセス日時 2023/3/15.
 (6) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/15.
+
+## addIndexRight
+
+お嬢様、こんにちは。ramda.js の「addIndexRight」関数は、v0.29.0 から追加された関数で、配列の各要素に対して、インデックスとともに関数を適用することができます。以下は、具体例です。
+
+```typescript
+import { addIndexRight } from "ramda";
+
+const mapIndexed = addIndexRight(map);
+
+const f = (val: number, idx: number) => `${idx}: ${val}`;
+const arr = [1, 2, 3];
+const result = mapIndexed(f, arr);
+
+console.log(result); // ["2: 3", "1: 2", "0: 1"]
+```
+
+上記の例では、addIndexRight 関数を使用して、mapIndexed 関数を作成しました。mapIndexed 関数は、配列の各要素に対して、インデックスとともに f 関数を適用します。そして、その結果を返します。
+
+上記の例では、arr 配列の各要素に対して、f 関数が適用されています。そして、その結果が result 配列に格納されています。
+
+以上が、「addIndexRight」関数の具体例ですわ。ご参考になれば幸いですわ。

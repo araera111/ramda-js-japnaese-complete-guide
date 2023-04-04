@@ -640,11 +640,11 @@ const ends = converge((a: string, b: string): string => a + b, [head, last]);
 
 この ends 関数は、文字列を引数にとり、その先頭と末尾の文字を結合した文字列を返す関数になりますわ。以下のように使えますわ。
 
-```ts
+```typescript
 // ends関数を使う
-console.log(ends(‘hello'));
+console.log(ends("hello"));
 // 先頭と末尾はhoです
-console.log(ends(‘world'));
+console.log(ends("world"));
 // 先頭と末尾はwdです
 ```
 
@@ -1852,3 +1852,16 @@ console.log(fn(3.14, -5)); // -200
 (2) Ramda Documentation. https://ramdajs.com/docs/ アクセス日時 2023/3/16.
 (3) javascript - How to use Ramda's useWith - Stack Overflow. https://stackoverflow.com/questions/51777393/how-to-use-ramdas-usewith アクセス日時 2023/3/16.
 (4) Ramda Documentation. https://ramdajs.com/ アクセス日時 2023/3/16.
+
+## addIndexRight
+
+```typescript import { addIndexRight, map } from 'ramda';
+
+const mapIndexed = addIndexRight(map);
+
+const result = mapIndexed((val, idx) => { return ${idx}: ${val}; }, [‘a’, ‘b’, ‘c’]);
+
+console.log(result); // [‘2: c’, ‘1: b’, ‘0: a’]
+```
+
+ここでは、addIndexRight 関数を使って、mapIndexed という新しい関数を作成していますわ。そして、mapIndexed 関数を使って、配列の各要素に対して、そのインデックスとともに関数を適用していますわ。最後に、結果をコンソールに出力していますわ。
